@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6579702fb3251c55fca821d0b193654b",
+    "content-hash": "3cb90ee7b9bb29cb67fee519ef143d8c",
     "packages": [
         {
             "name": "composer/installers",
@@ -150,6 +150,65 @@
                 }
             ],
             "time": "2022-08-20T06:45:11+00:00"
+        },
+        {
+            "name": "elementor/elementor-pro",
+            "version": "3.16.2",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:elementor/elementor-pro.git",
+                "reference": "e93eae7939e4511a7b924f5c153d380bf457fad3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://composer.elementor.com/download/3.16.2",
+                "reference": "e93eae7939e4511a7b924f5c153d380bf457fad3",
+                "shasum": ""
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+                "inewlegend/elementor-editor-testing": "0.0.2",
+                "phpunit/phpunit": "^5|^6|^7",
+                "squizlabs/php_codesniffer": "^3.6",
+                "wp-coding-standards/wpcs": "^2.3",
+                "yoast/phpunit-polyfills": "^1.0.1"
+            },
+            "type": "wordpress-plugin",
+            "autoload-dev": {
+                "classmap": [
+                    "tests/phpunit/mock/"
+                ]
+            },
+            "scripts": {
+                "lint": [
+                    "phpcs --standard=ruleset.xml"
+                ],
+                "test": [
+                    "phpunit --testsuite elementor-pro"
+                ],
+                "test:multisite": [
+                    "WP_MULTISITE=1 phpunit --testsuite elementor-pro"
+                ],
+                "test:woocommerce": [
+                    "phpunit --testsuite woocommerce"
+                ],
+                "test:install": [
+                    "bash ./bin/install-wp-tests-local.sh"
+                ]
+            },
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Elementor team"
+                }
+            ],
+            "description": "WordPress website builder, with no limits of design. A website builder that delivers high-end page designs and advanced capabilities, never before seen on WordPress.",
+            "support": {
+                "source": "https://github.com/elementor/elementor-pro/tree/3.16.2"
+            },
+            "time": "2023-09-20T08:04:24+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -1095,6 +1154,42 @@
             "time": "2022-10-16T01:01:54+00:00"
         },
         {
+            "name": "wpackagist-plugin/elementor",
+            "version": "3.16.6",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/elementor/",
+                "reference": "tags/3.16.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/elementor.3.16.6.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/elementor/"
+        },
+        {
+            "name": "wpackagist-theme/hello-elementor",
+            "version": "2.8.1",
+            "source": {
+                "type": "svn",
+                "url": "https://themes.svn.wordpress.org/hello-elementor/",
+                "reference": "2.8.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/theme/hello-elementor.2.8.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-theme",
+            "homepage": "https://wordpress.org/themes/hello-elementor/"
+        },
+        {
             "name": "wpackagist-theme/twentytwentythree",
             "version": "1.2",
             "source": {
@@ -1597,5 +1692,5 @@
         "php": ">=8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

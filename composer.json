@@ -28,6 +28,13 @@
       "type": "composer",
       "url": "https://wpackagist.org",
       "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+    },
+    {
+      "type": "composer",
+      "url": "https://composer.elementor.com",
+      "only": [
+        "elementor/elementor-pro"
+      ]
     }
   ],
   "require": {
@@ -40,7 +47,10 @@
     "roots/wordpress": "6.3.2",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.1.0",
-    "wpackagist-theme/twentytwentythree": "^1.0"
+    "wpackagist-theme/twentytwentythree": "^1.0",
+    "wpackagist-plugin/elementor": "^3.16",
+    "elementor/elementor-pro": "^3.16",
+    "wpackagist-theme/hello-elementor": "^2.8"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
