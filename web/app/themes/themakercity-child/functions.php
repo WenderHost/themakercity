@@ -22,3 +22,5 @@ define( 'MAKR_STYLESHEET_DIR', trailingslashit( get_stylesheet_directory( __FILE
  */
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/debugging.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/enqueues.php' );
+require_once( MAKR_STYLESHEET_DIR . 'lib/fns/templates.php' );
+require_once( MAKR_STYLESHEET_DIR . 'lib/fns/utilities.php' );
