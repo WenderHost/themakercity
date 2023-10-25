@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cb90ee7b9bb29cb67fee519ef143d8c",
+    "content-hash": "3b3b38ee04bdcdbd3f472af8b3de1ce4",
     "packages": [
         {
             "name": "composer/installers",
@@ -1152,6 +1152,24 @@
                 }
             ],
             "time": "2022-10-16T01:01:54+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/directorist",
+            "version": "7.7.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/directorist/",
+                "reference": "tags/7.7.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/directorist.7.7.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/directorist/"
         },
         {
             "name": "wpackagist-plugin/elementor",
