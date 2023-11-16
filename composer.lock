@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59db9c9c21c8f8744d5c184b0a4c72be",
+    "content-hash": "d37c5589b98aaf2fe7e7975f0fd6d02f",
     "packages": [
         {
             "name": "composer/installers",
@@ -150,65 +150,6 @@
                 }
             ],
             "time": "2022-08-20T06:45:11+00:00"
-        },
-        {
-            "name": "elementor/elementor-pro",
-            "version": "3.16.2",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:elementor/elementor-pro.git",
-                "reference": "e93eae7939e4511a7b924f5c153d380bf457fad3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://composer.elementor.com/download/3.16.2",
-                "reference": "e93eae7939e4511a7b924f5c153d380bf457fad3",
-                "shasum": ""
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-                "inewlegend/elementor-editor-testing": "0.0.2",
-                "phpunit/phpunit": "^5|^6|^7",
-                "squizlabs/php_codesniffer": "^3.6",
-                "wp-coding-standards/wpcs": "^2.3",
-                "yoast/phpunit-polyfills": "^1.0.1"
-            },
-            "type": "wordpress-plugin",
-            "autoload-dev": {
-                "classmap": [
-                    "tests/phpunit/mock/"
-                ]
-            },
-            "scripts": {
-                "lint": [
-                    "phpcs --standard=ruleset.xml"
-                ],
-                "test": [
-                    "phpunit --testsuite elementor-pro"
-                ],
-                "test:multisite": [
-                    "WP_MULTISITE=1 phpunit --testsuite elementor-pro"
-                ],
-                "test:woocommerce": [
-                    "phpunit --testsuite woocommerce"
-                ],
-                "test:install": [
-                    "bash ./bin/install-wp-tests-local.sh"
-                ]
-            },
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Elementor team"
-                }
-            ],
-            "description": "WordPress website builder, with no limits of design. A website builder that delivers high-end page designs and advanced capabilities, never before seen on WordPress.",
-            "support": {
-                "source": "https://github.com/elementor/elementor-pro/tree/3.16.2"
-            },
-            "time": "2023-09-20T08:04:24+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -1176,6 +1117,25 @@
                 }
             ],
             "time": "2023-11-12T22:43:29+00:00"
+        },
+        {
+            "name": "wenmark/elementor-pro",
+            "version": "3.17.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.17.1",
+                "shasum": "cb17b138ccfc4e455a4cf0ae3a2b34f1eb987a5c"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "Elementor.com",
+                "homepage": "https://go.elementor.com/wp-dash-wp-plugins-author-uri/"
+            },
+            "description": "Elevate your designs and unlock the full power of Elementor. Gain access to dozens of Pro widgets and kits, Theme Builder, Pop Ups, Forms and WooCommerce building capabilities.",
+            "homepage": "https://go.elementor.com/wp-dash-wp-plugins-author-uri/"
         },
         {
             "name": "wpackagist-plugin/directorist",
