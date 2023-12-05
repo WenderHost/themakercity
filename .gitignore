@@ -9,6 +9,7 @@ web/app/uploads/*
 !web/app/uploads/.gitkeep
 web/app/cache/*
 sql/
+auth.json
 
 # WordPress
 web/wp
