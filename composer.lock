@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72cb8c3c61e53ea1a9ac6c7626984223",
+    "content-hash": "3a4d73311089638d07e9b21999ba5536",
     "packages": [
         {
             "name": "composer/installers",
@@ -212,6 +212,50 @@
                 }
             ],
             "time": "2023-11-12T22:16:48+00:00"
+        },
+        {
+            "name": "lukasbesch/bedrock-plugin-disabler",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lukasbesch/bedrock-plugin-disabler.git",
+                "reference": "6e1e6e9488edb6d78dbfa891df7c481fb7a4a017"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lukasbesch/bedrock-plugin-disabler/zipball/6e1e6e9488edb6d78dbfa891df7c481fb7a4a017",
+                "reference": "6e1e6e9488edb6d78dbfa891df7c481fb7a4a017",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1.4|^2.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "roave/security-advisories": "dev-master",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "wordpress-muplugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukas Besch",
+                    "email": "connect@lukasbesch.com"
+                },
+                {
+                    "name": "Kamil Grzegorczyk",
+                    "email": "kamilgrzegorczyk@gmail.com"
+                }
+            ],
+            "description": "Disable certain plugins in non-production environments using PHP constants.",
+            "support": {
+                "issues": "https://github.com/lukasbesch/bedrock-plugin-disabler/issues",
+                "source": "https://github.com/lukasbesch/bedrock-plugin-disabler/tree/v1.4.0"
+            },
+            "time": "2023-02-06T12:11:13+00:00"
         },
         {
             "name": "oscarotero/env",
@@ -1174,6 +1218,24 @@
             "homepage": "https://wordpress.org/plugins/elementor/"
         },
         {
+            "name": "wpackagist-plugin/limit-login-attempts-reloaded",
+            "version": "2.25.26",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
+                "reference": "tags/2.25.26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.25.26.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/limit-login-attempts-reloaded/"
+        },
+        {
             "name": "wpackagist-plugin/safe-svg",
             "version": "2.2.2",
             "source": {
@@ -1208,6 +1270,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/simple-page-ordering/"
+        },
+        {
+            "name": "wpackagist-plugin/spinupwp",
+            "version": "1.5.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/spinupwp/",
+                "reference": "tags/1.5.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/spinupwp.1.5.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/spinupwp/"
         },
         {
             "name": "wpackagist-theme/hello-elementor",

@@ -66,7 +66,10 @@
         "wpackagist-plugin/directorist": "^7.7",
         "zordius/lightncandy": "^1.2",
         "wpackagist-plugin/safe-svg": "^2.2",
-        "wpackagist-plugin/simple-page-ordering": "^2.6"
+        "wpackagist-plugin/simple-page-ordering": "^2.6",
+        "wpackagist-plugin/limit-login-attempts-reloaded": "^2.25",
+        "wpackagist-plugin/spinupwp": "^1.5",
+        "lukasbesch/bedrock-plugin-disabler": "^1.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
