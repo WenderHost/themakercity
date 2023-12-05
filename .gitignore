@@ -10,6 +10,8 @@ web/app/uploads/*
 web/app/cache/*
 sql/
 auth.json
+scripts/
+movefile.yml
 
 # WordPress
 web/wp
