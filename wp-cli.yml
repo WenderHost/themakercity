@@ -1,3 +1,6 @@
 path: web/wp
 server:
   docroot: web
+
+@staging:
+  ssh: themakercity@159.203.82.111/sites/themakercity.wenmarkdigital.com/files/web
