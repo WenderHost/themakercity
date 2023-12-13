@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e13775a6ebd7b6c5dfefa502880d1c29",
+    "content-hash": "45447460a26e0dfa7f2808bf28733460",
     "packages": [
         {
             "name": "composer/installers",
@@ -1201,24 +1201,6 @@
             "homepage": "https://gravityforms.com"
         },
         {
-            "name": "wpackagist-plugin/directorist",
-            "version": "7.8.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/directorist/",
-                "reference": "tags/7.8.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/directorist.7.8.2.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/directorist/"
-        },
-        {
             "name": "wpackagist-plugin/elementor",
             "version": "3.18.2",
             "source": {
@@ -1361,6 +1343,21 @@
             },
             "type": "wordpress-theme",
             "homepage": "https://wordpress.org/themes/twentytwentythree/"
+        },
+        {
+            "name": "wpengine/advanced-custom-fields-pro",
+            "version": "6.2.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?p=pro&t=6.2.4"
+            },
+            "require": {
+                "composer/installers": "~1.0 || ~2.0"
+            },
+            "replace": {
+                "wpackagist-plugin/advanced-custom-fields": "self.version"
+            },
+            "type": "wordpress-plugin"
         },
         {
             "name": "zordius/lightncandy",
@@ -2226,5 +2223,5 @@
         "php": ">=8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
