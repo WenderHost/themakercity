@@ -12,6 +12,7 @@ sql/
 auth.json
 scripts/
 movefile.yml
+node_modules
 
 # WordPress
 web/wp

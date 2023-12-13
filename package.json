@@ -1,0 +1,36 @@
+{
+  "name": "themakercity-sass-compile",
+  "version": "1.0.0",
+  "description": "SASS compiling for our CSS assets.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "concat:js": "globcat web/app/themes/themakercity-child/lib/js/scripts/*.js --output web/app/themes/themakercity-child/lib/js/themakercity-child.js",
+    "uglify:js": "uglifyjs web/app/themes/themakercity-child/lib/js/themakercity-child.js --compress --mangle --output web/app/themes/themakercity-child/lib/js/themakercity-child-dist.js",
+    "build": "npm run sass:prod && npm run build:js",
+    "build:css": "npm-run-all --parallel sass:*",
+    "build:js": "npm run concat:js && npm run uglify:js",
+    "sass:dev": "sass --update --style=expanded web/app/themes/themakercity-child/lib/scss:web/app/themes/themakercity-child/lib/css",
+    "sass:prod": "sass --no-source-map --style=compressed web/app/themes/themakercity-child/lib/scss:web/app/themes/themakercity-child/lib/css/dist",
+    "watch:css": "onchange 'web/app/themes/themakercity-child/lib/scss/assets/*.scss' -- npm run build:css",
+    "watch:js": "onchange 'web/app/themes/themakercity-child/lib/js/scripts/*.js' -- npm run build:js",
+    "watch": "npm-run-all --parallel watch:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:WenderHost/themakercity.git"
+  },
+  "author": "Michael Wender",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WenderHost/themakercity/issues"
+  },
+  "homepage": "https://github.com/WenderHost/themakercity#readme",
+  "devDependencies": {
+    "globcat": "^3.0.1",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "sass": "^1.68.0",
+    "uglify-js": "^3.17.4"
+  }
+}
