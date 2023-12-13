@@ -1,0 +1,20 @@
+/* main.scss */
+.makersocials {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.makersocials li {
+  display: block;
+  margin: 0 16px 0 0;
+}
+.makersocials li:last-child {
+  margin-right: 0;
+}
+.makersocials li a {
+  display: block;
+  text-align: center;
+}
+
+/*# sourceMappingURL=main.css.map */

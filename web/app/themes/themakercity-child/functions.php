@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'HELLO_ELEMENTOR_CHILD_VERSION', '2.0.0' );
 define( 'MAKR_STYLESHEET_DIR', trailingslashit( get_stylesheet_directory( __FILE__ ) ) );
 define( 'MAKR_STYLESHEET_DIR_URI', trailingslashit( get_stylesheet_directory_uri( __FILE__ ) ) );
+define( 'MAKR_ENV', getenv( 'WP_ENV' ) );
 
 /**
  * Include required files
@@ -26,3 +27,4 @@ require_once( MAKR_STYLESHEET_DIR . 'lib/fns/enqueues.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/templates.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/utilities.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/shortcodes/logo.php' );
+require_once( MAKR_STYLESHEET_DIR . 'lib/shortcodes/makersocials.php' );

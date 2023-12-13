@@ -1,0 +1,22 @@
+$iconsize: 32px;
+
+.makersocials{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+
+  li{
+    display: block;
+    margin: 0 16px 0 0;
+
+    &:last-child{
+      margin-right: 0;
+    }
+
+    a{
+      display: block;
+      text-align: center;
+    }
+  }
+}
