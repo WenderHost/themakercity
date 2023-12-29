@@ -15,11 +15,16 @@ function maker_social_icons( $atts ){
   if( have_rows( 'social_profiles') ):
     while( have_rows( 'social_profiles' ) ): the_row();
       $platform = get_sub_field('platform');
+      if( 'website' == $platform )
+        $platform = 'earth-americas';
       $link = get_sub_field('link');
       $links[] = '<a href="' . $link . '" target="_blank" title="' . esc_attr( get_the_title( $post ) . ' on ' . ucfirst( $platform ) ) . '"><icon class="fa fa-xl fa-' . $platform . '"></icon></a>';
     endwhile;
   endif;
-  uber_log('🔔 $links = ' . print_r( $links, true ) );
+  $email = get_field( 'email' );
+  if( ! empty( $email ) && is_email( $email ) )
+    $links[] = '<a href="mailto:' . $email . '" target="_blank" title="Email ' . esc_attr( get_the_title( $post ) ) . '"><icon class="fa fa-xl fa-envelope"></icon></a>';
+  //uber_log('🔔 $links = ' . print_r( $links, true ) );
 
   if( 0 < count( $links ) )
     return '<ul class="makersocials"><li>' . implode( '</li><li>', $links ) . '</li></ul>';
