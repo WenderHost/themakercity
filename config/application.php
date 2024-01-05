@@ -130,6 +130,11 @@ Config::define('SCRIPT_DEBUG', false);
 ini_set('display_errors', '0');
 
 /**
+ * The Maker City Specific Settings
+ */
+Config::define('FACETWP_LICENSE_KEY', env('FACETWP_LICENSE_KEY'));
+
+/**
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
  * See https://codex.wordpress.org/Function_Reference/is_ssl#Notes
  */
