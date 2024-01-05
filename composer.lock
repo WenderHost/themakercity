@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f40444831445a1d22e16cd44df4c638",
+    "content-hash": "4c87d3aeca8f4faaa00b04e214e58588",
     "packages": [
         {
             "name": "composer/installers",
@@ -1180,6 +1180,96 @@
             },
             "description": "Elevate your designs and unlock the full power of Elementor. Gain access to dozens of Pro widgets and kits, Theme Builder, Pop Ups, Forms and WooCommerce building capabilities.",
             "homepage": "https://go.elementor.com/wp-dash-wp-plugins-author-uri/"
+        },
+        {
+            "name": "wenmark/facetwp",
+            "version": "4.2.8",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp/4.2.8",
+                "shasum": "9d32785010bae13c04fd91ea8ae20d8e006bfa6a"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "FacetWP, LLC",
+                "homepage": "https://facetwp.com/"
+            },
+            "description": "Advanced Filtering for WordPress"
+        },
+        {
+            "name": "wenmark/facetwp-cache",
+            "version": "1.7",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-cache/1.7",
+                "shasum": "f4303aa4fc6eaaeb3c66a0882df86786ffb26f4a"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "FacetWP, LLC",
+                "homepage": "https://facetwp.com/"
+            },
+            "description": "Caching support for FacetWP"
+        },
+        {
+            "name": "wenmark/facetwp-elementor",
+            "version": "1.9",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-elementor/1.9",
+                "shasum": "e4efaa855ad46a972687bc2c064f66b63d33fe1f"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "FacetWP, LLC",
+                "homepage": "https://facetwp.com/"
+            },
+            "description": "FacetWP and Elementor Integration"
+        },
+        {
+            "name": "wenmark/facetwp-flyout",
+            "version": "0.8.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-flyout/0.8.1",
+                "shasum": "836004a2f74478c0c92080394e6d611f49cccd73"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "FacetWP, LLC",
+                "homepage": "https://facetwp.com/"
+            },
+            "description": "Displays a flyout facet menu"
+        },
+        {
+            "name": "wenmark/facetwp-relevanssi",
+            "version": "0.8.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-relevanssi/0.8.1",
+                "shasum": "59af11101cc960f5211d0bf67268001760a9d146"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "FacetWP, LLC",
+                "homepage": "https://facetwp.com/"
+            },
+            "description": "Relevanssi integration for FacetWP"
         },
         {
             "name": "wenmark/gravityforms",

@@ -76,7 +76,12 @@
         "wenmark/gravityforms": "^2",
         "wpackagist-plugin/instant-css": "^1.2",
         "wpengine/advanced-custom-fields-pro": "^6.2",
-        "wpackagist-plugin/relevanssi": "^4.22"
+        "wpackagist-plugin/relevanssi": "^4.22",
+        "wenmark/facetwp": "^4.2",
+        "wenmark/facetwp-cache": "^1.7",
+        "wenmark/facetwp-elementor": "^1.9",
+        "wenmark/facetwp-relevanssi": "^0.8.1",
+        "wenmark/facetwp-flyout": "^0.8.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
