@@ -75,7 +75,8 @@
         "lukasbesch/bedrock-plugin-disabler": "^1.4",
         "wenmark/gravityforms": "^2",
         "wpackagist-plugin/instant-css": "^1.2",
-        "wpengine/advanced-custom-fields-pro": "^6.2"
+        "wpengine/advanced-custom-fields-pro": "^6.2",
+        "wpackagist-plugin/relevanssi": "^4.22"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
