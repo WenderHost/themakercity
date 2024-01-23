@@ -1164,11 +1164,11 @@
         },
         {
             "name": "wenmark/elementor-pro",
-            "version": "3.18.2",
+            "version": "3.18.3",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.18.2",
-                "shasum": "c2cd0b63bf610fa2ba3255f598dcb1c8a1cf837b"
+                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.18.3",
+                "shasum": "d28652c1e22c385abe05aaa506cf6cb2fba93480"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
