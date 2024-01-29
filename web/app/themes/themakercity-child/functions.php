@@ -29,3 +29,4 @@ require_once( MAKR_STYLESHEET_DIR . 'lib/fns/templates.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/utilities.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/shortcodes/logo.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/shortcodes/makersocials.php' );
+require_once( MAKR_STYLESHEET_DIR . 'lib/shortcodes/primary_image.php' );

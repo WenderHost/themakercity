@@ -1,4 +1,5 @@
 /* main.scss */
+/* Variables */
 .makersocials {
   list-style-type: none;
   margin: 0;
@@ -14,6 +15,23 @@
 }
 .makersocials li a {
   display: block;
+  text-align: center;
+}
+
+/* Makers Styles */
+.maker-primary-image img {
+  border: 2px solid #000;
+}
+.maker-primary-image .collaborator-icon {
+  position: absolute;
+  bottom: 14px;
+  left: 8px;
+  line-height: 30px;
+  font-size: 1.2rem;
+  border: 2px solid #000;
+  background-color: #fcb569;
+  width: 40px;
+  height: 40px;
   text-align: center;
 }
 
