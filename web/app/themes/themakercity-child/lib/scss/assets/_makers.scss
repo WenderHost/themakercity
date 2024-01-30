@@ -26,3 +26,31 @@
     text-align: center;
   }
 }
+
+.facetwp-facet .facetwp-checkbox.checked{
+  background-image: url(../img/checkbox-on.png);
+}
+#elementor-tab-title-1631{
+  width: 160px;
+
+  &.button{
+    color: #999;
+  }
+
+
+  &.button::after{
+      background-image: url(../img/close-icon.png);
+      vertical-align: -20%;
+  }
+
+  &::after{
+    content: ' ';
+    display: inline-block;
+    margin-left: 4px;
+    width: 16px;
+    height: 16px;
+    background-size: 16px 16px;
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+}
