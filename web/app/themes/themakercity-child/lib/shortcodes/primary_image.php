@@ -7,6 +7,7 @@ function maker_primary_image( $atts ){
   $args = shortcode_atts([
     'css_classes' => 'maker-primary-image',
     'link'        => false,
+    'show'        => 'primary_image',
   ], $atts );
 
   global $post;
@@ -23,15 +24,27 @@ function maker_primary_image( $atts ){
     $link_close = '</a>';
   }
 
-  $primary_image = get_field( 'primary_image' );
-  $attachment_id = $primary_image['ID'];
+  if( 'gallery' == $args['show'] ){
+    $gallery = get_field( 'additional_images' );
+    if( is_array( $gallery ) ){
+      $image = $gallery[0];
+    } else {
+      $image = get_field( 'primary_image' );
+    }
+  } else {
+    $image = get_field( 'primary_image' );
+  }
+
+  $attachment_id = $image['ID'];
 
   $collaborator = get_field('collaborator');
   $collaborator_html = '';
 
   $img_src = esc_url( wp_get_attachment_image_url( $attachment_id, 'large' ) );
-  $img_srcset = esc_attr( wp_get_attachment_image_srcset( $attachment_id, 'large' ) );
-  $img_sizes = wp_get_attachment_image_sizes( $attachment_id, 'large' );
+  //$img_srcset = esc_attr( wp_get_attachment_image_srcset( $attachment_id, 'large' ) );
+  $img_srcset = '';
+  //$img_sizes = wp_get_attachment_image_sizes( $attachment_id, 'large' );
+  $img_sizes = '';
 
   if( 'yes' == $collaborator ){
     $css_classes[] = 'collaborator';
