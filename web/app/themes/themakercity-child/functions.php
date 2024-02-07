@@ -25,6 +25,7 @@ define( 'MAKR_ENV', getenv( 'WP_ENV' ) );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/debugging.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/elementor-queries.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/enqueues.php' );
+require_once( MAKR_STYLESHEET_DIR . 'lib/fns/routes.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/templates.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/utilities.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/shortcodes/logo.php' );
