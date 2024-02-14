@@ -13,6 +13,7 @@ auth.json
 scripts/
 movefile.yml
 node_modules
+*.sql
 
 # WordPress
 web/wp
