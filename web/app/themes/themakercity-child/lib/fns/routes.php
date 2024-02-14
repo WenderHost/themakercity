@@ -19,6 +19,10 @@ $custom_routes = [
     'slug'      => 'profile',
     'template'  => 'dashboard',
   ],
+  1 => [
+    'slug'      => 'account',
+    'template'  => 'dashboard',
+  ],
 ];
 
 /**

@@ -22,8 +22,9 @@ define( 'MAKR_ENV', getenv( 'WP_ENV' ) );
 /**
  * Include required files
  */
+require_once( MAKR_STYLESHEET_DIR . 'lib/fns/adminbar.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/debugging.php' );
-require_once( MAKR_STYLESHEET_DIR . 'lib/fns/elementor-queries.php' );
+require_once( MAKR_STYLESHEET_DIR . 'lib/fns/elementor.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/enqueues.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/routes.php' );
 require_once( MAKR_STYLESHEET_DIR . 'lib/fns/templates.php' );

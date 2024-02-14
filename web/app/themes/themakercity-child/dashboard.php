@@ -9,40 +9,37 @@
  */
 
 // Redirect non-authenticated users
-if( ! is_user_logged_in() )
-  wp_redirect( home_url() );
+//if( ! is_user_logged_in() )
+  //wp_redirect( home_url() );
 
 if ( ! defined( 'ABSPATH' ) ) {
   exit; // Exit if accessed directly.
 }
 
-get_header();
+add_action( 'wp_enqueue_scripts', function(){
+  wp_dequeue_style( 'hello-elementor' );
+}, 99 );
 
-while ( have_posts() ) :
-  the_post();
-  ?>
+/**
+ * Set the following page related variables:
+ *
+ * $current_route - the current URL path
+ * $current_title - the title for the path
+ */
+$current_url = $_SERVER['REQUEST_URI'];
+$dashboard_routes = [ 'profile' => 'My Profile', 'account' => 'My Account' ];
+foreach( $dashboard_routes as $route => $title ){
+  if( false !== strpos( $current_url, '/' . $route ) ){
+    $current_route = $route;
+    $current_title = $title . ' | ' . get_bloginfo( 'title' );
+  }
+}
 
-<main id="content" <?php post_class( 'site-main' ); ?>>
-
-  <?php if ( apply_filters( 'hello_elementor_page_title', true ) ) : ?>
-    <header class="page-header">
-      <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-    </header>
-  <?php endif; ?>
-
-  <div class="page-content">
-    <?php the_content(); ?>
-    <div class="post-tags">
-      <?php the_tags( '<span class="tag-links">' . esc_html__( 'Tagged ', 'hello-elementor' ), null, '</span>' ); ?>
-    </div>
-    <?php wp_link_pages(); ?>
-  </div>
-
-  <?php comments_template(); ?>
-
-</main>
-
-  <?php
-endwhile;
-
-get_footer();
+get_template_part( 'templates/layout/head', null, [ 'title' => $current_title ] );
+if( is_user_logged_in() ){
+  get_template_part( 'templates/layout/header' );
+  get_template_part( 'templates/' . $current_route );
+} else {
+  get_template_part( 'templates/sign-in' );
+}
+get_template_part( 'templates/layout/footer' );
