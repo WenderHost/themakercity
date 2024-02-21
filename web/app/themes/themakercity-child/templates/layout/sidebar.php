@@ -20,6 +20,11 @@
           <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Your Account</span>
         </a>
       </li>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="<?= home_url() ?>">
+          <i class="align-middle" data-feather="corner-down-left"></i> <span class="align-middle">Return to Site</span>
+        </a>
+      </li>
       <!--
       <li class="sidebar-header">
         Tools & Components
