@@ -95,6 +95,91 @@
   display: none;
 }
 
+/* Elementor Typography */
+.elementor-element.bordered.elementor-widget-heading h2 {
+  z-index: 10;
+  position: relative;
+}
+.elementor-element.bordered.elementor-widget-heading .elementor-widget-container {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+.elementor-element.bordered.elementor-widget-heading .elementor-widget-container::before {
+  position: absolute;
+  content: "";
+  height: 0.8em;
+  bottom: -0.15em;
+  z-index: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  background: #85cec5;
+}
+
+/**
+ * FacetWP
+ */
+/** with a basic grid **/
+.facetwp-type-checkboxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/** with floats **/
+.facetwp-checkbox:nth-child(3n) {
+  float: right;
+}
+
+.facetwp-checkbox:nth-child(3n+1) {
+  float: left;
+}
+
+.facetwp-checkbox:nth-child(3n+2) {
+  float: left; /* Adjust as needed */
+  clear: none; /* Adjust this as per your layout needs */
+}
+
+.facetwp-overflow {
+  clear: both;
+}
+
+.facetwp-toggle {
+  float: left;
+  clear: both;
+}
+
+.facetwp-selections ul {
+  margin: 0;
+  padding: 0;
+}
+
+.facetwp-selections li {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 8px 10px;
+  list-style-type: none;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.facetwp-selections .facetwp-selection-value {
+  color: #6233ca;
+}
+
+.facetwp-selections .facetwp-selection-value:hover {
+  text-decoration: underline;
+}
+
+.facetwp-selections .facetwp-selection-label + .facetwp-selection-value {
+  margin-left: 4px;
+}
+
+.facetwp-selections .facetwp-selection-value:last-child {
+  margin-right: 0;
+}
+
 .makersocials {
   list-style-type: none;
   margin: 0;
@@ -160,6 +245,11 @@
   background-size: 16px 16px;
   background-position: right;
   background-repeat: no-repeat;
+}
+
+/* Plasma Slider */
+.plasmaSlider {
+  background-color: #fff !important;
 }
 
 /*# sourceMappingURL=main.css.map */

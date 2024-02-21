@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11ae576d8760c59188b8716b599e3e43",
+    "content-hash": "bbd40a0f6d3df9f9935d8a345a7b4f46",
     "packages": [
         {
             "name": "composer/installers",
@@ -1335,24 +1335,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/elementor/"
-        },
-        {
-            "name": "wpackagist-plugin/instant-css",
-            "version": "1.2.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/instant-css/",
-                "reference": "trunk"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/instant-css.zip?timestamp=1695280574"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/instant-css/"
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",

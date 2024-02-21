@@ -1,0 +1,27 @@
+/* Elementor Typography */
+.elementor-element.bordered.elementor-widget-heading{
+    h2{
+        z-index: 10;
+        position: relative;
+    }
+
+    .elementor-widget-container{
+        position: relative;
+        width: fit-content;
+        margin: 0 auto;
+        padding: 0 30px;
+
+        &::before{
+            position: absolute;
+            content: '';
+            height: .8em;
+            bottom: -.15em;
+            z-index: 0;
+            width: 100%;
+            left: 0;
+            right: 0;
+            background: $makerteal;
+        }
+    }
+
+}
