@@ -10,32 +10,6 @@
  * @since      2024
  */
 ?>
-<script type="text/javascript">
-document.body.addEventListener("loginSuccess", function(evt){
-  console.log("👉 `loginSuccess` was triggered!");
-  console.log('🔔 evt.detail = ', evt.detail );
-
-  document.getElementById('login-message').classList.add(evt.detail.css);
-  var responseMessage = document.querySelector('#login-message .alert-message');
-  responseMessage.innerHTML = evt.detail.message;
-  setTimeout( () => {
-    window.location.href = evt.detail.redirect_url;
-  }, 1750);
-})
-
-document.body.addEventListener("loginFail", function(evt){
-  console.log("`loginFail` was triggered!");
-  console.log('🔔 evt.detail = ', evt.detail );
-
-  document.getElementById('login-message').classList.add(evt.detail.css);
-  var responseMessage = document.querySelector('#login-message .alert-message');
-  responseMessage.innerHTML = evt.detail.message;
-})
-
-document.body.addEventListener("submit", function(evt){
-  document.getElementById('login-message').classList.remove("alert-success","alert-warning");
-})
-</script>
 <style>
 .alert{
     display:none;
@@ -95,3 +69,30 @@ document.body.addEventListener("submit", function(evt){
       </div>
     </div>
   </main>
+<script type="text/javascript">
+const loginMsgContainer = document.getElementById('login-message');
+const loginMsgText = document.querySelector('#login-message .alert-message');
+
+document.body.addEventListener("loginSuccess", function(evt){
+  console.log("👉 `loginSuccess` was triggered!");
+  console.log('🔔 evt.detail.redirect_url = ', evt.detail.redirect_url );
+
+  loginMsgContainer.classList.add(evt.detail.css);
+  loginMsgText.innerHTML = evt.detail.message;
+  setTimeout( () => {
+    window.location.href = evt.detail.redirect_url;
+  }, 1750);
+})
+
+document.body.addEventListener("loginFail", function(evt){
+  console.log("`loginFail` was triggered!");
+  console.log('🔔 evt.detail = ', evt.detail );
+
+  loginMsgContainer.classList.add(evt.detail.css);
+  loginMsgText.innerHTML = evt.detail.message;
+})
+
+document.body.addEventListener("submit", function(evt){
+  loginMsgContainer.classList.remove("alert-success","alert-warning");
+})
+</script>
