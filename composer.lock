@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbd40a0f6d3df9f9935d8a345a7b4f46",
+    "content-hash": "d7f28f45324d786411d893c1d0264d21",
     "packages": [
         {
             "name": "composer/installers",
@@ -259,21 +259,22 @@
         },
         {
             "name": "mwender/htmx-api-wp",
-            "version": "0.1.7",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mwender/htmx-api-wp.git",
-                "reference": "6ef085988666a4d4a7d1371788f054d24a91abbd"
+                "reference": "6b0122f5b722392484bdbea407b0a0e8f88c8f6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mwender/htmx-api-wp/zipball/6ef085988666a4d4a7d1371788f054d24a91abbd",
-                "reference": "6ef085988666a4d4a7d1371788f054d24a91abbd",
+                "url": "https://api.github.com/repos/mwender/htmx-api-wp/zipball/6b0122f5b722392484bdbea407b0a0e8f88c8f6d",
+                "reference": "6b0122f5b722392484bdbea407b0a0e8f88c8f6d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
             },
+            "default-branch": true,
             "type": "wordpress-plugin",
             "authors": [
                 {
@@ -290,9 +291,9 @@
                 "wordpress"
             ],
             "support": {
-                "source": "https://github.com/mwender/htmx-api-wp/tree/0.1.7"
+                "source": "https://github.com/mwender/htmx-api-wp/tree/main"
             },
-            "time": "2024-01-19T12:25:23+00:00"
+            "time": "2024-02-12T20:54:46+00:00"
         },
         {
             "name": "oscarotero/env",
@@ -2358,6 +2359,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "mwender/htmx-api-wp": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

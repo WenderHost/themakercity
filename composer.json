@@ -85,7 +85,7 @@
         "wenmark/facetwp-elementor": "^1.9",
         "wenmark/facetwp-relevanssi": "^0.8.1",
         "wenmark/facetwp-flyout": "^0.8.1",
-        "mwender/htmx-api-wp": "^0.1.7"
+        "mwender/htmx-api-wp": "dev-main"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
