@@ -10,7 +10,7 @@ if( $current_user ){
     'html_updated_message'  => '<div class="alert alert-success" role="alert"><div class="alert-message">%s</div></div>',
     'html_submit_button'  => '<button type="submit" class="btn btn-primary">%s</button>',
     'instruction_placement' => 'field',
-    'fields'  => [ 'name', 'email', 'collaborator', 'primary_image', 'avatar', 'description', 'additional_images', 'social_profiles' ],
+    'fields'  => [ 'name', 'email', 'collaborator', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar'  ],
   ];
   acf_form( $settings );
 }
