@@ -1,4 +1,10 @@
 /* Elementor Typography */
+hr{
+  border: 0;
+  height: 1px;
+  background-color: $makerteal !important;
+}
+
 .elementor-element.bordered.elementor-widget-heading{
     h2{
         z-index: 10;
@@ -15,13 +21,41 @@
             position: absolute;
             content: '';
             height: .8em;
-            bottom: -.15em;
+            bottom: -.35em;
             z-index: 0;
             width: 100%;
             left: 0;
             right: 0;
             background: $makerteal;
         }
+    }
+
+    &.font-medium .elementor-widget-container::before{
+      bottom: -.15em;
+    }
+
+    &.left-align .elementor-widget-container,
+    &.align-left .elementor-widget-container{
+
+        padding: 0 10px 0 5px;
+        margin: 0 auto 0 0;
+
+        h2{
+          width: fit-content;
+        }
+        /*
+        h2::after{
+            position: absolute;
+            content: '';
+            height: .8em;
+            bottom: -.15em;
+            z-index: 1;
+            width: 80%;
+            right: 0;
+            left: 20px;
+            background-color: #f00;
+        }
+        */
     }
 
 }
