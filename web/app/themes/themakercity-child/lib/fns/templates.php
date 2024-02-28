@@ -25,8 +25,8 @@ function render_template( $filename = '', $data = [] ){
   $compile = 'false';
 
   $theme_path = \get_stylesheet_directory();
-  $theme_template = \trailingslashit( $theme_path ) . 'lib/templates/' . $filename . '.hbs';
-  $theme_template_compiled = \trailingslashit( $theme_path ) . 'lib/templates/compiled/' . $filename . '.php';
+  $theme_template = \trailingslashit( $theme_path ) . 'hbs-templates/' . $filename . '.hbs';
+  $theme_template_compiled = \trailingslashit( $theme_path ) . 'hbs-templates/compiled/' . $filename . '.php';
 
   if( file_exists( $theme_template ) ){
     if( ! file_exists( $theme_template_compiled ) ){
@@ -84,7 +84,7 @@ function template_exists( $filename = '' ){
   $extensions = ['.hbs', '.htm', '.html'];
   $filename = str_replace( $extensions, '', $filename );
 
-  $theme_template = MAKR_STYLESHEET_DIR . 'lib/templates/' . $filename . '.hbs';
+  $theme_template = MAKR_STYLESHEET_DIR . 'hbs-templates/' . $filename . '.hbs';
 
   if( file_exists( $theme_template ) ){
     return true;
