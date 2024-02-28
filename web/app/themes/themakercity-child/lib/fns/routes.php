@@ -23,6 +23,10 @@ $custom_routes = [
     'slug'      => 'account',
     'template'  => 'dashboard',
   ],
+  2 => [
+    'slug'      => 'sign-up',
+    'template'  => 'sign-up',
+  ],
 ];
 
 /**

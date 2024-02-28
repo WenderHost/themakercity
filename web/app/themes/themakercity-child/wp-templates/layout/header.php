@@ -2,10 +2,10 @@
 $title = ( isset( $args ) && array_key_exists( 'title', $args ) )? $args['title'] : false ;
 ?>
   <div class="wrapper">
-    <?= get_template_part( 'templates/layout/sidebar' ); ?>
+    <?= get_template_part( 'wp-templates/layout/sidebar' ); ?>
 
     <div class="main">
-      <?= get_template_part( 'templates/layout/navbar-top' ); ?>
+      <?= get_template_part( 'wp-templates/layout/navbar-top' ); ?>
       <main class="content">
         <?php if( $title ): ?>
         <div class="mb-3">
