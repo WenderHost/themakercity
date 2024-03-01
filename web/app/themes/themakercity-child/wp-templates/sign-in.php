@@ -62,7 +62,8 @@
               </div>
             </div>
             <div class="text-center mb-3">
-              Don't have an account? <a href="<?= home_url('sign-up') ?>">Sign up</a>
+              Don't have an account? <a href="<?= home_url('sign-up') ?>">Sign up</a><br/>
+              <a href="<?= home_url() ?>">&larr; Return to The Maker City</a>.
             </div>
           </div>
         </div>

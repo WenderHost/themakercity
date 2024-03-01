@@ -1,0 +1,10 @@
+<mj-section>
+
+  <mj-column>
+    <mj-text align="center" line-height="1.5">
+      &copy; {{year}} Knoxville Entrepreneur Center (cert. 501(c)(3) organization). All rights reserved.<br/>
+      865.282.4322 &bull; 17 Market Square, #101, Knoxville, TN 37902
+    </mj-text>
+  </mj-column>
+
+</mj-section>

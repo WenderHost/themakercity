@@ -1,0 +1,29 @@
+<mjml>
+
+  <mj-head>
+
+    <mj-attributes>
+      <mj-text align="center" color="#555" />
+    </mj-attributes>
+
+  </mj-head>
+
+  <mj-body background-color="#eee">
+
+    <mj-include path="./header.mjml" />
+
+    <mj-section background-color="#fff">
+
+      <mj-column>
+        <mj-text align="left" font-size="16px" line-height="1.25" font-family="Helvetica">
+          {{{content}}}
+        </mj-text>
+      </mj-column>
+
+    </mj-section>
+
+    <mj-include path="./footer.mjml" />
+
+  </mj-body>
+
+</mjml>

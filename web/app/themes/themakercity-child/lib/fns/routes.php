@@ -16,16 +16,28 @@ namespace TheMakerCity\routes;
  */
 $custom_routes = [
   0 => [
-    'slug'      => 'profile',
-    'template'  => 'dashboard',
+    'slug'          => 'profile',
+    'template'      => 'dashboard',
+    'auth_required' => true,
+    'title'         => 'My Profile',
   ],
   1 => [
-    'slug'      => 'account',
-    'template'  => 'dashboard',
+    'slug'          => 'account',
+    'template'      => 'dashboard',
+    'auth_required' => true,
+    'title'         => 'My Account',
   ],
   2 => [
-    'slug'      => 'sign-up',
-    'template'  => 'sign-up',
+    'slug'          => 'sign-in',
+    'template'      => 'dashboard',
+    'auth_required' => false,
+    'title'         => 'Sign In',
+  ],
+  3 => [
+    'slug'          => 'sign-up',
+    'template'      => 'dashboard',
+    'auth_required' => false,
+    'title'         => 'Sign Up',
   ],
 ];
 
