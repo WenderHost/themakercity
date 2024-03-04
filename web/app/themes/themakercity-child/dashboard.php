@@ -58,6 +58,10 @@ if(
   || ( ! is_user_logged_in() && $auth_required )
 ){
   wp_redirect( home_url() );
+} else if( is_user_logged_in() && in_array( $current_slug, [ 'sign-in','sign-up' ] ) ){
+  // Conversely, if the user is logged in, no need to show the
+  // "Sign In" or "Sign Up" pages, redirect to "My Profile":
+  wp_redirect( home_url( '/profile/' ) );
 }
 
 /**
