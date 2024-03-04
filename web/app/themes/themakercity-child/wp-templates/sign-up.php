@@ -72,7 +72,7 @@
               <div class="card-body">
                 <div class="m-sm-3">
                   <form id="password-reset" hx-post="/wp-htmx/v1/noswap/register" hx-swap="none">
-                    <input type="hidden" name="action" value="htmx_passwordreset">
+                    <input type="hidden" name="action" value="htmx_register">
                     <div class="mb-3">
                       <label class="form-label">Name</label>
                       <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your name" />

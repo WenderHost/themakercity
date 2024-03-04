@@ -15,7 +15,7 @@ if ( ! isset( $hxvals['action'] ) || $hxvals['action'] != 'htmx_login') {
 /**/
 
 $email = ( is_array( $hxvals ) && array_key_exists( 'email', $hxvals ) && is_email( $hxvals['email'] ) )? $hxvals['email'] : null ;
-$password = ( is_array( $hxvals ) && array_key_exists( 'email', $hxvals ) )? $hxvals['password'] : null ;
+$password = ( is_array( $hxvals ) && array_key_exists( 'password', $hxvals ) )? $hxvals['password'] : null ;
 $remember_me = ( is_array( $hxvals) && array_key_exists( 'remember-me', $hxvals ) )? (bool) $hxvals['remember-me'] : false ;
 
 $data = [];
