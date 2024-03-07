@@ -9,13 +9,13 @@
         Pages
       </li>
 
-      <li class="sidebar-item<?php if( is_front_page() ){ echo ' active'; } ?>">
+      <li class="sidebar-item<?php if( strpos( $_SERVER['REQUEST_URI'], 'profile' ) ){ echo ' active'; } ?>">
         <a class="sidebar-link" href="<?= home_url( 'profile' ) ?>">
           <i class="align-middle" data-feather="user"></i> <span class="align-middle">Your Profile</span>
         </a>
       </li>
 
-      <li class="sidebar-item<?php if( is_post_type_archive( 'property' ) || 'property' == get_post_type() ){ echo ' active'; } ?>">
+      <li class="sidebar-item<?php if( strpos( $_SERVER['REQUEST_URI'], 'account' ) ){ echo ' active'; } ?>">
         <a class="sidebar-link" href="<?= home_url( 'account' ) ?>">
           <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Your Account</span>
         </a>
