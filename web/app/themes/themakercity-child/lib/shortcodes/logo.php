@@ -56,7 +56,7 @@ function maker_icon( $atts = [] ){
   $svg = '<style>#makr-icon-and-bkgrd_' . $args['instance'] . '{' . $background_image . '}</style><div id="makr-icon-and-bkgrd_' . $args['instance'] . '"><svg width="' . $args['width'] . '" id="makr-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 174 174"><style>.icon-background_' . $args['instance'] . '{fill:' . $icon_background . '}</style><g><path class="icon-background_' . $args['instance'] . '" d="M4.6 5h164v164H4.6z"/><path fill="' . $color . '" d="M-.4 0v174h174V0H-.4zm169 169H4.6V5h164v164z"/></g><path fill="' . $color . '" d="M71.5 40.2L57.6 54.1 43.7 40.2h-5.4v38.6h38.6V40.2h-5.4zm0 7.6V68L61.4 57.9l10.1-10.1zm-27.8 0l10.1 10.1 3.8 3.8 11.7 11.7H43.7V47.8zM38.3 95.1v38.6h38.6v-5.4L63 114.4l13.9-13.9v-5.4H38.3zm30.9 33.2H49l10.1-10.1 10.1 10.1zm0-27.8l-10.1 10.1-3.8 3.8-11.7 11.7v-25.6h25.6zM134.9 73.4l-16.2-33.2h-6.2L96.4 73.4v5.4H135v-5.4zm-19.3-27.2L129 73.4h-26.8l13.4-27.2zM134.9 100.5v-5.4H96.3v38.6h5.4v-27.9l28.1 27.9h5.1v-2.8l-11.1-11.1H134.9v-19.3zm-5.4 13.9h-11.1l-13.9-13.9h25v13.9z"/></svg></div>';
 
   if( $args['link'] )
-    $svg = '<a href="' . home_url() . '">' . $svg . '</a>';
+    $svg = '<a href="' . home_url() . '" style="width: ' . $args['width'] . 'px; display: block;">' . $svg . '</a>';
 
   return $svg;
 }
