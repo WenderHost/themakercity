@@ -15,6 +15,7 @@ movefile.yml
 node_modules
 *.sql
 web/*.sh
+.idea/
 
 # WordPress
 web/wp
