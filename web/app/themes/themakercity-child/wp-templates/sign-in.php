@@ -25,6 +25,7 @@
           <div class="d-table-cell align-middle">
 
             <div class="text-center mt-4">
+              <a href="<?= home_url() ?>" alt="Return home" style="display: block; margin: 0 auto 20px auto;"><img src="<?= MAKR_STYLESHEET_DIR_URI ?>lib/img/maker-icon_512x512.png" style="width: 100px;" /></a>
               <h1 class="h2">The Maker City</h1>
               <p class="lead">
                 Sign in to your account to continue
@@ -62,8 +63,8 @@
               </div>
             </div>
             <div class="text-center mb-3">
-              Don't have an account? <a href="<?= home_url('sign-up') ?>">Sign up</a><br/>
-              <a href="<?= home_url() ?>">&larr; Return to The Maker City</a>.
+              <p class="lead">Don't have an account? <a href="<?= home_url('sign-up') ?>">Sign up</a></p>
+              <p><a href="<?= home_url() ?>">&larr; Return to The Maker City</a>.</p>
             </div>
           </div>
         </div>

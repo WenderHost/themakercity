@@ -28,7 +28,7 @@ function create_user( $name, $email, $business_description ) {
       'user_email'    => $email,
       'display_name'  => $name,
       'role'          => 'unapproved', // Set the user role to "unapproved"
-      'user_pass'     => null,
+      'user_pass'     => wp_generate_password(),
     );
 
     $user_id = wp_insert_user( $user_data );

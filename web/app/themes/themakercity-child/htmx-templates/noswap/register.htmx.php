@@ -25,4 +25,20 @@ if( ! is_wp_error( $user_id ) ){
 
   $business_description = get_user_meta( $user_id, 'business_description', true );
   wp_mail( get_option( 'admin_email' ) , 'New Maker: ' . $user_data->display_name, "<em>{$user_data->display_name}</em> has registered for a Maker Profile using the following details:\n\n<strong>Email:</strong> {$user_data->user_email}\n\n<strong>Business Description:</strong>\n{$business_description}\n\n<a href=\"{$unapproved_users_url}\">Click here</a> to approve/unapprove this user." );
+  $json_response = [
+    'newAccount' => [
+      'css'     => 'alert-success',
+      'message' => 'We have received your request for a Maker\'s Directory Profile. Someone on our staff will review your request and get back to you soon.'
+    ],
+    'resetRegistrationForm' => [],
+  ];
+  header( 'HX-Trigger: ' . json_encode( $json_response ) );
+} else {
+  $json_response = [
+    'newAccount' => [
+      'css'     => 'alert-danger',
+      'message' => $user_id->get_error_message(),
+    ],
+  ];
+  header( 'HX-Trigger: ' . json_encode( $json_response ) );
 }
