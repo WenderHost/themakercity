@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7f28f45324d786411d893c1d0264d21",
+    "content-hash": "a92843ee7ef09eb6e0042fe5d29d5125",
     "packages": [
         {
             "name": "composer/installers",
@@ -1190,6 +1190,25 @@
                 }
             ],
             "time": "2023-11-12T22:43:29+00:00"
+        },
+        {
+            "name": "wenmark/acf-extended-pro",
+            "version": "0.8.9.5",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/acf-extended-pro/0.8.9.5",
+                "shasum": "ed291aa55633dd8307345c3625faf3241693b627"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "ACF Extended",
+                "homepage": "https://www.acf-extended.com"
+            },
+            "description": "All-in-one enhancement suite that improves WordPress & Advanced Custom Fields.",
+            "homepage": "https://www.acf-extended.com"
         },
         {
             "name": "wenmark/elementor-pro",

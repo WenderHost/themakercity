@@ -7,7 +7,7 @@ if( $current_user ){
     'html_updated_message'  => '<div class="alert alert-success" role="alert"><div class="alert-message">%s</div></div>',
     'html_submit_button'    => '<button type="submit" class="btn btn-primary">%s</button>',
     'instruction_placement' => 'field',
-    'fields'  => [ 'name', 'email', 'collaborator', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar', 'category', 'tags'  ],
+    'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar'  ],
   ];
 
   $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
