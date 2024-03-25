@@ -38,7 +38,7 @@ function wp_custom_email_template( $args ) {
   $data = array(
     'title' => $subject,
     'content' => nl2br( $message ),
-    // Add other data as needed.
+    'logo' => MAKR_STYLESHEET_DIR_URI . 'lib/img/maker-icon_512x512.png',
   );
 
   // Retrieve our handlebars template:
