@@ -17,6 +17,13 @@
 .alert.alert-success,.alert.alert-warning,.alert-danger{
     display:flex;
 }
+.fa-1, .fa-2{
+  margin-right: .5rem;
+  border-radius: 50%;
+  background-color: #3b7ddd;
+  padding: .35rem .6rem;
+  color: #fff;
+}
 </style>
   <main class="d-flex w-100">
     <div class="container d-flex flex-column">
@@ -24,84 +31,69 @@
         <a href="<?= home_url() ?>" alt="Return home" style="display: block; margin: 0 auto 40px auto;"><img src="<?= MAKR_STYLESHEET_DIR_URI ?>lib/img/maker-icon_512x512.png" style="width: 100px;" /></a>
         <h1>Sign Up for The Makers Directory</h1>
       </div>
-      <div class="row mt-6">
-        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
-          <div class="d-table-cell align-top">
+      <div class="row mt-4 justify-content-md-center">
+        <div class="col-md-5">
+          <div class="accordion" id="directory-steps">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <i class="fa-solid fa-1"></i> Are you *already* listed?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
+                <div class="accordion-body">
+                  <p class="lead">If you have a listing in <a href="<?= home_url( '/makers/' ) ?>" target="_blank">The Maker Directory</a>, then you already have an account. Gain access by entering your sign up email, and we'll send you a password reset:</p>
 
-            <div class="text-center mt-4">
-              <h2>Already listed in our Directory?</h2>
-              <p class="lead" style="text-align: center;">
-                If you have a listing in our <a href="<?= home_url( '/makers/' ) ?>" target="_blank">Maker Directory</a>, then you already have an account. Gain access by entering your sign up email, and we'll send you a password reset:
-              </p>
-            </div>
-            <div class="alert" id="reset-message" role="alert">
-              <div class="alert-message">Alert goes here...</div>
-            </div>
+                  <!-- START Reset Form -->
+                  <div class="alert" id="reset-message" role="alert">
+                    <div class="alert-message">Alert goes here...</div>
+                  </div>
 
-            <div class="card">
-              <div class="card-body">
-                <div class="m-sm-3">
-                  <form id="password-reset" hx-post="/wp-htmx/v1/noswap/resetpassword" hx-swap="none">
-                    <input type="hidden" name="action" value="htmx_passwordreset">
-                    <div class="mb-3">
-                      <label class="form-label">Email</label>
-                      <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+                  <div class="card mb-2">
+                    <div class="card-body">
+                      <div class="m-sm-3">
+                        <form id="password-reset" hx-post="/wp-htmx/v1/noswap/resetpassword" hx-swap="none">
+                          <input type="hidden" name="action" value="htmx_passwordreset">
+                          <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
+                          </div>
+                          <div class="d-grid gap-2 mt-3">
+                            <input type="submit" class="btn btn-lg btn-primary" value="Reset Password" />
+                          </div>
+                        </form>
+                      </div>
                     </div>
-                    <div class="d-grid gap-2 mt-3">
-                      <input type="submit" class="btn btn-lg btn-primary" value="Reset Password" />
-                    </div>
-                  </form>
+                  </div><!-- .card -->
+                  <div class="text-center mb-3">
+                    <p class="">Need to <a href="<?= home_url('sign-in') ?>">sign in</a>?</p>
+                  </div>
+                  <!-- END Reset Form -->
+
                 </div>
               </div>
-            </div><!-- .card -->
-            <div class="text-center mb-3">
-              <p class="lead">Need to <a href="<?= home_url('sign-in') ?>">sign in</a>?</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
-          <div class="d-table-cell align-top">
-
-            <div class="text-center mt-4">
-              <h2>Need an account?</h2>
-              <p class="lead">
-                If you're not listed in our Maker Directory, fill out the form below. One of our staff will review your submission. Once approved, you can create and edit your profile.
-              </p>
-            </div><!-- .text-center mt-4 -->
-            <div class="alert" id="newAccount-message" role="alert">
-              <div class="alert-message">Alert goes here...</div>
-            </div>
-
-            <div class="card">
-              <div class="card-body">
-                <div class="m-sm-3">
-                  <form id="new-account" hx-post="/wp-htmx/v1/noswap/register" hx-swap="none">
-                    <input type="hidden" name="action" value="htmx_register">
-                    <div class="mb-3">
-                      <label class="form-label">Name</label>
-                      <input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your name" />
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Email</label>
-                      <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Describe Your Business</label>
-                      <textarea class="form-control form-control-lg" name="business_description" id="business_description" cols="30" rows="4"></textarea>
-                    </div>
-                    <div class="d-grid gap-2 mt-3">
-                      <input type="submit" class="btn btn-lg btn-primary" value="Apply For a Maker Account" />
-                    </div>
-                  </form>
-                </div>
+            </div><!-- .accordion-item -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  <i class="fa-solid fa-2"></i> Need a new account?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
+                <div class="accordion-body">
+                  <p class="lead">
+                    If you're not listed in The Maker Directory, click here:
+                  </p>
+                  <div class="d-grid"><a href="<?= home_url('apply') ?>" role="button" class="btn btn-primary btn-lg" style="padding: .4rem 1rem; font-size: 1.1875rem; border-radius: .3rem;">Apply for a Maker Account</a></div>
+                </div><!-- .accordion-body -->
               </div>
-            </div><!-- .card -->
-
-          </div>
-        </div>
+            </div>
+          </div><!-- .accordion -->
+        </div><!-- .col-md-6 -->
       </div>
     </div>
   </main>
+
 <script>
   const resetMsgContainer = document.getElementById('reset-message');
   const resetMsgText = document.querySelector('#reset-message .alert-message');

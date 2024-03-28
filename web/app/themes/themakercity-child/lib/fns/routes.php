@@ -39,6 +39,12 @@ $custom_routes = [
     'auth_required' => false,
     'title'         => 'Sign Up',
   ],
+  4 => [
+    'slug'          => 'apply',
+    'template'      => 'dashboard',
+    'auth_required' => false,
+    'title'         => 'Apply',
+  ],
 ];
 
 /**

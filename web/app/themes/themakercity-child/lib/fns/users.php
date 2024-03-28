@@ -111,7 +111,7 @@ add_action('set_user_role', __NAMESPACE__ . '\\send_reset_link_on_role_update', 
  */
 function custom_save_maker_post( $post_id ) {
   // Check if this is a frontend form submission
-  if ( ! is_admin() && 'maker' == get_post_type( $post_id ) ) {
+  if ( ! is_admin() && 'maker' == get_post_type( $post_id ) && 'publish' == get_post_status( $post_id ) ) {
 
     $user_id = get_current_user_id();
     $maker_profile_id_exists = metadata_exists( 'user', $user_id, 'maker_profile_id' );
@@ -155,4 +155,4 @@ function custom_save_maker_post( $post_id ) {
     }
   }
 }
-add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
+//add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
