@@ -52,7 +52,7 @@ function send_password_reset_email( $user_email ) {
   // Check if any user exists with the provided email address.
   $user = get_user_by( 'email', $user_email );
   if ( !$user ) {
-    return new \WP_Error( 'no_user_found', 'No user found with that email address. If you already have a Maker Profile, email us at support@themakercity.org, and we can lookup the email address associated with your profile.' );
+    return new \WP_Error( 'no_user_found', 'No user found with that email address.<ol style="margin-top: 1em;"><li>If you already have a Maker Profile, <a href="mailto:support@themarkercity.org?subject=Lookup%20My%20Account">email us</a>, and we can lookup the email address associated with your profile.</li><li>Otherwise, continue with Step 2 below.</li></ol>' );
   }
 
   // Attempt to send the password reset email.

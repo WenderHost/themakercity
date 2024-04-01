@@ -29,7 +29,7 @@
     <div class="container d-flex flex-column">
       <div class="row mt-6 text-center">
         <a href="<?= home_url() ?>" alt="Return home" style="display: block; margin: 0 auto 40px auto;"><img src="<?= MAKR_STYLESHEET_DIR_URI ?>lib/img/maker-icon_512x512.png" style="width: 100px;" /></a>
-        <h1>Sign Up for The Makers Directory</h1>
+        <h1>The Maker City Directory Listing</h1>
       </div>
       <div class="row mt-4 justify-content-md-center">
         <div class="col-md-5">
@@ -37,12 +37,12 @@
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fa-solid fa-1"></i> Are you *already* listed?
+                  <i class="fa-solid fa-1"></i> Already have a listing, but need a password?
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
                 <div class="accordion-body">
-                  <p class="lead">If you have a listing in <a href="<?= home_url( '/makers/' ) ?>" target="_blank">The Maker Directory</a>, then you already have an account. Gain access by entering your sign up email, and we'll send you a password reset:</p>
+                  <p class="lead">Submit your email and we’ll help you create a login to keep your listing fresh.</p>
 
                   <!-- START Reset Form -->
                   <div class="alert" id="reset-message" role="alert">
@@ -66,7 +66,7 @@
                     </div>
                   </div><!-- .card -->
                   <div class="text-center mb-3">
-                    <p class="">Need to <a href="<?= home_url('sign-in') ?>">sign in</a>?</p>
+                    <p class="mt-3"><span class="lead">Already have a log in?</span><br/>Use it <a href="<?= home_url('sign-in') ?>">here</a>, and make your listing shine!</p>
                   </div>
                   <!-- END Reset Form -->
 
@@ -76,13 +76,13 @@
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                  <i class="fa-solid fa-2"></i> Need a new account?
+                  <i class="fa-solid fa-2"></i> Need a new listing?
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
                 <div class="accordion-body">
                   <p class="lead">
-                    If you're not listed in The Maker Directory, click here:
+                    If you're not listed in The Maker City Directory, click here:
                   </p>
                   <div class="d-grid"><a href="<?= home_url('apply') ?>" role="button" class="btn btn-primary btn-lg" style="padding: .4rem 1rem; font-size: 1.1875rem; border-radius: .3rem;">Apply for a Maker Account</a></div>
                 </div><!-- .accordion-body -->

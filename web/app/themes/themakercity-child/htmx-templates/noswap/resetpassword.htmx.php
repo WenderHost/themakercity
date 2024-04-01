@@ -20,6 +20,12 @@ if( $email ){
   if( ! is_wp_error( $result ) ){
     header( 'HX-Trigger: {"passwordReset":{"css":"alert-success", "message": "Check your inbox. We have sent an email with instructions for resetting your password."}}' );
   } else if( is_wp_error( $result ) ) {
-    header( 'HX-Trigger: {"passwordReset":{"css":"alert-danger", "message": "' . $result->get_error_message() . '"}}' );
+    $data = array(
+      'passwordReset' => array(
+        'css'     => 'alert-danger',
+        'message' => $result->get_error_message(),
+      ),
+    );
+    header( 'HX-Trigger: ' . json_encode( $data ) ); // {"passwordReset":{"css":"alert-danger", "message": "' . $result->get_error_message() . '"}}
   }
 }
