@@ -1,0 +1,23 @@
+/* Special Image Styling */
+
+/**
+ * Add this as a class on an Elementor image to align
+ * the caption in the middle of the image. For the
+ * caption, use:
+ *
+ * - First line text<div class="makr-underline"><span>Main Text</span></div>Third line text"
+ */
+.makr-imagebox{
+  figure.wp-caption{
+    position: relative;
+  }
+
+  figcaption{
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    padding-top: 38%;
+    text-align: center;
+    width: 100%;
+  }
+}

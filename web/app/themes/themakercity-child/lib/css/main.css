@@ -102,6 +102,30 @@ hr {
   background-color: #85cec5 !important;
 }
 
+.makr-underline {
+  position: relative;
+  width: fit-content;
+  margin: -0.25rem auto 1rem auto;
+  padding: 0 15px;
+}
+.makr-underline::before {
+  position: absolute;
+  content: "";
+  height: 1.25em;
+  bottom: -0.05em;
+  z-index: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  background: #3d978c;
+}
+.makr-underline span {
+  font-size: 2.25rem;
+  font-weight: bold;
+  z-index: 10;
+  position: relative;
+}
+
 .elementor-element.bordered.elementor-widget-heading h2 {
   z-index: 10;
   position: relative;
@@ -229,6 +253,26 @@ hr {
 .makersocials li a {
   display: block;
   text-align: center;
+}
+
+/* Special Image Styling */
+/**
+ * Add this as a class on an Elementor image to align
+ * the caption in the middle of the image. For the
+ * caption, use:
+ *
+ * - First line text<div class="makr-underline"><span>Main Text</span></div>Third line text"
+ */
+.makr-imagebox figure.wp-caption {
+  position: relative;
+}
+.makr-imagebox figcaption {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  padding-top: 38%;
+  text-align: center;
+  width: 100%;
 }
 
 /* Makers Styles */

@@ -5,6 +5,32 @@ hr{
   background-color: $makerteal !important;
 }
 
+.makr-underline{
+    position: relative;
+    width: fit-content;
+    margin: -.25rem auto 1rem auto;
+    padding: 0 15px;
+
+    &::before{
+        position: absolute;
+        content: '';
+        height: 1.25em;
+        bottom: -.05em;
+        z-index: 0;
+        width: 100%;
+        left: 0;
+        right: 0;
+        background: darken($makerteal,25%);
+    }
+
+    span{
+        font-size: 2.25rem;
+        font-weight: bold;
+        z-index: 10;
+        position: relative;
+    }
+}
+
 .elementor-element.bordered.elementor-widget-heading{
     h2{
         z-index: 10;
