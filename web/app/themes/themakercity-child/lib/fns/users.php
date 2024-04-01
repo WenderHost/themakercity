@@ -141,6 +141,7 @@ function custom_save_maker_post( $post_id ) {
      * Set the $post_title for the Maker CPT to the same value as
      * the `name` field.
      */
+    /*
     $profile_name = get_post_meta( $post_id, 'name', true );
     if( ! empty( $profile_name ) ){
       $post_data = [
@@ -153,6 +154,7 @@ function custom_save_maker_post( $post_id ) {
       wp_update_post( $post_data );
       add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
     }
+    /**/
   }
 }
-//add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
+add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );

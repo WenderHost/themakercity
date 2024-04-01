@@ -18,7 +18,7 @@ function notify_admin_new_maker_profile( int $post_id ):void {
     $email = get_field( 'email', $post_id );
 
     $subject = 'New Maker Application for ' . $name;
-    $body = '<p>' . $name . ' &gt;' . $email . '&lt; has applied to be listed in the Maker Directory.</p><p><a href="' . get_permalink( $post_id ) .'">Click Here</a> to view this maker\'s profile. To approve the maker, simply "Publish" their profile. Once you, the system will make their profile live, setup their login, and send the maker an email.</p>';
+    $body = '<p>' . $name . ' &lt;' . $email . '&gt; has applied to be listed in the Maker Directory. <a href="' . get_permalink( $post_id ) .'">Click Here</a> to view this maker\'s profile.</p><p>To approve the maker, simply "Publish" their profile. Then the system will make their profile live, setup their login, and send the maker an email.</p>';
     $headers = array('Content-Type: text/html; charset=UTF-8');
 
     // Get all admin emails
