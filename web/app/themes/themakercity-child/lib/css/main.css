@@ -274,6 +274,9 @@ hr {
   text-align: center;
   width: 100%;
 }
+.makr-imagebox figcaption a {
+  color: inherit;
+}
 
 /* Makers Styles */
 .maker-primary-image img {
