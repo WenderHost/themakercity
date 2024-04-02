@@ -86,7 +86,8 @@
         "wenmark/facetwp-relevanssi": "^0.8.1",
         "wenmark/facetwp-flyout": "^0.8.1",
         "mwender/htmx-api-wp": "dev-main",
-        "wenmark/acf-extended-pro": "^0.8.9"
+        "wenmark/acf-extended-pro": "^0.8.9",
+        "wpackagist-plugin/disable-gutenberg": "^3.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
