@@ -1212,11 +1212,11 @@
         },
         {
             "name": "wenmark/elementor-pro",
-            "version": "3.20.2",
+            "version": "3.20.3",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.20.2",
-                "shasum": "578f1812e17ff7fff89cd213e958a4b7aae048cd"
+                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.20.3",
+                "shasum": "292052d8390b34a60cee8b8906d47cc08ddcb490"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
