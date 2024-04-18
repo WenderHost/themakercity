@@ -38,7 +38,7 @@ function maker_primary_image( $atts ){
     $image = get_field( 'primary_image' );
   }
 
-  $attachment_id = $image['ID'];
+  $attachment_id = ( is_array( $image ) && array_key_exists( 'ID', $image ) )? $image['ID'] : false ;
 
   $collaborator = get_field('collaborator');
   $collaborator_html = '';
@@ -55,7 +55,12 @@ function maker_primary_image( $atts ){
   if( is_array( $css_classes ) )
     $css_classes = implode( ' ', $css_classes );
 
-  $html = "<div class=\"{$css_classes}\">{$link_open}<img src=\"{$img_src}\" srcset=\"{$img_srcset}\" sizes=\"{$img_sizes}\" />{$link_close}{$collaborator_html}</div>";
+  if( $img_src ){
+    $html = "<div class=\"{$css_classes}\">{$link_open}<img src=\"{$img_src}\" srcset=\"{$img_srcset}\" sizes=\"{$img_sizes}\" />{$link_close}{$collaborator_html}</div>";
+  } else {
+    $html = "<div class=\"{$css_classes}\">{$link_open}<div class=\"placeholder\" style=\"width: 100%; min-height: 420px; background-color: #eee\"></div>{$link_close}{$collaborator_html}</div>";
+  }
+
   return $html;
 }
 add_shortcode( 'primary_image', __NAMESPACE__ . '\\maker_primary_image' );

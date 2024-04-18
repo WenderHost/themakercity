@@ -162,6 +162,9 @@ $avatar = get_avatar_url( $current_user->user_email, ['size' => 96] );
               </a>
               <div class="dropdown-menu dropdown-menu-end">
                 <a class="dropdown-item" href="<?= home_url('/profile') ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                <?php if( current_user_can( 'activate_plugins' ) ){ ?>
+                <a class="dropdown-item" href="<?= site_url( '/wp-admin/' ) ?>" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> WP Admin</a>
+                <?php } ?>
                 <!--
                 <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
                 <div class="dropdown-divider"></div>

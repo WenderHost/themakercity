@@ -3,22 +3,23 @@
 namespace TheMakerCity\admins;
 
 /**
- * Notifies an admin new maker profile.
+ * Notifies an admin of a new maker profile.
  *
  * @param      int  $post_id  The Post ID
  */
 function notify_admin_new_maker_profile( int $post_id ):void {
-  // Check if this is a frontend form submission
-  if ( ! is_admin() && 'maker' == get_post_type( $post_id ) ) {
+
+  if ( 'maker' == get_post_type( $post_id ) ) {
     // Prepare email data
     $to = get_bloginfo('admin_email'); // Get the admin email
 
     // Get Maker Details
     $name = get_field( 'name', $post_id );
     $email = get_field( 'email', $post_id );
+    $business_name = get_the_title( $post_id );
 
     $subject = 'New Maker Application for ' . $name;
-    $body = '<p>' . $name . ' &lt;' . $email . '&gt; has applied to be listed in the Maker Directory. <a href="' . get_permalink( $post_id ) .'">Click Here</a> to view this maker\'s profile.</p><p>To approve the maker, simply "Publish" their profile. Then the system will make their profile live, setup their login, and send the maker an email.</p>';
+    $body = '<p>' . $name . ' &lt;<a href="mailto:' . $email . '">' . $email . '</a>&gt; has applied to be listed in the Maker Directory. <a href="' . get_permalink( $post_id ) .'">Click Here</a> to view this maker\'s profile for ' . $business_name . '.</p><p>To approve the maker, simply "Publish" their profile. Then the system will make their profile live, setup their login, and send the maker an email.</p>';
     $headers = array('Content-Type: text/html; charset=UTF-8');
 
     // Get all admin emails
@@ -36,7 +37,7 @@ function notify_admin_new_maker_profile( int $post_id ):void {
     // Optionally, add any other actions you wish to perform on form submission
   }
 }
-add_action('acf/save_post', __NAMESPACE__ . '\\notify_admin_new_maker_profile', 20);
+add_action('themakercity/after_maker_create', __NAMESPACE__ . '\\notify_admin_new_maker_profile' );
 
 /**
  * Returns an array of admin emails.

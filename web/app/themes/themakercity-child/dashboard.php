@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_enqueue_scripts', function(){
   wp_dequeue_style( 'hello-elementor' );
+  wp_enqueue_style( 'adminkit' );
 }, 99 );
 
 /**
@@ -58,7 +59,7 @@ if(
   || ( ! is_user_logged_in() && $auth_required )
 ){
   wp_redirect( home_url() );
-} else if( is_user_logged_in() && in_array( $current_slug, [ 'sign-in','sign-up' ] ) ){
+} else if( is_user_logged_in() && in_array( $current_slug, [ 'sign-in','sign-up', 'apply' ] ) ){
   // Conversely, if the user is logged in, no need to show the
   // "Sign In" or "Sign Up" pages, redirect to "My Profile":
   wp_redirect( home_url( '/profile/' ) );
@@ -67,10 +68,17 @@ if(
 /**
  * Load the appropriate template partials:
  */
+if( 'apply' == $current_slug ){
+  wp_enqueue_style( 'choicesjs' );
+  wp_enqueue_script( 'choicesjs' );
+  wp_enqueue_style( 'filepond' );
+  wp_enqueue_script( 'filepond-init' );
+}
+
 get_template_part( 'wp-templates/layout/head', null, [ 'title' => $current_title ] );
 if( is_user_logged_in() ){
-  get_template_part( 'wp-templates/layout/header' );
-  get_template_part( 'wp-templates/' . $current_slug );
+    get_template_part( 'wp-templates/layout/header' );
+    get_template_part( 'wp-templates/' . $current_slug );
 } else {
   if( ! $auth_required ){
     get_template_part( 'wp-templates/' . $current_slug );

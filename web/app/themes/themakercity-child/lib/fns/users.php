@@ -12,6 +12,75 @@ function add_user_roles() {
 add_action( 'init', __NAMESPACE__ . '\\add_user_roles' );
 
 /**
+ * Creates a maker user.
+ *
+ * @param      object  $post   The Maker CPT post object.
+ *
+ * @return     int       The User ID.
+ */
+function create_maker_user( $post ){
+  if( is_null( $post ) )
+    return new \WP_Error( 'not_a_post_obj', 'Received a `null` $post object.' );
+
+  if( 'maker' !== $post->post_type )
+    return new \WP_Error( 'not_a_maker_cpt', 'The provided $post is not a Maker CPT object.' );
+
+  $maker_post_handled = get_post_meta( $post->ID, '_maker_publish_handled', true );
+  // Convert the meta value to boolean explicitly
+  $is_handled = ! empty( $maker_publish_handled ) && 'false' !== $maker_publish_handled;
+  if( ! $is_handled && 'publish' == $post->post_status ){
+    $name   = get_post_meta( $post->ID, 'name', true );
+    $email  = get_post_meta( $post->ID, 'email', true );
+
+    if( email_exists( $email ) )
+      return new \WP_Error( 'email_exists', 'The supplied email is in use by a WP User.' );
+
+    $user_data = array(
+      'user_login'    => $email,
+      'user_email'    => $email,
+      'display_name'  => $name,
+      'role'          => 'maker', // Set the user role to "unapproved"
+      'user_pass'     => wp_generate_password(),
+    );
+    $user_id = wp_insert_user( $user_data );
+    if( is_wp_error( $user_id ) )
+      return new \WP_Error( 'user_creation_failed', $user_id->get_error_message() );
+
+    add_user_meta( $user_id, 'maker_profile_id', $post->ID, true );
+
+    // Set the Maker Profile's post_author to this user
+    $update_post = wp_update_post( ['ID' => $post->ID, 'post_author' => $user_id ], true );
+
+    // START Email User
+    $user_info = get_userdata( $user_id );
+    $user_email = $user_info->user_email;
+    $user_login = $user_info->user_login;
+
+    // Generate a password reset link
+    $reset_key = get_password_reset_key( $user_info );
+    $reset_link = add_query_arg([
+      'action' => 'rp',
+      'key' => $reset_key,
+      'login' => rawurlencode($user_login)
+      ],
+      network_site_url('wp-login.php', 'login')
+    );
+
+    // Email subject and message
+    $subject = ( 'development' == WP_ENV )? 'Welcome to Maker City' : 'Welcome to The Maker City Directory - Reset Your Password' ;
+    $message = "Your access to The Maker City Directory has been approved! To set your new password, please visit the following link:\n\n\n";
+    $message .= '<table align=\'center\' style=\'text-align:center\'><tr><td align=\'center\' style=\'text-align:center; font-size: 18px; font-weight: bold;\'><a href="' . $reset_link . '">Set Your Password</a></td></tr></table>';
+    $message .= "\n\nThis link will expire in 24 hours.";
+
+    // Send the email
+    wp_mail( $user_email, $subject, $message );
+    // END Email User
+
+    return $user_id;
+  }
+}
+
+/**
  * Creates a user.
  *
  * @param      string  $name                  The user's name
@@ -158,3 +227,34 @@ function custom_save_maker_post( $post_id ) {
   }
 }
 add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
+
+function custom_save_maker_validation() {
+  // Check if the email field is set and not empty.
+  if ( isset( $_POST['acf']['field_657b6a41e0962'] ) && ! empty( $_POST['acf']['field_657b6a41e0962'] ) ) {
+    $email = $_POST['acf']['field_657b6a41e0962'];
+
+    // Use WP function to check if a user exists with this email.
+    if ( email_exists( $email ) ) {
+      // Add a custom validation error.
+      acf_add_validation_error('acf[field_657b6a41e0962]', 'A Maker with this email already exists.');
+      //acf_add_validation_error('acf[field_657b6a41e0962]', 'A Maker with this email (' . $email . ') already exists. If this is your email, try <a href="' . home_url( '/sign-up/' ) . '">resetting your password</a>.');
+    }
+  }
+}
+//add_filter('acf/validate_save_post', __NAMESPACE__ . '\\custom_save_maker_validation', 10, 0);
+
+function validate_maker_email( $valid, $value, $field, $input_name ){
+  $printr_field = print_r( $field, true );
+  uber_log("🪵 Running validate_maker_email( $valid, $value, $printr_field, $input_name );");
+  if( $valid !== true ){
+    return $valid;
+  }
+
+  if( email_exists( $value ) ){
+    return __( 'A Maker with this email already exists.' );
+  }
+
+  return $valid;
+}
+//add_filter( 'acf/validate_value/key=field_657b6a41e0962', __NAMESPACE__ . '\\validate_maker_email', 10, 4 );
+
