@@ -2,7 +2,6 @@
   "name": "themakercity-sass-compile",
   "version": "1.0.0",
   "description": "SASS compiling for our CSS assets.",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "concat:js": "globcat web/app/themes/themakercity-child/lib/js/scripts/*.js --output web/app/themes/themakercity-child/lib/js/themakercity-child.js",
@@ -14,7 +13,8 @@
     "sass:prod": "sass --no-source-map --style=compressed web/app/themes/themakercity-child/lib/scss:web/app/themes/themakercity-child/lib/css-dist",
     "watch:css": "onchange 'web/app/themes/themakercity-child/lib/scss/assets/*.scss' -- npm run build:css",
     "watch:js": "onchange 'web/app/themes/themakercity-child/lib/js/scripts/*.js' -- npm run build:js",
-    "watch": "npm-run-all --parallel watch:*"
+    "watch": "npm-run-all --parallel watch:*",
+    "build:parcel": "parcel build web/app/themes/themakercity-child/lib/js/scripts/filepond.init.js --out-dir web/app/themes/themakercity-child/lib/js/dist/"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,13 @@
     "globcat": "^3.0.1",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
+    "parcel-bundler": "^1.12.5",
     "sass": "^1.68.0",
     "uglify-js": "^3.17.4"
+  },
+  "dependencies": {
+    "filepond": "^4.30.6",
+    "filepond-plugin-file-validate-type": "^1.2.9",
+    "filepond-plugin-image-preview": "^4.6.12"
   }
 }
