@@ -16,6 +16,7 @@ node_modules
 *.sql
 web/*.sh
 .idea/
+.cache/
 
 # WordPress
 web/wp
