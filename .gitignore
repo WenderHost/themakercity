@@ -10,7 +10,7 @@ web/app/uploads/*
 web/app/cache/*
 sql/
 auth.json
-scripts/
+/scripts/
 movefile.yml
 node_modules
 *.sql
