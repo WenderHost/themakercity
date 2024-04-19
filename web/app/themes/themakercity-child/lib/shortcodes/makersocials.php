@@ -23,7 +23,7 @@ function maker_social_icons( $atts ){
   endif;
   $email = get_field( 'email' );
   if( ! empty( $email ) && is_email( $email ) )
-    $links[] = '<a href="mailto:' . $email . '" target="_blank" title="Email ' . esc_attr( get_the_title( $post ) ) . '"><icon class="fa fa-xl fa-envelope"></icon></a>';
+    $links[] = '<a href="mailto:' . $email . '?subject=The%20Maker%20City%20Directory%20Referral" target="_blank" title="Email ' . esc_attr( get_the_title( $post ) ) . '"><icon class="fa fa-xl fa-envelope"></icon></a>';
   //uber_log('🔔 $links = ' . print_r( $links, true ) );
 
   if( 0 < count( $links ) )
