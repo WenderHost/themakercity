@@ -15,6 +15,8 @@ function enqueue_scripts_styles() {
   wp_register_style( 'choicesjs', MAKR_STYLESHEET_DIR_URI . 'lib/css-dist/choices.min.css', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/css-dist/choices.min.css' ) );
   wp_register_script( 'choicesjs', MAKR_STYLESHEET_DIR_URI . 'lib/js/choices.min.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/choices.min.js' ) );
 
+  wp_enqueue_script( 'global', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/global.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/global.js' ), true );
+
   wp_register_style( 'filepond', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/filepond.init.css', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/filepond.init.css' ) );
   //wp_register_script( 'filepond', 'https://unpkg.com/filepond@^4/dist/filepond.js' );
   wp_register_script( 'filepond-init', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/filepond.init.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/filepond.init.js' ), true );

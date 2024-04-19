@@ -14,7 +14,7 @@
     "watch:css": "onchange 'web/app/themes/themakercity-child/lib/scss/assets/*.scss' -- npm run build:css",
     "watch:js": "onchange 'web/app/themes/themakercity-child/lib/js/scripts/*.js' -- npm run build:js",
     "watch": "npm-run-all --parallel watch:*",
-    "build:parcel": "parcel build web/app/themes/themakercity-child/lib/js/scripts/filepond.init.js --out-dir web/app/themes/themakercity-child/lib/js/dist/"
+    "build:parcel": "parcel build web/app/themes/themakercity-child/lib/js/scripts/*.js --out-dir web/app/themes/themakercity-child/lib/js/dist/"
   },
   "repository": {
     "type": "git",

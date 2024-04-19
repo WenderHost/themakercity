@@ -279,6 +279,28 @@ hr {
 }
 
 /* Makers Styles */
+.collaborator-note {
+  display: flex;
+  align-items: center;
+}
+.collaborator-note .collaborator-icon {
+  margin-right: 10px;
+}
+
+.collaborator-icon {
+  line-height: 30px;
+  font-size: 1.2rem;
+  border: 2px solid #000;
+  background-color: #fcb569;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+
+.single .maker-primary-image .collaborator-icon {
+  display: none;
+}
+
 .maker-primary-image img {
   border: 2px solid #000;
 }
@@ -293,13 +315,6 @@ hr {
   position: absolute;
   bottom: 14px;
   left: 8px;
-  line-height: 30px;
-  font-size: 1.2rem;
-  border: 2px solid #000;
-  background-color: #fcb569;
-  width: 40px;
-  height: 40px;
-  text-align: center;
 }
 
 .facetwp-facet .facetwp-checkbox.checked {
