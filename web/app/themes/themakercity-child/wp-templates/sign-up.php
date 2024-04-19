@@ -34,13 +34,36 @@
       <div class="row mt-4 justify-content-md-center">
         <div class="col-md-5">
           <div class="accordion" id="directory-steps">
+
+
             <div class="accordion-item">
+
               <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="fa-solid fa-1"></i> Already have a listing, but need a password?
+                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  <i class="fa-solid fa-1"></i> Need a new listing?
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
+
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
+                <div class="accordion-body">
+                  <p class="lead">
+                    If you're not listed in The Maker City Directory, click here:
+                  </p>
+                  <div class="d-grid"><a href="<?= home_url('apply') ?>" role="button" class="btn btn-primary btn-lg" style="padding: .4rem 1rem; font-size: 1.1875rem; border-radius: .3rem;">Apply for a Maker Account</a></div>
+                </div><!-- .accordion-body -->
+              </div>
+            </div><!-- .accordion-item -->
+
+
+            <div class="accordion-item">
+
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <i class="fa-solid fa-2"></i> Already have a listing, but need a password?
+                </button>
+              </h2>
+
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
                 <div class="accordion-body">
                   <p class="lead">Submit your email and we’ll help you create a login to keep your listing fresh.</p>
 
@@ -73,21 +96,8 @@
                 </div>
               </div>
             </div><!-- .accordion-item -->
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                  <i class="fa-solid fa-2"></i> Need a new listing?
-                </button>
-              </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
-                <div class="accordion-body">
-                  <p class="lead">
-                    If you're not listed in The Maker City Directory, click here:
-                  </p>
-                  <div class="d-grid"><a href="<?= home_url('apply') ?>" role="button" class="btn btn-primary btn-lg" style="padding: .4rem 1rem; font-size: 1.1875rem; border-radius: .3rem;">Apply for a Maker Account</a></div>
-                </div><!-- .accordion-body -->
-              </div>
-            </div>
+
+
           </div><!-- .accordion -->
         </div><!-- .col-md-6 -->
       </div>
