@@ -1216,11 +1216,11 @@
         },
         {
             "name": "wenmark/elementor-pro",
-            "version": "3.21.1",
+            "version": "3.21.2",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.21.1",
-                "shasum": "c845ef1bd73a7a3d72cd8cd347de7c76559562de"
+                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.21.2",
+                "shasum": "9d4a51f5ba3e1f13715911496e6722bd824fa36f"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1325,11 +1325,11 @@
         },
         {
             "name": "wenmark/gravityforms",
-            "version": "2.8.8",
+            "version": "2.8.9",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/gravityforms/2.8.8",
-                "shasum": "2c823ed8cd1b5c12796d54c1e2ed01756fce704d"
+                "url": "https://packages.wenmarkdigital.com/satispress/gravityforms/2.8.9",
+                "shasum": "258b712a52bdddb37ac7efc809fc8650336462d4"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
