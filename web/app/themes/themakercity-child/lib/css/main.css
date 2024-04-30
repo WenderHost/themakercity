@@ -96,7 +96,9 @@
 }
 
 /* Elementor Typography */
-hr {
+hr,
+.elementor hr {
+  margin: 1rem 0;
   border: 0;
   height: 1px;
   background-color: #85cec5 !important;
@@ -345,6 +347,106 @@ hr {
 /* Plasma Slider */
 .plasmaSlider {
   background-color: #fff !important;
+}
+
+/* SquareSpace Buttons - Legacy */
+.sqs-block {
+  position: relative;
+  height: auto;
+  padding-top: 17px;
+  padding-bottom: 17px;
+}
+
+[class*=sqs-col] .sqs-block {
+  padding-left: 17px;
+  padding-right: 17px;
+}
+
+.sqs-block:not(.sqs-block-html):not(.sqs-block-markdown) {
+  clear: both;
+}
+
+:selection {
+  background-color: #000;
+  color: #fff;
+}
+
+.sqs-block-button-container--center {
+  text-align: center;
+  margin: 1rem 0;
+}
+.sqs-block-button-container--center br {
+  display: none;
+}
+.sqs-block-button-container--center a {
+  color: #fff;
+}
+
+/*
+a {
+    background: transparent;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(26,26,26,.7);
+}
+
+a:hover {
+    outline: 0;
+}
+*/
+.sqs-block-button-element {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  padding: 1em 2.5em;
+  color: #fff;
+  background-color: #272727;
+  border-width: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: normal;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.sqs-block-button-element--medium {
+  padding: 21px 34px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  background-color: #272727;
+  border-color: #272727;
+}
+
+.sqs-block-button-element:hover {
+  opacity: 1;
+}
+
+.sqs-block-button-element--medium {
+  transition: 0.1s opacity linear;
+  -webkit-backface-visibility: hidden;
+}
+
+.sqs-block-button-element--medium:hover {
+  opacity: 0.8;
+}
+
+a:active, a:hover {
+  outline: 0;
 }
 
 /*# sourceMappingURL=main.css.map */
