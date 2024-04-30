@@ -67,3 +67,37 @@ function send_password_reset_email( $user_email ) {
   }
 }
 
+/**
+ * Filters the message sent when a user resets his/her password.
+ *
+ * @param      string  $message     The message
+ * @param      string  $key         The key
+ * @param      string  $user_login  The user login
+ * @param      object  $userdata    The userdata
+ *
+ * @return     string  The filtered message.
+ */
+function filter_password_reset_message( $message, $key, $user_login, $userdata ){
+  // Generate a password reset link
+  $reset_key = get_password_reset_key( $userdata );
+  $reset_link = add_query_arg([
+    'action' => 'rp',
+    'key' => $reset_key,
+    'login' => rawurlencode($user_login)
+    ],
+    network_site_url('/wp-login.php', 'https')
+  );
+
+  $message = get_field( 'email_copy_for_password_reset', 'option', false );
+  $message = str_replace( ['{name}', '{username}', '{password_reset_link}'], [ $userdata->display_name, $user_login, $reset_link ], $message );
+
+  // The following corrects for the behavior of the TinyMCE link
+  // inserter if you provide a variable like {password_reset_link}
+  // as the link value:
+  if( stristr( $message, 'http://http') )
+    $message = str_replace( 'http://http', 'http', $message );
+
+  return $message;
+}
+add_filter( 'retrieve_password_message', __NAMESPACE__ . '\\filter_password_reset_message', 10, 4 );
+

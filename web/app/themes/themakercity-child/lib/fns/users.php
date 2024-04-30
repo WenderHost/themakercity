@@ -39,7 +39,7 @@ function create_maker_user( $post ){
       'user_login'    => $email,
       'user_email'    => $email,
       'display_name'  => $name,
-      'role'          => 'maker', // Set the user role to "unapproved"
+      'role'          => 'maker', // Set the user role to "maker"
       'user_pass'     => wp_generate_password(),
     );
     $user_id = wp_insert_user( $user_data );
@@ -55,6 +55,7 @@ function create_maker_user( $post ){
     $user_info = get_userdata( $user_id );
     $user_email = $user_info->user_email;
     $user_login = $user_info->user_login;
+    $profile_link = get_permalink( $post->ID );
 
     // Generate a password reset link
     $reset_key = get_password_reset_key( $user_info );
@@ -67,10 +68,16 @@ function create_maker_user( $post ){
     );
 
     // Email subject and message
-    $subject = ( 'development' == WP_ENV )? 'Welcome to Maker City' : 'Welcome to The Maker City Directory - Reset Your Password' ;
-    $message = "Your access to The Maker City Directory has been approved! To set your new password, please visit the following link:\n\n\n";
-    $message .= '<table align=\'center\' style=\'text-align:center\'><tr><td align=\'center\' style=\'text-align:center; font-size: 18px; font-weight: bold;\'><a href="' . $reset_link . '">Set Your Password</a></td></tr></table>';
-    $message .= "\n\nThis link will expire in 24 hours.";
+    $subject = ( 'development' == WP_ENV )? 'Welcome to Maker City' : 'Welcome to The Maker City Directory!' ;
+
+    $message = get_field( 'email_copy_for_new_user_new_listing', 'option', false );
+    $message = str_replace( ['{name}', '{username}', '{password_reset_link}', '{profile_link}'], [ $user_info->display_name, $user_login, $reset_link, $profile_link ], $message );
+
+    // The following corrects for the behavior of the TinyMCE link
+    // inserter if you provide a variable like {password_reset_link}
+    // as the link value:
+    if( stristr( $message, 'http://http') )
+      $message = str_replace( 'http://http', 'http', $message );
 
     // Send the email
     wp_mail( $user_email, $subject, $message );
@@ -107,12 +114,20 @@ function custom_login_redirect( $redirect_to, $request, $user ) {
 }
 add_filter( 'login_redirect', __NAMESPACE__ . '\\custom_login_redirect', 10, 3 );
 
+/**
+ * Sends a Maker user a new account email when their status is changed from "Subscriber" to "Maker".
+ *
+ * @param      int  $user_id       The user ID.
+ * @param      string  $role       The role
+ * @param      array  $old_roles   The old roles
+ */
 function send_reset_link_on_role_update($user_id, $role, $old_roles) {
   // Check if the new role is 'maker' and if one of the old roles was 'unapproved'
-  if ( 'maker' === $role && in_array( 'unapproved', $old_roles ) ) {
+  if ( 'maker' === $role && in_array( 'subscriber', $old_roles ) ) {
     $user_info = get_userdata( $user_id );
     $user_email = $user_info->user_email;
     $user_login = $user_info->user_login;
+    $display_name = $user_info->display_name;
 
     // Generate a password reset link
     $reset_key = get_password_reset_key( $user_info );
@@ -121,14 +136,20 @@ function send_reset_link_on_role_update($user_id, $role, $old_roles) {
       'key' => $reset_key,
       'login' => rawurlencode($user_login)
       ],
-      network_site_url('wp-login.php', 'login')
+      network_site_url('/wp-login.php', 'https')
     );
 
     // Email subject and message
-    $subject = ( 'development' == WP_ENV )? 'Welcome to Maker City' : 'Welcome to The Maker City Directory - Reset Your Password' ;
-    $message = "Your access to The Maker City Directory has been approved! To set your new password, please visit the following link:\n\n\n";
-    $message .= '<table align=\'center\' style=\'text-align:center\'><tr><td align=\'center\' style=\'text-align:center; font-size: 18px; font-weight: bold;\'><a href="' . $reset_link . '">Set Your Password</a></td></tr></table>';
-    $message .= "\n\nThis link will expire in 24 hours.";
+    $subject = ( 'development' == WP_ENV )? 'Give your page a refresh!' : 'Give your page a refresh! [The Maker City]' ;
+
+    $message = get_field( 'email_copy_for_existing_listing_new_user', 'option', false );
+    $message = str_replace( ['{name}', '{username}', '{password_reset_link}'], [ $display_name, $user_login, $reset_link ], $message );
+
+    // The following corrects for the behavior of the TinyMCE link
+    // inserter if you provide a variable like {password_reset_link}
+    // as the link value:
+    if( stristr( $message, 'http://http') )
+      $message = str_replace( 'http://http', 'http', $message );
 
     // Send the email
     wp_mail( $user_email, $subject, $message );
