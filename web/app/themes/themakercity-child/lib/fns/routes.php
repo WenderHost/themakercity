@@ -90,7 +90,7 @@ function custom_template_include( $template ){
 
   return $template;
 }
-add_filter( 'template_include', __NAMESPACE__ . '\\custom_template_include' );
+add_filter( 'template_include', __NAMESPACE__ . '\\custom_template_include', 999 );
 
 /**
  * Register our custom routes upon theme activation
