@@ -1,13 +1,4 @@
 // /scripts/maker-search.js
-
-function runWhenElementorLoaded(callback) {
-  if (window.elementorFrontend && window.elementorFrontend.hooks) {
-    callback();
-  } else {
-    setTimeout(() => runWhenElementorLoaded(callback), 100);
-  }
-}
-
 function activateSecondTab() {
   const tabs = document.querySelectorAll('.elementor-tab-title');
   if (tabs.length > 1) {
@@ -51,7 +42,6 @@ export function initializeMakerSearch() {
   let inite = 0;
   document.addEventListener('DOMContentLoaded', async function() {
     await setupTabs();
-    //runWhenElementorLoaded(activateSecondTab);
     setInterval(function(){
       if (document.readyState == "complete" && inite == 0 )  {
         activateSecondTab();
