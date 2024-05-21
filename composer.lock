@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3f9669133f2173971671ea616a72de0",
+    "content-hash": "2810091da11318ae8435eb8ddf79bb28",
     "packages": [
         {
             "name": "composer/installers",
@@ -1377,6 +1377,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/elementor/"
+        },
+        {
+            "name": "wpackagist-plugin/gf-salesforce-crmperks",
+            "version": "1.4.3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/gf-salesforce-crmperks/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/gf-salesforce-crmperks.zip?timestamp=1714907281"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/gf-salesforce-crmperks/"
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
