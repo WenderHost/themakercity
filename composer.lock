@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2810091da11318ae8435eb8ddf79bb28",
+    "content-hash": "e0dc2e9636d59d90193396fbed771496",
     "packages": [
         {
             "name": "composer/installers",
@@ -1197,11 +1197,11 @@
         },
         {
             "name": "wenmark/acf-extended-pro",
-            "version": "0.8.9.5",
+            "version": "0.9.0.5",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/acf-extended-pro/0.8.9.5",
-                "shasum": "ed291aa55633dd8307345c3625faf3241693b627"
+                "url": "https://packages.wenmarkdigital.com/satispress/acf-extended-pro/0.9.0.5",
+                "shasum": "962e6be117d74f6d38bdad17e55e5c752c54b67a"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

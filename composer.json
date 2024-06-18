@@ -85,7 +85,7 @@
         "wenmark/facetwp-elementor": "^1.9",
         "wenmark/facetwp-relevanssi": "^0.8.1",
         "wenmark/facetwp-flyout": "^0.8.1",
-        "wenmark/acf-extended-pro": "^0.8.9",
+        "wenmark/acf-extended-pro": "^0.9",
         "wpackagist-plugin/disable-gutenberg": "^3.1",
         "tcattd/htmx-api-wp": "dev-main",
         "wpackagist-plugin/wordpress-importer": "^0.8.2",
