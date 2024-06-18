@@ -9,7 +9,7 @@
             "aria-label": "",
             "type": "text",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "33",
@@ -18,7 +18,6 @@
             },
             "relevanssi_exclude": 0,
             "default_value": "",
-            "required_message": "",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -31,7 +30,7 @@
             "aria-label": "",
             "type": "email",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "33",
@@ -40,7 +39,6 @@
             },
             "relevanssi_exclude": 0,
             "default_value": "",
-            "required_message": "",
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -78,7 +76,7 @@
             "aria-label": "",
             "type": "taxonomy",
             "instructions": "What categories best describe what you make\/do? Mark 1-3 that apply.",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -97,7 +95,6 @@
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
             },
-            "required_message": "",
             "bidirectional": 0,
             "multiple": 0,
             "allow_null": 0,
@@ -325,6 +322,28 @@
             },
             "layout": "block",
             "sub_fields": [
+                {
+                    "key": "field_66719c46137ec",
+                    "label": "Show your location?",
+                    "name": "show_location",
+                    "aria-label": "",
+                    "type": "true_false",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "relevanssi_exclude": 0,
+                    "message": "Check this option to show your location on your Maker Profile.",
+                    "default_value": 0,
+                    "ui": 0,
+                    "ui_on_text": "",
+                    "ui_off_text": "",
+                    "style": ""
+                },
                 {
                     "key": "field_657b6ac2e5f2c",
                     "label": "Street",
@@ -595,6 +614,65 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_6671a236ab396",
+            "label": "Show your location?",
+            "name": "show_location",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "message": "Check this option to show your location on your Maker Profile.",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "style": ""
+        },
+        {
+            "key": "field_66719e7e986c1",
+            "label": "Business Address",
+            "name": "business_address",
+            "aria-label": "",
+            "type": "google_map",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "",
+            "center_lat": "35.964668",
+            "center_lng": "-83.926453",
+            "height": 400,
+            "acfe_google_map_zooms": {
+                "zoom": "10",
+                "min_zoom": "0",
+                "max_zoom": "21"
+            },
+            "acfe_google_map_marker_icon": "",
+            "acfe_google_map_marker_width": 50,
+            "acfe_google_map_type": "roadmap",
+            "acfe_google_map_disable_ui": 0,
+            "acfe_google_map_disable_zoom_control": 0,
+            "acfe_google_map_disable_map_type": 0,
+            "acfe_google_map_disable_fullscreen": 0,
+            "acfe_google_map_disable_streetview": 0,
+            "acfe_google_map_style": "",
+            "acfe_google_map_key": "AIzaSyByvEXXQZiFVi0yUAExuARB2JVA678nO-A",
+            "zoom": "10",
+            "acfe_google_map_marker_height": 50
         }
     ],
     "location": [
@@ -622,5 +700,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1712091666
+    "modified": 1718723167
 }

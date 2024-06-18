@@ -10,7 +10,7 @@ if( $current_user ){
     'html_updated_message'  => '<div class="alert alert-success" role="alert"><div class="alert-message">%s</div></div>',
     'html_submit_button'    => '<button type="submit" class="btn btn-primary">%s</button>',
     'instruction_placement' => 'field',
-    'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar'  ],
+    'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar', 'show_location', 'business_address' ],
   ];
 
   if( empty( $maker_profile_id ) ){
