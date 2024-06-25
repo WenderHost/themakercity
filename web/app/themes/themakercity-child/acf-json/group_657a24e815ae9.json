@@ -670,7 +670,7 @@
             "acfe_google_map_disable_fullscreen": 0,
             "acfe_google_map_disable_streetview": 0,
             "acfe_google_map_style": "",
-            "acfe_google_map_key": "AIzaSyByvEXXQZiFVi0yUAExuARB2JVA678nO-A",
+            "acfe_google_map_key": "",
             "zoom": "10",
             "acfe_google_map_marker_height": 50
         }
@@ -700,5 +700,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1718723167
+    "modified": 1719333725
 }
