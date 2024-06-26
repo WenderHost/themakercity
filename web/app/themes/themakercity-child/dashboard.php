@@ -83,7 +83,8 @@ if( is_user_logged_in() ){
   if( ! $auth_required ){
     get_template_part( 'wp-templates/' . $current_slug );
   } else {
-    wp_die('Authorization required.');
+    //wp_die('Authorization required.');
+    get_template_part( 'wp-templates/sign-in' );
   }
 }
 get_template_part( 'wp-templates/layout/footer' );
