@@ -1,32 +1,58 @@
-<h1>Your Profile</h1>
 <?php
-$current_user = wp_get_current_user();
-if( $current_user ){
-  $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
-
-  $settings = [
-    'post_title'            => true,
-    'updated_message'       => __('Your profile has been updated. <a href="' . get_permalink( $maker_profile_id ) . '" target="_blank">View</a> your profile.', 'acf'),
-    'html_updated_message'  => '<div class="alert alert-success" role="alert"><div class="alert-message">%s</div></div>',
-    'html_submit_button'    => '<button type="submit" class="btn btn-primary">%s</button>',
-    'instruction_placement' => 'field',
-    'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar', 'show_location', 'business_address' ],
-  ];
-
-  if( empty( $maker_profile_id ) ){
-    $settings['post_id'] = 'new_post';
-    $settings['new_post'] = [
-      'post_type'   => 'maker',
-      'post_status' => 'publish',
-      'post_author' => $current_user->ID,
-    ];
-  } else {
-    $settings['post_id'] = $maker_profile_id;
-  }
-
-  acf_form( $settings );
-}
+use function TheMakerCity\utilities\get_alert;
 ?>
+
+  <div class="container-fluid">
+    <div class="row justify-content-start">
+      <div class="col-9">
+        <div class="card" style="max-width: 1200px;">
+          <div class="card-header bg-primary text-white"><span class="fs-1 fw-bold">Your Profile</span></div>
+          <div class="card-body">
+        <?php
+        $current_user = wp_get_current_user();
+        if( $current_user ){
+          $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
+          // '<div class="alert alert-success" role="alert"><div class="alert-message">%s</div></div>',
+          $settings = [
+            'post_title'            => true,
+            'updated_message'       => __('Your profile has been updated. <a href="' . get_permalink( $maker_profile_id ) . '" target="_blank">View</a> your profile.', 'acf'),
+            'html_updated_message'  => get_alert([ 'description' => '%s', 'type' => 'success' ]),
+            'html_submit_button'    => '<div class="d-grid mt-3"><button type="submit" class="btn btn-primary fw-bold fs-3">%s</button></div>',
+            'instruction_placement' => 'field',
+            'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar', 'show_location', 'business_address' ],
+            'form'                  => true,
+          ];
+
+          if( empty( $maker_profile_id ) ){
+            $settings['post_id'] = 'new_post';
+            $settings['new_post'] = [
+              'post_type'   => 'maker',
+              'post_status' => 'publish',
+              'post_author' => $current_user->ID,
+            ];
+          } else {
+            $settings['post_id'] = $maker_profile_id;
+          }
+
+          acf_form( $settings );
+        }
+        ?>
+          </div><!-- .card-body -->
+        </div><!-- .card -->
+      </div><!-- .col-9 -->
+      <div class="col-3">
+        <!--<div class="card" id="make-me-sticky">
+          <div class="card-body">
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary fs-1 fw-bold">Update</button>
+            </div>
+          </div>
+        </div>-->
+
+      </div><!-- .col-3 -->
+    </div><!-- .row.justify-content-start -->
+  </div>
+
 <style>
   /* This CSS file is to hide the original Title label */
   .acf-field .acf-label label[for="acf-_post_title"] {

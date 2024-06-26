@@ -4,15 +4,36 @@
     "fields": [
         {
             "key": "field_65c53ab8f9ab8",
-            "label": "",
-            "name": "",
+            "label": "First Name",
+            "name": "first_name",
             "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_667c5cdf41ee5",
+            "label": "Last Name",
+            "name": "last_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -27,9 +48,9 @@
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "user_form",
                 "operator": "==",
-                "value": "post"
+                "value": "all"
             }
         ]
     ],
@@ -42,5 +63,12 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1710438867
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_display_title": "",
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1719426298
 }
