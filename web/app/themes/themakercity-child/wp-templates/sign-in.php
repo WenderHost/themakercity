@@ -38,7 +38,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="m-sm-3">
-                  <form hx-post="/wp-htmx/v1/noswap/login" hx-swap="none">
+                  <form hx-post="/wp-htmx/v1/login" hx-swap="outerHTML" hx-target="#login-message">
                     <input type="hidden" name="action" value="htmx_login">
                     <div class="mb-3">
                       <label class="form-label">Email</label>
