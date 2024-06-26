@@ -1236,11 +1236,11 @@
         },
         {
             "name": "wenmark/facetwp",
-            "version": "4.2.12",
+            "version": "4.3.1",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/facetwp/4.2.12",
-                "shasum": "c7f00ad7a0fec7a43b198de4fd2f5a43461bde63"
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp/4.3.1",
+                "shasum": "7c4a53a27cc6648b6dc8eea7104cc74c34889e90"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1290,11 +1290,11 @@
         },
         {
             "name": "wenmark/facetwp-flyout",
-            "version": "0.8.1",
+            "version": "0.8.3",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-flyout/0.8.1",
-                "shasum": "836004a2f74478c0c92080394e6d611f49cccd73"
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-flyout/0.8.3",
+                "shasum": "8343fe1f18c2105093753974a8bf9c001cbee0ac"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1308,11 +1308,11 @@
         },
         {
             "name": "wenmark/facetwp-relevanssi",
-            "version": "0.8.1",
+            "version": "0.8.2",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-relevanssi/0.8.1",
-                "shasum": "59af11101cc960f5211d0bf67268001760a9d146"
+                "url": "https://packages.wenmarkdigital.com/satispress/facetwp-relevanssi/0.8.2",
+                "shasum": "1d7a7502f10ed4a74cfd7205c037b33f77673ef9"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1326,11 +1326,11 @@
         },
         {
             "name": "wenmark/gravityforms",
-            "version": "2.8.12",
+            "version": "2.8.13",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/gravityforms/2.8.12",
-                "shasum": "24247d5cc2f8ac17ccac9fed5613b878188cd345"
+                "url": "https://packages.wenmarkdigital.com/satispress/gravityforms/2.8.13",
+                "shasum": "1a6ae2cec8d36947f19791cea49d1febfada2f2f"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1363,15 +1363,15 @@
         },
         {
             "name": "wpackagist-plugin/elementor",
-            "version": "3.22.2",
+            "version": "3.22.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/elementor/",
-                "reference": "tags/3.22.2"
+                "reference": "tags/3.22.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/elementor.3.22.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/elementor.3.22.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1620,12 +1620,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "601ba5186e85dff8a3cc1feabe69e1a11805d9b2"
+                "reference": "27714b56f04815b654c3805502ab77207505ac19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/601ba5186e85dff8a3cc1feabe69e1a11805d9b2",
-                "reference": "601ba5186e85dff8a3cc1feabe69e1a11805d9b2",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/27714b56f04815b654c3805502ab77207505ac19",
+                "reference": "27714b56f04815b654c3805502ab77207505ac19",
                 "shasum": ""
             },
             "conflict": {
@@ -1633,7 +1633,7 @@
                 "admidio/admidio": "<4.2.13",
                 "adodb/adodb-php": "<=5.20.20|>=5.21,<=5.21.3",
                 "aheinze/cockpit": "<2.2",
-                "aimeos/ai-client-html": ">=2020.04.1,<2020.10.27|>=2021.04.1,<2021.10.21|>=2022.04.1,<2022.10.12|>=2023.04.1,<2023.10.14|>=2024.04.1,<2024.04.4",
+                "aimeos/ai-client-html": ">=2020.04.1,<2020.10.27|>=2021.04.1,<2021.10.22|>=2022.04.1,<2022.10.13|>=2023.04.1,<2023.10.15|>=2024.04.1,<2024.04.7",
                 "aimeos/aimeos-core": ">=2022.04.1,<2022.10.17|>=2023.04.1,<2023.10.17|>=2024.04.1,<2024.04.7",
                 "aimeos/aimeos-typo3": "<19.10.12|>=20,<20.10.5",
                 "airesvsg/acf-to-rest-api": "<=3.1",
@@ -2016,7 +2016,7 @@
                 "october/cms": "<1.0.469|==1.0.469|==1.0.471|==1.1.1",
                 "october/october": "<=3.4.4",
                 "october/rain": "<1.0.472|>=1.1,<1.1.2",
-                "october/system": "<1.0.476|>=1.1,<1.1.12|>=2,<2.2.34|>=3,<3.5.2",
+                "october/system": "<1.0.476|>=1.1,<1.1.12|>=2,<2.2.34|>=3,<3.5.15",
                 "omeka/omeka-s": "<4.0.3",
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": ">=1,<1.9.3|>=2,<2.1.5",
@@ -2417,7 +2417,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-24T21:04:21+00:00"
+            "time": "2024-06-26T15:05:17+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
