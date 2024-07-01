@@ -89,7 +89,8 @@
         "wpackagist-plugin/disable-gutenberg": "^3.1",
         "tcattd/htmx-api-wp": "dev-main",
         "wpackagist-plugin/wordpress-importer": "^0.8.2",
-        "wpackagist-plugin/gf-salesforce-crmperks": "^1.4"
+        "wpackagist-plugin/gf-salesforce-crmperks": "^1.4",
+        "wpackagist-plugin/insert-headers-and-footers": "^2.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7.1",
