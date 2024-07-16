@@ -344,6 +344,12 @@ hr,
   background-repeat: no-repeat;
 }
 
+/* Navigation */
+li.external a {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Plasma Slider */
 .plasmaSlider {
   background-color: #fff !important;
