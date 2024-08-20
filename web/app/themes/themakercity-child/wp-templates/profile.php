@@ -6,7 +6,20 @@ use function TheMakerCity\utilities\get_alert;
     <div class="row justify-content-start">
       <div class="col-9">
         <div class="card" style="max-width: 1200px;">
-          <div class="card-header bg-primary text-white"><span class="fs-1 fw-bold">Your Profile</span></div>
+          <div class="card-header bg-primary text-white">
+            <div class="row align-items-center">
+              <div class="col"><span class="fs-1 fw-bold">Your Profile</span></div>
+              <div class="col" style="text-align: right;">
+                <?php
+                $current_user = wp_get_current_user();
+                $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
+                $profile_permalink = get_permalink( $maker_profile_id );
+                ?>
+                <a href="<?= $profile_permalink ?>" target="_blank" style="color: #fff;"><i class="align-middle" data-feather="external-link"></i> View Your Profile</a>
+              </div>
+            </div>
+
+          </div>
           <div class="card-body">
         <?php
         $current_user = wp_get_current_user();
