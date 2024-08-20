@@ -6,6 +6,7 @@ use function TheMakerCity\utilities\{get_alert};
 function maker_primary_image( $atts ){
   $args = shortcode_atts([
     'css_classes' => 'maker-primary-image',
+    'style'       => null,
     'link'        => false,
     'show'        => 'primary_image',
     'size'        => 'large',
@@ -56,7 +57,7 @@ function maker_primary_image( $atts ){
     $css_classes = implode( ' ', $css_classes );
 
   if( $img_src ){
-    $html = "<div class=\"{$css_classes}\">{$link_open}<img src=\"{$img_src}\" srcset=\"{$img_srcset}\" sizes=\"{$img_sizes}\" />{$link_close}{$collaborator_html}</div>";
+    $html = "<div class=\"{$css_classes}\" style=\"{$args['style']}\">{$link_open}<img src=\"{$img_src}\" srcset=\"{$img_srcset}\" sizes=\"{$img_sizes}\" />{$link_close}{$collaborator_html}</div>";
   } else {
     $html = "<div class=\"{$css_classes}\">{$link_open}<div class=\"placeholder\" style=\"width: 100%; min-height: 420px; background-color: #eee\"></div>{$link_close}{$collaborator_html}</div>";
   }
