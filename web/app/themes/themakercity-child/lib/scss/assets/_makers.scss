@@ -40,6 +40,29 @@
     border: none;
   }
 
+  &.no-border img{
+    border: none;
+  }
+
+  &.square{
+    border: 2px solid #000;
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+
+    img{
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
   .collaborator-icon{
     position: absolute;
     bottom: 14px;
