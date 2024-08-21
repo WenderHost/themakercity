@@ -5,11 +5,12 @@ use function TheMakerCity\utilities\{get_alert};
 
 function maker_primary_image( $atts ){
   $args = shortcode_atts([
-    'css_classes' => 'maker-primary-image',
-    'style'       => null,
-    'link'        => false,
-    'show'        => 'primary_image',
-    'size'        => 'large',
+    'css_classes'       => 'maker-primary-image',
+    'style'             => null,
+    'link'              => false,
+    'show'              => 'primary_image',
+    'size'              => 'large',
+    'show_placeholder'  => false,
   ], $atts );
 
   global $post;
@@ -27,6 +28,8 @@ function maker_primary_image( $atts ){
   }
 
   $size = ( $args['size'] && in_array( $args['size'], ['thumbnail','medium','large','full'] ) )? $args['size'] : 'large' ;
+
+  $show_placeholder = ( 'true' === $args['show_placeholder'] )? (bool) $args['show_placeholder'] : false ;
 
   if( 'gallery' == $args['show'] ){
     $gallery = get_field( 'additional_images' );
@@ -56,9 +59,10 @@ function maker_primary_image( $atts ){
   if( is_array( $css_classes ) )
     $css_classes = implode( ' ', $css_classes );
 
+  $html = '';
   if( $img_src ){
     $html = "<div class=\"{$css_classes}\" style=\"{$args['style']}\">{$link_open}<img src=\"{$img_src}\" srcset=\"{$img_srcset}\" sizes=\"{$img_sizes}\" />{$link_close}{$collaborator_html}</div>";
-  } else {
+  } else if( $show_placeholder ) {
     $html = "<div class=\"{$css_classes}\">{$link_open}<div class=\"placeholder\" style=\"width: 100%; min-height: 420px; background-color: #eee\"></div>{$link_close}{$collaborator_html}</div>";
   }
 
