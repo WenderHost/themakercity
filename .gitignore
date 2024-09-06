@@ -18,6 +18,7 @@ web/*.sh
 web/*.xml
 .idea/
 .cache/
+web/mapping.csv
 
 # WordPress
 web/wp
