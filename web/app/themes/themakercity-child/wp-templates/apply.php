@@ -71,14 +71,14 @@
             </div>
           </div>
           <div class="form-check-inline-row mb-3">
-            <div><label class="form-label">Are you open to collaborating? <span class="required">*</span></label></div>
+            <div><label class="form-label">Collaborate with other Makers on projects? <span class="required">*</span></label></div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="maker_collaborator" id="collaborator_yes" value="yes">
               <label class="form-check-label" for="collaborator_yes">Yes</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="maker_collaborator" id="collaborator_no" value="no">
-              <label class="form-check-label" for="collaborator_no">No</label>
+              <label class="form-check-label" for="collaborator_no">Not Now</label>
             </div>
           </div><!-- .form-check-inline-row -->
           <div class="row mb-3">
@@ -114,6 +114,9 @@
           <div class="mb-3">
             <label for="logo" class="form-label">Logo <span class="required">*</span></label>
             <input type="file" class="form-control filepond" name="maker_logo" accept="image/png, image/jpeg, image/gif" />
+          </div>
+          <div class="mb-3 mt-3">
+            <p><strong>PLEASE NOTE:</strong></br>This form simply gets your Maker profile started. Once your account is created, you'll be able to add website links, social media profiles, product photos, headshots, and more.</p>
           </div>
           <div>
             <input type="submit" class="btn btn-lg btn-primary" value="Submit" />

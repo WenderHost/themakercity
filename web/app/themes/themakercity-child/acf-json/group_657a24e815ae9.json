@@ -45,7 +45,7 @@
         },
         {
             "key": "field_65aff8d41e5fc",
-            "label": "Are you open to collaborating?",
+            "label": "Collaborate with other Makers on projects?",
             "name": "collaborator",
             "aria-label": "",
             "type": "radio",
@@ -60,12 +60,13 @@
             "relevanssi_exclude": 0,
             "choices": {
                 "yes": "Open to Collaborating with Other Makers",
-                "no": "Not Open to Collaboration with Other Makers"
+                "no": "Not Now"
             },
             "default_value": "no",
             "return_format": "value",
             "allow_null": 0,
             "other_choice": 0,
+            "allow_in_bindings": 1,
             "layout": "vertical",
             "save_other_choice": 0
         },
@@ -216,6 +217,7 @@
             "collapsed": "",
             "button_label": "Add Row",
             "rows_per_page": 20,
+            "acfe_repeater_stylised_button": 0,
             "sub_fields": [
                 {
                     "key": "field_657a256324971",
@@ -274,8 +276,7 @@
                     "placeholder": "",
                     "parent_repeater": "field_657a25432ce62"
                 }
-            ],
-            "acfe_repeater_stylised_button": 0
+            ]
         },
         {
             "key": "field_65bbe72aa5155",
@@ -347,6 +348,7 @@
             "collapsed": "",
             "button_label": "Add Row",
             "rows_per_page": 20,
+            "acfe_repeater_stylised_button": 0,
             "sub_fields": [
                 {
                     "key": "field_657b6ea96a34f",
@@ -407,8 +409,7 @@
                     "append": "",
                     "parent_repeater": "field_657b6e9d6a34e"
                 }
-            ],
-            "acfe_repeater_stylised_button": 0
+            ]
         },
         {
             "key": "field_658eee3136d6b",
@@ -515,5 +516,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1724251724
+    "modified": 1726251388
 }
