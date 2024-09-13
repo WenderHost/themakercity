@@ -3,6 +3,103 @@
 namespace TheMakerCity\users;
 
 /**
+ * Add "Date Created" column to the WP Admin User listing.
+ *
+ * @param array $columns The existing columns.
+ * @return array Modified columns with "Date Created" added.
+ */
+function add_user_date_created_column( $columns ) {
+  $columns['date_created'] = 'Date Created';
+  return $columns;
+}
+add_filter( 'manage_users_columns', __NAMESPACE__ . '\\add_user_date_created_column' );
+
+/**
+ * Checks and retrieves the current user's Maker profile ID.
+ *
+ * This function retrieves the `maker_profile_id` user meta for the current user.
+ * If the value is not set, it will search for a Maker CPT authored by the current user.
+ * If a Maker CPT is found, the function updates the user's `maker_profile_id` meta
+ * with the Maker CPT's post ID. If no Maker CPT is found, the function returns `false`.
+ *
+ * @return int|false The Maker CPT post ID if found, or false if no Maker CPT is found or user is not logged in.
+ */
+function check_maker_profile_id() {
+  // Get the current user
+  $current_user = wp_get_current_user();
+
+  // Check if current user is logged in
+  if ( ! $current_user || 0 === $current_user->ID ) {
+    return false; // User not logged in
+  }
+
+  // Get the 'maker_profile_id' user meta value
+  $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
+
+  // If the maker_profile_id is already set, return it
+  if ( $maker_profile_id ) {
+    return $maker_profile_id;
+  }
+
+  // Query Maker CPTs with current user as author
+  $args = [
+    'post_type'   => 'maker', // Adjust 'maker' to your actual CPT slug if needed
+    'author'      => $current_user->ID,
+    'post_status' => 'publish', // You can adjust the post status as per your needs
+    'numberposts' => 1,
+  ];
+
+  $maker_cpt = get_posts( $args );
+
+  // If a Maker CPT is found
+  if ( ! empty( $maker_cpt ) ) {
+    $maker_post_id = $maker_cpt[0]->ID;
+
+    // Set the maker_profile_id user meta value
+    update_user_meta( $current_user->ID, 'maker_profile_id', $maker_post_id );
+
+    // Return the Maker CPT post_id
+    return $maker_post_id;
+  }
+
+  // No Maker CPT found, return false
+  return false;
+}
+
+
+/**
+ * Display the "Date Created" value for each user in the new column.
+ *
+ * @param string $value The column value.
+ * @param string $column_name The name of the column.
+ * @param int $user_id The ID of the current user.
+ * @return string The modified column value.
+ */
+function show_user_date_created_column( $value, $column_name, $user_id ) {
+  if ( 'date_created' === $column_name ) {
+    $user = get_userdata( $user_id );
+    $registered_date = $user->user_registered;
+    // Format the date as "F j, Y g:i A" (e.g., September 13, 2024 3:45 PM)
+    $value = date( 'F j, Y g:i A', strtotime( $registered_date ) );
+  }
+  return $value;
+}
+add_filter( 'manage_users_custom_column', __NAMESPACE__ . '\\show_user_date_created_column', 10, 3 );
+
+/**
+ * Make the "Date Created" column sortable.
+ *
+ * @param array $columns The existing sortable columns.
+ * @return array The modified sortable columns.
+ */
+function make_date_created_column_sortable( $columns ) {
+  $columns['date_created'] = 'user_registered';
+  return $columns;
+}
+add_filter( 'manage_users_sortable_columns', __NAMESPACE__ . '\\make_date_created_column_sortable' );
+
+
+/**
  * Adds user roles.
  */
 function add_user_roles() {
@@ -187,58 +284,6 @@ function custom_save_maker_post( $post_id ) {
       if( $maker_profile_id != $post_id )
         return;
     }
-
-    /**
-     * MAKER PROFILE $post_title
-     *
-     * Set the $post_title for the Maker CPT to the same value as
-     * the `name` field.
-     */
-    /*
-    $profile_name = get_post_meta( $post_id, 'name', true );
-    if( ! empty( $profile_name ) ){
-      $post_data = [
-        'ID'          => $post_id,
-        'post_title'  => $profile_name,
-        'post_name'   => sanitize_title( $profile_name ),
-      ];
-
-      remove_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
-      wp_update_post( $post_data );
-      add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
-    }
-    /**/
   }
 }
 add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
-
-function custom_save_maker_validation() {
-  // Check if the email field is set and not empty.
-  if ( isset( $_POST['acf']['field_657b6a41e0962'] ) && ! empty( $_POST['acf']['field_657b6a41e0962'] ) ) {
-    $email = $_POST['acf']['field_657b6a41e0962'];
-
-    // Use WP function to check if a user exists with this email.
-    if ( email_exists( $email ) ) {
-      // Add a custom validation error.
-      acf_add_validation_error('acf[field_657b6a41e0962]', 'A Maker with this email already exists.');
-      //acf_add_validation_error('acf[field_657b6a41e0962]', 'A Maker with this email (' . $email . ') already exists. If this is your email, try <a href="' . home_url( '/sign-up/' ) . '">resetting your password</a>.');
-    }
-  }
-}
-//add_filter('acf/validate_save_post', __NAMESPACE__ . '\\custom_save_maker_validation', 10, 0);
-
-function validate_maker_email( $valid, $value, $field, $input_name ){
-  $printr_field = print_r( $field, true );
-  uber_log("🪵 Running validate_maker_email( $valid, $value, $printr_field, $input_name );");
-  if( $valid !== true ){
-    return $valid;
-  }
-
-  if( email_exists( $value ) ){
-    return __( 'A Maker with this email already exists.' );
-  }
-
-  return $valid;
-}
-//add_filter( 'acf/validate_value/key=field_657b6a41e0962', __NAMESPACE__ . '\\validate_maker_email', 10, 4 );
-

@@ -17,13 +17,15 @@
       <?php
       $current_user = wp_get_current_user();
       $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
-      $profile_permalink = get_permalink( $maker_profile_id );
+      if( $maker_profile_id ){
+        $profile_permalink = get_permalink( $maker_profile_id );
       ?>
       <li class="sidebar-item">
         <a class="sidebar-link" href="<?= $profile_permalink ?>" target="_blank">
           <i class="align-middle" data-feather="external-link"></i> <span class="align-middle">View Your Profile</span>
         </a>
       </li>
+      <?php } ?>
       <li class="sidebar-item<?php if( strpos( $_SERVER['REQUEST_URI'], 'account' ) ){ echo ' active'; } ?>">
         <a class="sidebar-link" href="<?= home_url( 'account' ) ?>">
           <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Your Account</span>

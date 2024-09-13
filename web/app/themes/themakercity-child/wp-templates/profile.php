@@ -1,5 +1,11 @@
 <?php
 use function TheMakerCity\utilities\get_alert;
+use function TheMakerCity\users\check_maker_profile_id;
+
+$current_user = wp_get_current_user();
+$maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
+if( empty( $maker_profile_id ) )
+  $maker_profile_id = check_maker_profile_id();
 ?>
 
   <div class="container-fluid">
@@ -11,8 +17,6 @@ use function TheMakerCity\utilities\get_alert;
               <div class="col"><span class="fs-1 fw-bold">Your Profile</span></div>
               <div class="col" style="text-align: right;">
                 <?php
-                $current_user = wp_get_current_user();
-                $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
                 $profile_permalink = get_permalink( $maker_profile_id );
                 ?>
                 <a href="<?= $profile_permalink ?>" target="_blank" style="color: #fff;"><i class="align-middle" data-feather="external-link"></i> View Your Profile</a>
@@ -22,10 +26,8 @@ use function TheMakerCity\utilities\get_alert;
           </div>
           <div class="card-body">
         <?php
-        $current_user = wp_get_current_user();
         if( $current_user ){
-          $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
-          // '<div class="alert alert-success" role="alert"><div class="alert-message">%s</div></div>',
+
           $settings = [
             'post_title'            => true,
             'updated_message'       => __('Your profile has been updated. <a href="' . get_permalink( $maker_profile_id ) . '" target="_blank">View</a> your profile.', 'acf'),
@@ -36,7 +38,7 @@ use function TheMakerCity\utilities\get_alert;
             'form'                  => true,
           ];
 
-          if( empty( $maker_profile_id ) ){
+          if( empty( $maker_profile_id ) || ! $maker_profile_id ){
             $settings['post_id'] = 'new_post';
             $settings['new_post'] = [
               'post_type'   => 'maker',
