@@ -4,6 +4,7 @@ namespace TheMakerCity\shortcodes;
 use function TheMakerCity\utilities\{get_alert};
 
 function maker_primary_image( $atts ){
+
   $args = shortcode_atts([
     'css_classes'       => 'maker-primary-image',
     'style'             => null,
@@ -11,6 +12,7 @@ function maker_primary_image( $atts ){
     'show'              => 'primary_image',
     'size'              => 'large',
     'show_placeholder'  => false,
+    'show_collaborator' => true,
   ], $atts );
 
   global $post;
@@ -30,6 +32,8 @@ function maker_primary_image( $atts ){
   $size = ( $args['size'] && in_array( $args['size'], ['thumbnail','medium','large','full'] ) )? $args['size'] : 'large' ;
 
   $show_placeholder = ( 'true' === $args['show_placeholder'] )? (bool) $args['show_placeholder'] : false ;
+  if ( $args['show_collaborator'] === 'false' ) $args['show_collaborator'] = false; // just to be sure...
+  $show_collaborator = (bool) $args['show_collaborator'];
 
   if( 'gallery' == $args['show'] ){
     $gallery = get_field( 'additional_images' );
@@ -44,16 +48,17 @@ function maker_primary_image( $atts ){
 
   $attachment_id = ( is_array( $image ) && array_key_exists( 'ID', $image ) )? $image['ID'] : false ;
 
-  $collaborator = get_field('collaborator');
-  $collaborator_html = '';
-
   $img_src = esc_url( wp_get_attachment_image_url( $attachment_id, $size ) );
   $img_srcset = esc_attr( wp_get_attachment_image_srcset( $attachment_id, $size ) );
   $img_sizes = wp_get_attachment_image_sizes( $attachment_id, $size );
 
-  if( 'yes' == $collaborator ){
-    $css_classes[] = 'collaborator';
-    $collaborator_html = '<div class="collaborator-icon">c</div>';
+  $collaborator_html = '';
+  if( $show_collaborator ){
+    $collaborator = get_field('collaborator');
+    if( 'yes' == $collaborator ){
+      $css_classes[] = 'collaborator';
+      $collaborator_html = '<div class="collaborator-icon">c</div>';
+    }
   }
 
   if( is_array( $css_classes ) )
