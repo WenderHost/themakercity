@@ -56,6 +56,7 @@ $custom_routes = [
  */
 function custom_query_vars($vars) {
     $vars[] = 'maker_template';
+    $vars[] = 'maker_slug';
     return $vars;
 }
 add_filter( 'query_vars', __NAMESPACE__ . '\\custom_query_vars' );
@@ -67,7 +68,7 @@ function custom_routes(){
   global $custom_routes;
   if( is_array( $custom_routes ) ):
     foreach( $custom_routes as $route ){
-      add_rewrite_rule('^' . $route['slug'] . '/?', 'index.php?maker_template=' . $route['template'], 'top');
+      add_rewrite_rule('^' . $route['slug'] . '/?', 'index.php?maker_template=' . $route['template'] . '&maker_slug=' . $route['slug'], 'top');
     }
   endif;
 }
