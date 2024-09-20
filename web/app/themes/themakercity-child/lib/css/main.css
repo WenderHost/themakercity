@@ -185,6 +185,16 @@ hr,
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+@media (max-width: 1024px) {
+  .facetwp-type-checkboxes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .facetwp-type-checkboxes {
+    grid-template-columns: 1fr;
+  }
+}
 
 /** with floats **/
 .facetwp-checkbox:nth-child(3n) {
