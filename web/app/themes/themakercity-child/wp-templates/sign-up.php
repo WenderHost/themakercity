@@ -67,31 +67,10 @@
                 <div class="accordion-body">
                   <p class="lead">Submit your email and we’ll help you create a login to keep your listing fresh.</p>
 
-                  <!-- START Reset Form -->
-                  <div class="alert" id="reset-message" role="alert">
-                    <div class="alert-message">Alert goes here...</div>
-                  </div>
-
-                  <div class="card mb-2">
-                    <div class="card-body">
-                      <div class="m-sm-3">
-                        <form id="password-reset" hx-post="/wp-htmx/v1/noswap/resetpassword" hx-swap="none">
-                          <input type="hidden" name="action" value="htmx_passwordreset">
-                          <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
-                          </div>
-                          <div class="d-grid gap-2 mt-3">
-                            <input type="submit" class="btn btn-lg btn-primary" value="Reset Password" />
-                          </div>
-                        </form>
-                      </div>
-                    </div>
-                  </div><!-- .card -->
-                  <div class="text-center mb-3">
-                    <p class="mt-3"><span class="lead">Already have a log in?</span><br/>Use it <a href="<?= home_url('sign-in') ?>">here</a>, and make your listing shine!</p>
-                  </div>
-                  <!-- END Reset Form -->
+                <?= get_template_part( 'wp-templates/sections/reset-password-form' ) ?>
+                <div class="text-center mb-3">
+                  <p class="mt-3"><span class="lead">Already have a log in?</span><br/>Use it <a href="<?= home_url('sign-in') ?>">here</a>, and make your listing shine!</p>
+                </div>
 
                 </div>
               </div>
@@ -103,32 +82,3 @@
       </div>
     </div>
   </main>
-
-<script>
-  const resetMsgContainer = document.getElementById('reset-message');
-  const resetMsgText = document.querySelector('#reset-message .alert-message');
-  document.body.addEventListener('passwordReset', function(evt){
-    resetMsgContainer.classList.remove('alert-success','alert-danger');
-    resetMsgContainer.classList.add(evt.detail.css);
-    resetMsgText.innerHTML = evt.detail.message;
-  });
-
-  const newAccountMsgContainer = document.getElementById('newAccount-message');
-  const newAccountMsgText = document.querySelector('#newAccount-message .alert-message');
-  document.body.addEventListener('newAccount', function(evt){
-    newAccountMsgContainer.classList.remove('alert-success','alert-danger');
-    newAccountMsgContainer.classList.add(evt.detail.css);
-    newAccountMsgText.innerHTML = evt.detail.message;
-    if( 'alert-success' == evt.detail.css ){
-      setTimeout((evt) => {
-        newAccountMsgContainer.classList.remove('alert-success','alert-danger');
-        newAccountMsgText.innerHTML = '';
-      }, 15000);
-    }
-  });
-
-  const newAccountForm = document.getElementById('new-account');
-  document.body.addEventListener('resetRegistrationForm', function(evt){
-    newAccountForm.reset();
-  });
-</script>

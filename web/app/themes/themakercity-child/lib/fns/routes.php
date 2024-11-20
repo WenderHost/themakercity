@@ -45,6 +45,12 @@ $custom_routes = [
     'auth_required' => false,
     'title'         => 'Apply',
   ],
+  5 => [
+    'slug'          => 'reset-password',
+    'template'      => 'dashboard',
+    'auth_required' => false,
+    'title'         => 'Reset Your Password',
+  ],
 ];
 
 /**

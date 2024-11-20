@@ -57,13 +57,15 @@
                     <div class="d-grid gap-2 mt-3">
                       <!--<a href="index.html" class="btn btn-lg btn-primary">Sign in</a>-->
                       <input type="submit" class="btn btn-lg btn-primary" value="Submit" />
+                      <p><a href="<?= home_url('reset-password') ?>">Forgot your password?</a></p>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
             <div class="text-center mb-3">
-              <p class="lead">Don't have an account? <a href="<?= home_url('sign-up') ?>">Sign up</a></p>
+              <p class="mt-3 lead">Don't have an account? <a href="<?= home_url('sign-up') ?>">Sign up</a></p>
+
               <p><a href="<?= home_url() ?>">&larr; Return to The Maker City</a>.</p>
             </div>
           </div>
