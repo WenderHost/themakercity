@@ -48,7 +48,7 @@ if( 'success' == $status ){
   ?>
 <div class="alert alert-warning" id="login-message" role="alert">
   <div class="alert-message">
-    <p>Please correct the following erros:</p>
+    <p>Please correct the following errors:</p>
     <ul>
       <li><?= implode( '</li><li>', $errors ) ?></li>
     </ul>
