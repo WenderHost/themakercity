@@ -108,7 +108,7 @@
             "aria-label": "",
             "type": "image",
             "instructions": "<strong>This logo will be shown on your profile page.<\/strong> Upload a square image no bigger than 1500x1500 pixels and less 750Kb in size. (TIP: If you're having trouble reducing your filesize, try saving your image as a JPEG\/.jpg at 35% quality.)",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "25",
@@ -125,10 +125,8 @@
             "max_height": 1500,
             "max_size": ".75",
             "mime_types": "jpg,png,gif",
-            "preview_size": "medium",
-            "uploader": "",
-            "acfe_thumbnail": 0,
-            "upload_folder": ""
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
         },
         {
             "key": "field_657a37edf61a7",
@@ -509,12 +507,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_display_title": "",
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1726251388
+    "modified": 1733353730
 }
