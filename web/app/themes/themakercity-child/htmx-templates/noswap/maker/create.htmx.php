@@ -66,6 +66,10 @@ if( ! empty( $maker['email'] ) ){
  */
 foreach ( $maker as $key => $value ) {
   switch( $key ){
+    case 'logo':
+      // nothing, not required
+      break;
+
     default:
       if( empty( $value ) ){
         $field_name = ucwords( str_replace( '_', ' ', $key ) );

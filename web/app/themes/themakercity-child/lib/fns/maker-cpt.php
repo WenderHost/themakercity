@@ -12,8 +12,8 @@ use function TheMakerCity\users\create_maker_user;
  */
 function create_maker_cpt( $maker = array() ){
   if( is_array( $maker ) ){
-    if ( empty( $maker['business_name'] ) || empty( $maker['logo'] ) ) {
-      return new WP_Error('invalid_data', 'Missing required maker information.');
+    if ( empty( $maker['business_name'] ) ) {
+      return new \WP_Error('invalid_data', 'Missing required maker information.');
     }
 
     // Step 1: Create a new post of type 'maker'
@@ -48,9 +48,11 @@ function create_maker_cpt( $maker = array() ){
     }
 
     // Step 4: Set the post thumbnail
-    $attach_id = upload_and_set_acf_image_field( $post_id, $maker['logo'], 'primary_image') ;
-    if ( is_wp_error( $attach_id ) ) {
-      return $attach_id; // Return the error
+    if( ! empty( $maker['logo'] ) ){
+      $attach_id = upload_and_set_acf_image_field( $post_id, $maker['logo'], 'primary_image') ;
+      if ( is_wp_error( $attach_id ) ) {
+        return $attach_id; // Return the error
+      }
     }
 
     return $post_id;

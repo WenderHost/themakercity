@@ -112,7 +112,7 @@
             <textarea class="form-control" id="description" name="maker_description" rows="5"></textarea>
           </div>
           <div class="mb-3">
-            <label for="logo" class="form-label">Logo <span class="required">*</span></label>
+            <label for="logo" class="form-label">Logo</label>
             <input type="file" class="form-control filepond" name="maker_logo" accept="image/png, image/jpeg, image/gif" />
           </div>
           <div class="mb-3 mt-3">

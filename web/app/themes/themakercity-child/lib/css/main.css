@@ -333,6 +333,9 @@ hr,
   position: relative;
   overflow: hidden;
 }
+.maker-primary-image.square.placeholder {
+  padding-top: 0;
+}
 .maker-primary-image.square img {
   border: none;
   position: absolute;
