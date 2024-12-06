@@ -41,12 +41,17 @@ function setupTabs() {
 export function initializeMakerSearch() {
   let inite = 0;
   document.addEventListener('DOMContentLoaded', async function() {
-    await setupTabs();
-    setInterval(function(){
-      if (document.readyState == "complete" && inite == 0 )  {
-        activateSecondTab();
-        inite++;
-      }
-    }, 500);
+    const filterByTab = document.getElementById('elementor-tab-title-1631');
+    if( filterByTab ){
+      await setupTabs();
+      setInterval(function(){
+        if (document.readyState == "complete" && inite == 0 )  {
+          activateSecondTab();
+          inite++;
+        }
+      }, 500);      
+    } else {
+      console.log('👋 I did not find #elementor-tab-title-1631, so no need to initialize MakerSearch.');
+    }
   });
 }
