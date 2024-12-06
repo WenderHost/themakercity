@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b0b19e2faeec231fefb37bbedaef1a8",
+    "content-hash": "78c0895f5f27e02ba16f7d2416548454",
     "packages": [
         {
             "name": "composer/installers",
@@ -1067,48 +1067,6 @@
             "time": "2024-09-09T11:45:10+00:00"
         },
         {
-            "name": "tcattd/htmx-api-wp",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/TCattd/HTMX-API-WP.git",
-                "reference": "9efa1ca9cc27ef3923258fc39e013e41165a8d8a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/TCattd/HTMX-API-WP/zipball/9efa1ca9cc27ef3923258fc39e013e41165a8d8a",
-                "reference": "9efa1ca9cc27ef3923258fc39e013e41165a8d8a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0"
-            },
-            "default-branch": true,
-            "type": "wordpress-plugin",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Esteban Cuevas",
-                    "homepage": "https://actitud.xyz/"
-                }
-            ],
-            "description": "An un-official HTMX API for WordPress",
-            "homepage": "https://github.com/TCattd/HTMX-API-WP",
-            "keywords": [
-                "api",
-                "htmx",
-                "plugin",
-                "wordpress"
-            ],
-            "support": {
-                "source": "https://github.com/TCattd/HTMX-API-WP/tree/main",
-                "issues": "https://github.com/TCattd/HTMX-API-WP/issues"
-            },
-            "time": "2024-11-04T18:34:50+00:00"
-        },
-        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.1",
             "source": {
@@ -1357,6 +1315,24 @@
             },
             "description": "Easily create web forms and manage form entries within the WordPress admin.",
             "homepage": "https://gravityforms.com"
+        },
+        {
+            "name": "wpackagist-plugin/api-for-htmx",
+            "version": "1.0.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/api-for-htmx/",
+                "reference": "tags/1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/api-for-htmx.1.0.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/api-for-htmx/"
         },
         {
             "name": "wpackagist-plugin/disable-gutenberg",
@@ -2582,7 +2558,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "tcattd/htmx-api-wp": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
