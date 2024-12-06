@@ -2,15 +2,20 @@
 export function hideEmptyElements() {
   document.addEventListener('DOMContentLoaded', function() {
     const shortcodes = document.querySelectorAll('.elementor-shortcode');
-    shortcodes.forEach(function(shortcode) {
-      // Check if the element's text content is empty (ignoring whitespace) and it has no visible child nodes
-      if (shortcode.textContent.trim() === '' && !hasVisibleContent(shortcode)) {
-        const element = shortcode.closest('.elementor-element');
-        if (element) {
-          element.style.display = 'none';
+    console.log('🔔 shortcodes == ', shortcodes );
+    if( 0 < shortcodes.length ){
+      shortcodes.forEach(function(shortcode) {
+        // Check if the element's text content is empty (ignoring whitespace) and it has no visible child nodes
+        if (shortcode.textContent.trim() === '' && !hasVisibleContent(shortcode)) {
+          const element = shortcode.closest('.elementor-element');
+          if (element) {
+            element.style.display = 'none';
+          }
         }
-      }
-    });
+      });
+    } else {
+      console.info('👉 No shortcodes found.');
+    }
   });
 
   // Helper function to determine if an element has visible content
