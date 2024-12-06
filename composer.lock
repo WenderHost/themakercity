@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a352d1dc0c0d591be90667a8ebf9a719",
+    "content-hash": "8b0b19e2faeec231fefb37bbedaef1a8",
     "packages": [
         {
             "name": "composer/installers",
@@ -1212,6 +1212,25 @@
             "homepage": "https://www.acf-extended.com"
         },
         {
+            "name": "wenmark/advanced-custom-fields-pro",
+            "version": "6.3.11",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/advanced-custom-fields-pro/6.3.11",
+                "shasum": "d179cb9087b4eee980611d70b310bf9bfe4e8cd7"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": {
+                "name": "WP Engine",
+                "homepage": "https://wpengine.com/?utm_source=wordpress.org&#038;utm_medium=referral&#038;utm_campaign=plugin_directory&#038;utm_content=advanced_custom_fields"
+            },
+            "description": "Customize WordPress with powerful, professional and intuitive fields.",
+            "homepage": "https://www.advancedcustomfields.com"
+        },
+        {
             "name": "wenmark/elementor-pro",
             "version": "3.25.4",
             "dist": {
@@ -1574,22 +1593,6 @@
             "homepage": "https://wordpress.org/themes/twentytwentythree/"
         },
         {
-            "name": "wpengine/advanced-custom-fields-pro",
-            "version": "6.3.11",
-            "dist": {
-                "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?s=composer&p=pro&t=6.3.11"
-            },
-            "require": {
-                "composer/installers": "~1.0 || ~2.0"
-            },
-            "replace": {
-                "wpackagist-plugin/advanced-custom-fields": "self.version",
-                "wpengine/advanced-custom-fields": "self.version"
-            },
-            "type": "wordpress-plugin"
-        },
-        {
             "name": "zordius/lightncandy",
             "version": "v1.2.6",
             "source": {
@@ -1653,12 +1656,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "2c78ba62968eb21288359a6bc9f856952e226eaf"
+                "reference": "4ed4a2ac17e6d7bec06301356c4e15f595e47842"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2c78ba62968eb21288359a6bc9f856952e226eaf",
-                "reference": "2c78ba62968eb21288359a6bc9f856952e226eaf",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4ed4a2ac17e6d7bec06301356c4e15f595e47842",
+                "reference": "4ed4a2ac17e6d7bec06301356c4e15f595e47842",
                 "shasum": ""
             },
             "conflict": {
@@ -1799,7 +1802,7 @@
                 "dolibarr/dolibarr": "<19.0.2",
                 "dompdf/dompdf": "<2.0.4",
                 "doublethreedigital/guest-entries": "<3.1.2",
-                "drupal/core": ">=6,<6.38|>=7,<7.96|>=8,<10.2.9|>=10.3,<10.3.6|>=11,<11.0.5",
+                "drupal/core": ">=6,<6.38|>=7,<7.96|>=8,<10.2.10|>=10.3,<10.3.6|>=11,<11.0.5",
                 "drupal/core-recommended": ">=8,<10.2.9|>=10.3,<10.3.6|>=11,<11.0.5",
                 "drupal/drupal": ">=5,<5.11|>=6,<6.38|>=7,<7.80|>=8,<10.2.9|>=10.3,<10.3.6|>=11,<11.0.5",
                 "duncanmcclean/guest-entries": "<3.1.2",
@@ -2493,7 +2496,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-04T23:05:13+00:00"
+            "time": "2024-12-05T20:05:42+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
