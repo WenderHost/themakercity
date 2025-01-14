@@ -68,7 +68,7 @@ function maker_primary_image( $atts ){
   if( $img_src ){
     $html = "<div class=\"{$css_classes}\" style=\"{$args['style']}\">{$link_open}<img src=\"{$img_src}\" srcset=\"{$img_srcset}\" sizes=\"{$img_sizes}\" />{$link_close}{$collaborator_html}</div>";
   } else if( $show_placeholder ) {
-    $html = "<div class=\"{$css_classes} placeholder\">{$link_open}<div class=\"placeholder\" style=\"width: 100%; min-height: 420px; background-color: #eee\"></div>{$link_close}{$collaborator_html}</div>";
+    $html = "<div class=\"{$css_classes} placeholder\">{$link_open}<div class=\"placeholder\" style=\"width: 100%; aspect-ratio: 1/1; background-color: #eee\"></div>{$link_close}{$collaborator_html}</div>";
   }
 
   return $html;
