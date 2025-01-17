@@ -12,7 +12,7 @@ function custom_makers_event_callback( $query ) {
         'posts_per_page' => 1, // Retrieve only one event
         'meta_query' => array(
             array(
-                'key' => 'date', // The custom field key
+                'key' => 'event_date', // The custom field key
                 'value' => $today, // Compare with today's date
                 'compare' => '>=', // Get events today or in the future
                 'type' => 'DATETIME' // Specify the type
