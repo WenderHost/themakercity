@@ -41,7 +41,7 @@ function add_event_date_column( $columns ) {
   
   foreach ( $columns as $key => $value ) {
     // Insert the "Event Date" column before the "Date" column.
-    if ( 'date' === $key ) {
+    if ( 'event_date' === $key ) {
       $new_columns['event_date'] = __( 'Event Date', 'textdomain' );
     }
     $new_columns[ $key ] = $value;
@@ -56,7 +56,7 @@ add_filter( 'manage_event_posts_columns', __NAMESPACE__ . '\\add_event_date_colu
  */
 function display_event_date_column( $column, $post_id ) {
   if ( 'event_date' === $column ) {
-    $event_date = get_field( 'date', $post_id ); // Replace 'date' with your actual ACF field key if needed.
+    $event_date = get_field( 'event_date', $post_id ); // Replace 'date' with your actual ACF field key if needed.
     if ( $event_date ) {
       echo date( 'M j, Y - g:ia', strtotime( $event_date ) );
     } else {
@@ -84,7 +84,7 @@ function sort_event_by_date( $query ) {
   }
 
   if ( 'event_date' === $query->get( 'orderby' ) ) {
-    $query->set( 'meta_key', 'date' ); // Replace 'date' with your actual ACF field key if needed.
+    $query->set( 'meta_key', 'event_date' ); 
     $query->set( 'orderby', 'meta_value' );
     $query->set( 'meta_type', 'DATETIME' );
   }
