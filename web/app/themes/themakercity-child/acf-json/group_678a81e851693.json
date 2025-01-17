@@ -24,7 +24,7 @@
             "min_size": "",
             "max_width": 2000,
             "max_height": 2000,
-            "max_size": ".8",
+            "max_size": 1,
             "mime_types": ".jpg,.png,.gif",
             "allow_in_bindings": 0,
             "preview_size": "medium"
@@ -153,5 +153,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1737147075
+    "modified": 1737148350
 }
