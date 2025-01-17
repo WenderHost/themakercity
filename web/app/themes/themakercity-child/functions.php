@@ -29,6 +29,7 @@ require_once MAKR_STYLESHEET_DIR . 'lib/fns/debugging.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/elementor.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/emails.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/enqueues.php';
+require_once MAKR_STYLESHEET_DIR . 'lib/fns/events.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/maker-cpt.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/routes.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/templates.php';
