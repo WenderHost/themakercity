@@ -39,6 +39,7 @@ function wp_custom_email_template( $args ) {
     'title' => $subject,
     'content' => nl2br( $message ),
     'logo' => MAKR_STYLESHEET_DIR_URI . 'lib/img/maker-icon_512x512.png',
+    'year' => date( 'Y' ),
   );
 
   // Retrieve our handlebars template:
