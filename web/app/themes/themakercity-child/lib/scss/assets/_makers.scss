@@ -77,6 +77,9 @@
 .facetwp-facet .facetwp-checkbox.checked{
   background-image: url(../img/checkbox-on.png);
 }
+.elementor-widget-tabs .elementor-tab-desktop-title{
+  padding-bottom: 40px;
+}
 #elementor-tab-title-1631{
   width: 200px;
 
@@ -99,5 +102,25 @@
     background-size: 16px 16px;
     background-position: right;
     background-repeat: no-repeat;
+  }
+}
+
+#elementor-tab-title-1632,
+#elementor-tab-title-1633,
+#elementor-tab-title-1634{
+  background-image: url(../img/directory-tab-selection_1200x400.png);
+  background-repeat: no-repeat;
+  background-position: right 10px top 18px;
+  background-size: 350px 100px;
+  padding-right: 35px;
+  padding-left: 5px;
+
+  &:hover{
+    color: $makerteal;
+  }
+  
+  &.elementor-active{
+    color: #000;
+    background-position: right 10px top -58px;
   }
 }

@@ -356,6 +356,10 @@ hr,
   background-image: url(../img/checkbox-on.png);
 }
 
+.elementor-widget-tabs .elementor-tab-desktop-title {
+  padding-bottom: 40px;
+}
+
 #elementor-tab-title-1631 {
   width: 200px;
 }
@@ -375,6 +379,28 @@ hr,
   background-size: 16px 16px;
   background-position: right;
   background-repeat: no-repeat;
+}
+
+#elementor-tab-title-1632,
+#elementor-tab-title-1633,
+#elementor-tab-title-1634 {
+  background-image: url(../img/directory-tab-selection_1200x400.png);
+  background-repeat: no-repeat;
+  background-position: right 10px top 18px;
+  background-size: 350px 100px;
+  padding-right: 35px;
+  padding-left: 5px;
+}
+#elementor-tab-title-1632:hover,
+#elementor-tab-title-1633:hover,
+#elementor-tab-title-1634:hover {
+  color: #85cec5;
+}
+#elementor-tab-title-1632.elementor-active,
+#elementor-tab-title-1633.elementor-active,
+#elementor-tab-title-1634.elementor-active {
+  color: #000;
+  background-position: right 10px top -58px;
 }
 
 /* Navigation */
