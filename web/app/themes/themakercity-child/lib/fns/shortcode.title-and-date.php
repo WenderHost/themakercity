@@ -18,7 +18,7 @@ function get_title_and_date(){
 	$title = get_the_title( $post );
 	$date = get_field( 'event_date', $post->ID );
 	if( ! empty( $date ) )
-    $title.= ' &endash; ' . $date;
+    $title.= ' - ' . $date;
   return $title;
 }
 add_shortcode( 'title_and_date', __NAMESPACE__ . '\\get_title_and_date' );
