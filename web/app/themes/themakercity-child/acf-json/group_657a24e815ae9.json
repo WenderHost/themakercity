@@ -144,7 +144,7 @@
             },
             "relevanssi_exclude": 0,
             "return_format": "array",
-            "library": "all",
+            "library": "uploadedTo",
             "min": "",
             "max": "",
             "min_width": "",
@@ -485,7 +485,7 @@
             "acfe_google_map_disable_streetview": 0,
             "acfe_google_map_style": "",
             "acfe_google_map_key": "AIzaSyByvEXXQZiFVi0yUAExuARB2JVA678nO-A",
-            "zoom": "10",
+            "zoom": 10,
             "acfe_google_map_marker_height": 50
         }
     ],
@@ -507,5 +507,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1733353730
+    "modified": 1737152516
 }
