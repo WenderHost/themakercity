@@ -21,4 +21,4 @@ function get_title_and_date(){
     $title.= ' &endash; ' . $date;
   return $title;
 }
-add_shortcode( 'title_and_date', $func );
+add_shortcode( 'title_and_date', __NAMESPACE__ . '\\get_title_and_date' );
