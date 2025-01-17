@@ -41,7 +41,7 @@ function add_event_date_column( $columns ) {
   
   foreach ( $columns as $key => $value ) {
     // Insert the "Event Date" column before the "Date" column.
-    if ( 'event_date' === $key ) {
+    if ( 'date' === $key ) {
       $new_columns['event_date'] = __( 'Event Date', 'textdomain' );
     }
     $new_columns[ $key ] = $value;
