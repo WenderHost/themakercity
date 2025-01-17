@@ -85,7 +85,6 @@
     "wpackagist-plugin/disable-gutenberg": "^3.1",
     "wpackagist-plugin/wordpress-importer": "^0.8.2",
     "wpackagist-plugin/gf-salesforce-crmperks": "^1.4",
-    "wpackagist-plugin/insert-headers-and-footers": "^2.1",
     "wpackagist-plugin/user-switching": "^1.8",
     "wpackagist-plugin/api-for-htmx": "^1.0"
   },

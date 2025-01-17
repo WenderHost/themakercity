@@ -32,6 +32,7 @@ require_once MAKR_STYLESHEET_DIR . 'lib/fns/enqueues.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/events.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/maker-cpt.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/routes.php';
+require_once MAKR_STYLESHEET_DIR . 'lib/fns/shortcode.simplecalendar.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/templates.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/utilities.php';
 require_once MAKR_STYLESHEET_DIR . 'lib/fns/users.php';

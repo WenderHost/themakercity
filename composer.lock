@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "573034fa28679fb6f4b8233e3ccfb38a",
+    "content-hash": "fb2990a3fe5bab5bb2505f615e431ad9",
     "packages": [
         {
             "name": "composer/installers",
@@ -1405,24 +1405,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/gf-salesforce-crmperks/"
-        },
-        {
-            "name": "wpackagist-plugin/insert-headers-and-footers",
-            "version": "2.2.5",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/insert-headers-and-footers/",
-                "reference": "tags/2.2.5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/insert-headers-and-footers.2.2.5.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/insert-headers-and-footers/"
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
