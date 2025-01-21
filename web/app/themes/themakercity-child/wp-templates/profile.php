@@ -19,7 +19,7 @@ if( empty( $maker_profile_id ) )
                 <?php
                 $profile_permalink = get_permalink( $maker_profile_id );
                 ?>
-                <a href="<?= $profile_permalink ?>" target="_blank" style="color: #fff;"><i class="align-middle" data-feather="external-link"></i> View Your Profile</a>
+                <a href="<?= $profile_permalink ?>" target="_blank" class="btn btn-light btn-lg"><i class="align-middle fas fa-arrow-up-right-from-square"></i> View Your Profile</a>
               </div>
             </div>
 

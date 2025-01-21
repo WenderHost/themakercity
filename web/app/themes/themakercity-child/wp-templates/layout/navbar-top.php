@@ -3,9 +3,6 @@ $current_user = wp_get_current_user();
 $avatar = get_avatar_url( $current_user->user_email, ['size' => 96] );
 ?>
       <nav class="navbar navbar-expand navbar-light navbar-bg">
-        <a class="sidebar-toggle js-sidebar-toggle">
-          <i class="hamburger align-self-center"></i>
-        </a>
 
         <div class="navbar-collapse collapse">
           <ul class="navbar-nav navbar-align">
