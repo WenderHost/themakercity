@@ -117,7 +117,7 @@
             },
             "relevanssi_exclude": 0,
             "return_format": "array",
-            "library": "all",
+            "library": "uploadedTo",
             "min_width": 512,
             "min_height": 512,
             "min_size": "",
@@ -292,7 +292,7 @@
             },
             "relevanssi_exclude": 0,
             "return_format": "array",
-            "library": "all",
+            "library": "uploadedTo",
             "min_width": 512,
             "min_height": 512,
             "min_size": "",
@@ -300,10 +300,8 @@
             "max_height": 1500,
             "max_size": ".75",
             "mime_types": "jpg,png,gif",
-            "preview_size": "thumbnail",
-            "uploader": "",
-            "acfe_thumbnail": 0,
-            "upload_folder": ""
+            "allow_in_bindings": 1,
+            "preview_size": "thumbnail"
         },
         {
             "key": "field_657b6e74e3c0a",
@@ -507,5 +505,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1737152516
+    "modified": 1737430955
 }
