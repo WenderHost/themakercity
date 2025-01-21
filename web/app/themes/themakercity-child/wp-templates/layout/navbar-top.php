@@ -14,17 +14,9 @@ $avatar = get_avatar_url( $current_user->user_email, ['size' => 96] );
                 <i class="align-middle" data-feather="settings"></i>
               </a>
 
-              <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+              <a class="nav-link d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
                 <img src="<?= $avatar ?>" class="avatar img-fluid rounded me-1" alt="<?= $current_user->user_firstname ?> <?= $current_user->user_lastname ?>" /> <span class="text-dark"><?= $current_user->user_firstname ?> <?= $current_user->user_lastname ?></span>
               </a>
-              <div class="dropdown-menu dropdown-menu-end" style="z-index: 9999;">
-                <a class="dropdown-item" href="<?= home_url('/profile') ?>"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-                <?php if( current_user_can( 'activate_plugins' ) ){ ?>
-                <a class="dropdown-item" href="<?= site_url( '/wp-admin/' ) ?>" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> WP Admin</a>
-                <?php } ?>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="<?= wp_logout_url( home_url() ) ?>">Log out</a>
-              </div>
             </li>
           </ul>
         </div>

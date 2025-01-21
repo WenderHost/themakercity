@@ -36,6 +36,16 @@
           <i class="align-middle" data-feather="corner-down-left"></i> <span class="align-middle">Return to Site</span>
         </a>
       </li>
+      <?php if( current_user_can( 'activate_plugins' ) ){ ?>
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="<?= site_url( '/wp-admin/' ) ?>" target="_blank">
+          <i class="fas fa-arrow-up-right-from-square"></i> <span class="align-middle">WP Admin</span>
+        </a>        
+      </li>
+      <?php } ?>      
+      <li class="sidebar-item">
+        <a class="sidebar-link" href="<?= wp_logout_url( home_url() ) ?>">Log out</a>
+      </li>
       <!--
       <li class="sidebar-header">
         Tools & Components
