@@ -16,7 +16,7 @@ use function TheMakerCity\utilities\{get_alert};
  *     @type string  $css_classes       CSS classes to apply to the image container. Default 'maker-primary-image'.
  *     @type string  $style             Inline styles for the image container. Default null.
  *     @type bool    $link              Whether to wrap the image with a permalink. Default false.
- *     @type string  $show              Determines which image to show ('primary_image' or 'gallery'). Default 'primary_image'.
+ *     @type string  $show              Determines which image to show ('primary_image', 'logo', or 'gallery'). Default 'primary_image'.
  *     @type string  $size              Image size to display ('thumbnail', 'medium', 'large', 'full'). Default 'large'.
  *     @type bool    $show_placeholder  Whether to display a placeholder if no image is found. Default false.
  *     @type bool    $show_collaborator Whether to display collaborator information. Default true.
@@ -55,8 +55,43 @@ function maker_primary_image( $atts ){
   if ( $args['show_collaborator'] === 'false' ) $args['show_collaborator'] = false; // just to be sure...
   $show_collaborator = (bool) $args['show_collaborator'];
 
-  if( 'gallery' == $args['show'] ){
-    $gallery = get_field( 'additional_images' );
+  //$logo = get_field( 'logo' );
+  /*
+  if( 'logo' == $args['show'] )
+    uber_log( '🔔 $args = ' . print_r( $args, true ) );
+  /**/
+  switch( $args['show'] ){
+    case 'logo':
+      $image = get_field( 'logo' );
+      if( empty( $image ) )
+        return '';
+      break;
+
+    case 'gallery':
+      $gallery = get_field( 'additional_images' );
+      if( is_array( $gallery ) ){
+        $image = $gallery[0];
+      } else {
+        $image = get_field( 'primary_image' );
+      }      
+      break;
+
+    case 'primary_image':
+      $image = get_field( 'primary_image' );
+      if( empty( $image ) ){
+        $gallery = get_field( 'additional_images' );
+        if( is_array( $gallery ) ){
+          $image = $gallery[0];
+        }        
+      }
+      break;
+
+    default:
+      $image = get_field( 'primary_image' );
+  }
+  /*
+  if( 'gallery' == $args['show'] ){ 
+    $gallery = get_field( 'additional_images' );  
     if( is_array( $gallery ) ){
       $image = $gallery[0];
     } else {
@@ -65,6 +100,7 @@ function maker_primary_image( $atts ){
   } else {
     $image = get_field( 'primary_image' );
   }
+  /**/
 
   $attachment_id = ( is_array( $image ) && array_key_exists( 'ID', $image ) )? $image['ID'] : false ;
 

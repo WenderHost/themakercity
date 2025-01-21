@@ -133,3 +133,12 @@
 .bg-theme-dark.card-header{
   background-color: #222e3c;
 }
+.hide-if-value{
+  border: 1px solid rgb(204,208,212);
+  background-color: #f5f7fb;
+  padding: .25em .5em;
+  margin: .25em 0 1.5em 0;
+}
+.show-if-value.image-wrap{
+  border: 1px solid rgb(204,208,212);
+}

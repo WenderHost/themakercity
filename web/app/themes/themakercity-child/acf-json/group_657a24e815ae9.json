@@ -102,28 +102,82 @@
             "bidirectional_target": []
         },
         {
-            "key": "field_657a265931aee",
+            "key": "field_679022da5037f",
             "label": "Logo",
-            "name": "primary_image",
+            "name": "logo",
             "aria-label": "",
             "type": "image",
-            "instructions": "<strong>This logo will be shown on your profile page.<\/strong> Upload a square image no bigger than 1500x1500 pixels and less 750Kb in size. (TIP: If you're having trouble reducing your filesize, try saving your image as a JPEG\/.jpg at 35% quality.)",
+            "instructions": "<strong>This logo will be shown on your profile page.<\/strong>",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
             "relevanssi_exclude": 0,
             "return_format": "array",
             "library": "uploadedTo",
-            "min_width": 512,
-            "min_height": 512,
+            "min_width": "",
+            "min_height": "",
             "min_size": "",
-            "max_width": 1500,
-            "max_height": 1500,
-            "max_size": ".75",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 2,
+            "mime_types": "jpg,png,gif",
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_657a265931aee",
+            "label": "Primary Image",
+            "name": "primary_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "<strong>This image lets you control what will show for your search result and next to your information on your Maker Profile. If you leave this option empty, we'll default to the first image in your gallery below.<\/strong>",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "array",
+            "library": "uploadedTo",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 2,
+            "mime_types": "jpg,png,gif",
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_65bbe72aa5155",
+            "label": "Headshot (Optional)",
+            "name": "avatar",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "array",
+            "library": "uploadedTo",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 2,
             "mime_types": "jpg,png,gif",
             "allow_in_bindings": 1,
             "preview_size": "medium"
@@ -138,7 +192,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "70",
+                "width": "100",
                 "class": "",
                 "id": ""
             },
@@ -275,33 +329,6 @@
                     "parent_repeater": "field_657a25432ce62"
                 }
             ]
-        },
-        {
-            "key": "field_65bbe72aa5155",
-            "label": "Headshot (Optional)",
-            "name": "avatar",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "Upload a square image no bigger than 1500x1500 pixels and less 750Kb in size. (TIP: If you're having trouble reducing your filesize, try saving your image as a JPEG\/.jpg at 35% quality.)",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "relevanssi_exclude": 0,
-            "return_format": "array",
-            "library": "uploadedTo",
-            "min_width": 512,
-            "min_height": 512,
-            "min_size": "",
-            "max_width": 1500,
-            "max_height": 1500,
-            "max_size": ".75",
-            "mime_types": "jpg,png,gif",
-            "allow_in_bindings": 1,
-            "preview_size": "thumbnail"
         },
         {
             "key": "field_657b6e74e3c0a",
@@ -505,5 +532,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1737430955
+    "modified": 1737503513
 }

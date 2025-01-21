@@ -12,6 +12,10 @@ if( empty( $maker_profile_id ) )
     <div class="row justify-content-start">
       <div class="col-9">
         <div class="card" style="max-width: 1200px;">
+
+
+
+          <form id="acf-form" class="acf-form" method="post">
           <div class="card-header bg-theme-dark text-white">
             <div class="row align-items-center">
               <div class="col"><span class="fs-1 fw-bold">Your Profile</span></div>
@@ -19,7 +23,9 @@ if( empty( $maker_profile_id ) )
                 <?php
                 $profile_permalink = get_permalink( $maker_profile_id );
                 ?>
-                <a href="<?= $profile_permalink ?>" target="_blank" class="btn btn-light btn-lg"><i class="align-middle fas fa-arrow-up-right-from-square"></i> View Your Profile</a>
+                <a href="<?= $profile_permalink ?>" target="_blank" class="btn btn-light btn-lg"><i class="align-middle fas fa-arrow-up-right-from-square"></i> View</a>
+
+                <button type="submit" class="btn btn-primary btn-lg">Update</button>
               </div>
             </div>
 
@@ -35,7 +41,7 @@ if( empty( $maker_profile_id ) )
             'html_submit_button'    => '<div class="d-grid mt-3"><button type="submit" class="btn btn-primary fw-bold fs-3">%s</button></div>',
             'instruction_placement' => 'field',
             'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'logo', 'primary_image', 'avatar', 'additional_images', 'description', 'social_profiles', 'show_location', 'business_address' ],
-            'form'                  => true,
+            'form'                  => false,
           ];
 
           if( empty( $maker_profile_id ) || ! $maker_profile_id ){
@@ -52,7 +58,17 @@ if( empty( $maker_profile_id ) )
           acf_form( $settings );
         }
         ?>
+          <div class="acf-form-submit">
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-primary fw-bold fs-3">Update</button>
+            </div>       
+            <span class="acf-spinner"></span>
+          </div>
+
           </div><!-- .card-body -->
+          </form>
+
+
         </div><!-- .card -->
       </div><!-- .col-9 -->
       <div class="col-3">
