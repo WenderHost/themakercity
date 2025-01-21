@@ -22,12 +22,6 @@ $avatar = get_avatar_url( $current_user->user_email, ['size' => 96] );
                 <?php if( current_user_can( 'activate_plugins' ) ){ ?>
                 <a class="dropdown-item" href="<?= site_url( '/wp-admin/' ) ?>" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> WP Admin</a>
                 <?php } ?>
-                <!--
-                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-                -->
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?= wp_logout_url( home_url() ) ?>">Log out</a>
               </div>
