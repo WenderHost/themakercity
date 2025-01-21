@@ -34,7 +34,7 @@ if( empty( $maker_profile_id ) )
             'html_updated_message'  => get_alert([ 'description' => '%s', 'type' => 'success' ]),
             'html_submit_button'    => '<div class="d-grid mt-3"><button type="submit" class="btn btn-primary fw-bold fs-3">%s</button></div>',
             'instruction_placement' => 'field',
-            'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'primary_image', 'additional_images', 'description', 'social_profiles', 'avatar', 'show_location', 'business_address' ],
+            'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'logo', 'primary_image', 'avatar', 'additional_images', 'description', 'social_profiles', 'show_location', 'business_address' ],
             'form'                  => true,
           ];
 
