@@ -3,6 +3,26 @@
 namespace TheMakerCity\shortcodes;
 use function TheMakerCity\utilities\{get_alert};
 
+/**
+ * Generates the primary image HTML output for the 'maker' custom post type.
+ *
+ * This shortcode allows users to display a primary image or a gallery image 
+ * associated with a 'maker' CPT. It supports customization of CSS classes, 
+ * styles, linking, and placeholders.
+ *
+ * @param array $atts {
+ *     Optional. An array of shortcode attributes.
+ *
+ *     @type string  $css_classes       CSS classes to apply to the image container. Default 'maker-primary-image'.
+ *     @type string  $style             Inline styles for the image container. Default null.
+ *     @type bool    $link              Whether to wrap the image with a permalink. Default false.
+ *     @type string  $show              Determines which image to show ('primary_image' or 'gallery'). Default 'primary_image'.
+ *     @type string  $size              Image size to display ('thumbnail', 'medium', 'large', 'full'). Default 'large'.
+ *     @type bool    $show_placeholder  Whether to display a placeholder if no image is found. Default false.
+ *     @type bool    $show_collaborator Whether to display collaborator information. Default true.
+ * }
+ * @return string HTML markup for the primary image or a warning message if the CPT is not 'maker'.
+ */
 function maker_primary_image( $atts ){
 
   $args = shortcode_atts([
