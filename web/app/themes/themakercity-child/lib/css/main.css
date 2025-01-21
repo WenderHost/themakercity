@@ -409,6 +409,10 @@ hr,
   background-size: 256px 256px;
 }
 
+.bg-theme-dark.card-header {
+  background-color: #222e3c;
+}
+
 /* Navigation */
 li.external a {
   display: flex;

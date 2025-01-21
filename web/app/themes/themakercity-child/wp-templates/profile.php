@@ -12,7 +12,7 @@ if( empty( $maker_profile_id ) )
     <div class="row justify-content-start">
       <div class="col-9">
         <div class="card" style="max-width: 1200px;">
-          <div class="card-header bg-primary text-white">
+          <div class="card-header bg-theme-dark text-white">
             <div class="row align-items-center">
               <div class="col"><span class="fs-1 fw-bold">Your Profile</span></div>
               <div class="col" style="text-align: right;">
