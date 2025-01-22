@@ -77,17 +77,17 @@ function maker_primary_image( $atts ){
       break;
 
     case 'primary_image':
+    default:
       $image = get_field( 'primary_image' );
       if( empty( $image ) ){
         $gallery = get_field( 'additional_images' );
         if( is_array( $gallery ) ){
           $image = $gallery[0];
+        } else {
+          $image = get_field( 'logo' );
         }        
       }
       break;
-
-    default:
-      $image = get_field( 'primary_image' );
   }
   /*
   if( 'gallery' == $args['show'] ){ 
