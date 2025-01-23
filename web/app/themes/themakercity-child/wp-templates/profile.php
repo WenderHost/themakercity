@@ -10,8 +10,8 @@ if( empty( $maker_profile_id ) )
 
   <div class="container-fluid">
     <div class="row justify-content-start">
-      <div class="col-9">
-        <div class="card" style="max-width: 1200px;">
+      <div class="col-12">
+        <div class="card" style="max-width: 1100px;">
 
 
 
@@ -70,17 +70,7 @@ if( empty( $maker_profile_id ) )
 
 
         </div><!-- .card -->
-      </div><!-- .col-9 -->
-      <div class="col-3">
-        <!--<div class="card" id="make-me-sticky">
-          <div class="card-body">
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary fs-1 fw-bold">Update</button>
-            </div>
-          </div>
-        </div>-->
-
-      </div><!-- .col-3 -->
+      </div><!-- .col-12 -->
     </div><!-- .row.justify-content-start -->
   </div>
 
