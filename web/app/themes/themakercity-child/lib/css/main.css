@@ -206,12 +206,14 @@ hr,
 }
 
 /* END Checkbox layout */
+.facetwp-selections {
+  display: inline-block;
+}
 .facetwp-selections ul {
   margin: 0;
   padding: 0;
 }
-
-.facetwp-selections li {
+.facetwp-selections ul li {
   display: inline-block;
   margin: 0 6px 6px 0;
   padding: 8px 10px;
@@ -219,21 +221,26 @@ hr,
   border: 1px solid #ddd;
   border-radius: 3px;
 }
-
 .facetwp-selections .facetwp-selection-value {
   color: #6233ca;
 }
-
 .facetwp-selections .facetwp-selection-value:hover {
   text-decoration: underline;
 }
-
 .facetwp-selections .facetwp-selection-label + .facetwp-selection-value {
   margin-left: 4px;
 }
-
-.facetwp-selections .facetwp-selection-value:last-child {
+.facetwp-selections .facetwp-selection-label + .facetwp-selection-value:last-child {
   margin-right: 0;
+}
+
+.facetwp-facet-reset {
+  display: inline-block;
+}
+.facetwp-facet-reset button.facetwp-reset {
+  border: none;
+  padding: 0.25rem 1rem;
+  border-radius: 3px;
 }
 
 .makersocials {

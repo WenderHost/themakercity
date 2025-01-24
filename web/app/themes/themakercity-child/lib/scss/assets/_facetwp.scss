@@ -29,32 +29,51 @@
 /* END Checkbox layout */
 
 
-.facetwp-selections ul {
+.facetwp-selections{
+  display: inline-block;
+
+  ul{
     margin: 0;
     padding: 0;
-}
 
-.facetwp-selections li {
-    display: inline-block;
-    margin: 0 6px 6px 0;
-    padding: 8px 10px;
-    list-style-type: none;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-}
+    li {
+      display: inline-block;
+      margin: 0 6px 6px 0;
+      padding: 8px 10px;
+      list-style-type: none;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }        
+  }
 
-.facetwp-selections .facetwp-selection-value {
+  .facetwp-selection-value {
     color: #6233ca;
+
+    &:hover{
+      text-decoration: underline;
+    }  
+  }
+
+  .facetwp-selection-label + .facetwp-selection-value {
+      margin-left: 4px;
+
+      &:last-child{
+        margin-right: 0;
+      }
+  }
+
+
 }
 
-.facetwp-selections .facetwp-selection-value:hover {
-    text-decoration: underline;
+
+
+.facetwp-facet-reset{
+  display: inline-block;
+
+  button.facetwp-reset{
+    border: none;
+    padding: .25rem 1rem;
+    border-radius: 3px;
+  }
 }
 
-.facetwp-selections .facetwp-selection-label + .facetwp-selection-value {
-    margin-left: 4px;
-}
-
-.facetwp-selections .facetwp-selection-value:last-child {
-    margin-right: 0;
-}
