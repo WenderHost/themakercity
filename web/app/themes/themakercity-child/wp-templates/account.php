@@ -1,7 +1,7 @@
 <?php
 use function TheMakerCity\utilities\get_alert;
 ?>
-<div class="card" style="max-width: 1200px;">
+<div class="card" style="max-width: 620px;">
   <div class="card-header bg-theme-dark text-white"><span class="fs-1 fw-bold">Your Account</span></div>
   <div class="card-body">
 <?php
