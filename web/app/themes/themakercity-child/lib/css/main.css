@@ -180,45 +180,32 @@ hr,
   margin-bottom: 20px !important;
 }
 
-/** with a basic grid **/
+/**
+ * Checkbox layout:
+ * - Desktop: 3 cols
+ * - Tablet: 2 cols
+ * - Mobile: 1 col
+ */
 .facetwp-type-checkboxes {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  column-count: 3;
+  column-gap: 20px; /* Adjust for spacing */
 }
 @media (max-width: 1024px) {
   .facetwp-type-checkboxes {
-    grid-template-columns: 1fr 1fr;
+    column-count: 2;
   }
 }
 @media (max-width: 520px) {
   .facetwp-type-checkboxes {
-    grid-template-columns: 1fr;
+    column-count: 1;
   }
 }
 
-/** with floats **/
-.facetwp-checkbox:nth-child(3n) {
-  float: right;
+.facetwp-checkbox {
+  break-inside: avoid;
 }
 
-.facetwp-checkbox:nth-child(3n+1) {
-  float: left;
-}
-
-.facetwp-checkbox:nth-child(3n+2) {
-  float: left; /* Adjust as needed */
-  clear: none; /* Adjust this as per your layout needs */
-}
-
-.facetwp-overflow {
-  clear: both;
-}
-
-.facetwp-toggle {
-  float: left;
-  clear: both;
-}
-
+/* END Checkbox layout */
 .facetwp-selections ul {
   margin: 0;
   padding: 0;
