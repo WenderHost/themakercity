@@ -12,9 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'wp_enqueue_scripts', function(){
+  // Remove unused scripts/styles
+  wp_dequeue_style('admin-bar');
+  wp_dequeue_script('admin-bar');
   wp_dequeue_style( 'hello-elementor' );
+
+  // Load AdmiKit
+  wp_enqueue_script( 'adminkit' );
   wp_enqueue_style( 'adminkit' );
 }, 99 );
+
+// Don't show admin bar
+add_filter('show_admin_bar', '__return_false');
 
 /**
  * Retrieve the URL of the current request:
