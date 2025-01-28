@@ -1,4 +1,6 @@
 <?php
+use function TheMakerCity\users\check_maker_profile_id;
+
 $current_user = wp_get_current_user();
 $avatar = get_avatar_url( $current_user->user_email, ['size' => 96] );
 $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
