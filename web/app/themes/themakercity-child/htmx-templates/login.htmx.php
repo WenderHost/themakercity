@@ -1,7 +1,7 @@
 <?php
 // No direct access.
 defined('ABSPATH') || exit('Direct access not allowed.');
-uber_log('👉 Attempting to LOGIN...');
+//uber_log('👉 Attempting to LOGIN...');
 // Check if nonce is valid.
 /*
 if ( ! isset( $_SERVER['HTTP_X_WP_NONCE'] ) || ! wp_verify_nonce( $_SERVER['HTTP_X_WP_NONCE'], 'hxwp_nonce' ) ) {
@@ -20,7 +20,7 @@ $email = ( is_array( $hxvals ) && array_key_exists( 'email', $hxvals ) && is_ema
 $password = ( is_array( $hxvals ) && array_key_exists( 'password', $hxvals ) )? $hxvals['password'] : null ;
 $remember_me = ( is_array( $hxvals) && array_key_exists( 'remember-me', $hxvals ) )? (bool) $hxvals['remember-me'] : false ;
 
-uber_log('👉 Received: ' . "\n\$email = $email");
+//uber_log('👉 Received: ' . "\n\$email = $email");
 
 $data = [];
 $user = wp_signon( [ 'user_login' => $email, 'user_password' => $password, 'remember' => $remember_me ] );
