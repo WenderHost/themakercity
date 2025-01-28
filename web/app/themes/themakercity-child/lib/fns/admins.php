@@ -8,6 +8,7 @@ namespace TheMakerCity\admins;
  * @param      int  $post_id  The Post ID
  */
 function notify_admin_new_maker_profile( int $post_id ):void {
+  uber_log('Attempting to notify admins...');
 
   if ( 'maker' == get_post_type( $post_id ) ) {
     // Prepare email data
@@ -19,7 +20,7 @@ function notify_admin_new_maker_profile( int $post_id ):void {
     $business_name = get_the_title( $post_id );
 
     $subject = 'New Maker Application for ' . $name;
-    $body = '<p>' . $name . ' &lt;<a href="mailto:' . $email . '">' . $email . '</a>&gt; has applied to be listed in the Maker Directory. <a href="' . get_permalink( $post_id ) .'">Click Here</a> to view this maker\'s profile for ' . $business_name . '.</p><p>To approve the maker, simply "Publish" their profile. Then the system will make their profile live, setup their login, and send the maker an email.</p>';
+    $body = '<p>' . $name . ' &lt;<a href="mailto:' . $email . '">' . $email . '</a>&gt; has applied to be listed in the Maker Directory. <a href="' . get_permalink( $post_id ) .'">Click Here</a> to view this maker\'s profile for "<em>' . $business_name . '</em>".</p><p>To approve the maker, simply "Publish" their profile. Then the system will make their profile live, setup their login, and send the maker an email.</p>';
     $headers = array('Content-Type: text/html; charset=UTF-8');
 
     // Get all admin emails
