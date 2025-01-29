@@ -44,3 +44,25 @@ function disable_acf_extended_on_profile() {
   }
 }
 add_action( 'template_redirect', __NAMESPACE__ . '\\disable_acf_extended_on_profile' );
+
+
+function profile_faq( $field ){
+  ?>
+  <div class="accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button fs-6 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+         What type of image files can I upload?
+        </button>
+      </h2>
+
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#directory-steps">
+        <div class="accordion-body">
+          <p>Upload your images as JPG, GIF, or PNG files.</p><p>Note: The file type you choose varies depending on the type of image. For photographs, use JPG (it's a compression type made for photos by the Joint Photographic Experts Group, hence the name JPEG). For logos, GIF or PNG is great.</p><p>Try to keep your filesize bellow 150K for logos. Photos can be larger but we limit your uploads filesize to 2.5MB.</p>
+        </div><!-- .accordion-body -->
+      </div>
+    </div><!-- .accordion-item -->
+  </div>
+  <?php
+}
+add_action( 'acf/render_field/name=profile_faq', __NAMESPACE__ . '\\profile_faq' );
