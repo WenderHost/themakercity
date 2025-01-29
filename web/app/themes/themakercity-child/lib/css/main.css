@@ -310,6 +310,9 @@ hr,
 .maker-primary-image img {
   border: 2px solid #000;
 }
+.maker-primary-image.loop.logo.notsquare img, .maker-primary-image.logo.notsquare img {
+  object-fit: contain;
+}
 .maker-primary-image.loop img {
   width: 100%;
   height: 300px;
@@ -326,9 +329,6 @@ hr,
   padding-top: 100%;
   position: relative;
   overflow: hidden;
-}
-.maker-primary-image.square.notsquare img {
-  object-fit: contain;
 }
 .maker-primary-image.square.placeholder {
   padding-top: 0;

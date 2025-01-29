@@ -63,6 +63,7 @@ function maker_primary_image( $atts ){
   switch( $args['show'] ){
     case 'logo':
       $image = get_field( 'logo' );
+      $css_classes[] = 'logo';
       if( empty( $image ) )
         return '';
       break;
@@ -71,6 +72,7 @@ function maker_primary_image( $atts ){
       $gallery = get_field( 'additional_images' );
       if( is_array( $gallery ) ){
         $image = $gallery[0];
+        $css_classes[] = 'gallery';
       } else {
         $image = get_field( 'primary_image' );
       }      
@@ -79,12 +81,15 @@ function maker_primary_image( $atts ){
     case 'primary_image':
     default:
       $image = get_field( 'primary_image' );
+      $css_classes[] = 'primary';
       if( empty( $image ) ){
         $gallery = get_field( 'additional_images' );
         if( is_array( $gallery ) ){
           $image = $gallery[0];
+          $css_classes[] = 'gallery';
         } else {
           $image = get_field( 'logo' );
+          $css_classes[] = 'logo';
         }        
       }
       break;
