@@ -11,7 +11,7 @@
  */
 ?>
 <style>
-.alert{
+.alert-hide{
     display:none;
 }
 .alert.alert-success,.alert.alert-warning{

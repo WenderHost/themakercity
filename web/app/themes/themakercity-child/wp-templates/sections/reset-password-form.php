@@ -1,5 +1,5 @@
 <!-- START Reset Form -->
-<div class="alert" id="reset-message" role="alert">
+<div class="alert alert-hide" id="reset-message" role="alert">
   <div class="alert-message">Alert goes here...</div>
 </div>
 
@@ -24,7 +24,7 @@
   const resetMsgContainer = document.getElementById('reset-message');
   const resetMsgText = document.querySelector('#reset-message .alert-message');
   document.body.addEventListener('passwordReset', function(evt){
-    resetMsgContainer.classList.remove('alert-success','alert-danger');
+    resetMsgContainer.classList.remove('alert-success','alert-danger','alert-hide');
     resetMsgContainer.classList.add(evt.detail.css);
     resetMsgText.innerHTML = evt.detail.message;
   });
@@ -32,12 +32,12 @@
   const newAccountMsgContainer = document.getElementById('newAccount-message');
   const newAccountMsgText = document.querySelector('#newAccount-message .alert-message');
   document.body.addEventListener('newAccount', function(evt){
-    newAccountMsgContainer.classList.remove('alert-success','alert-danger');
+    newAccountMsgContainer.classList.remove('alert-success','alert-danger','alert-hide');
     newAccountMsgContainer.classList.add(evt.detail.css);
     newAccountMsgText.innerHTML = evt.detail.message;
     if( 'alert-success' == evt.detail.css ){
       setTimeout((evt) => {
-        newAccountMsgContainer.classList.remove('alert-success','alert-danger');
+        newAccountMsgContainer.classList.remove('alert-success','alert-danger','alert-hide');
         newAccountMsgText.innerHTML = '';
       }, 15000);
     }

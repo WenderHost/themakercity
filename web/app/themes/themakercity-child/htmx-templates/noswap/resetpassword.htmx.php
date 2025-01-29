@@ -18,7 +18,7 @@ $email = ( isset( $hxvals ) && array_key_exists( 'email', $hxvals ) )? $hxvals['
 if( $email ){
   $result = send_password_reset_email( $email );
   if( ! is_wp_error( $result ) ){
-    header( 'HX-Trigger: {"passwordReset":{"css":"alert-success", "message": "Check your inbox. We have sent an email with instructions for resetting your password."}}' );
+    header( 'HX-Trigger: {"passwordReset":{"css":"alert-success", "message": "Check your email. We have sent instructions for resetting your password.<br><br><strong>NOTE:</strong> If you don\'t see anyting in your Inbox, check your Spam."}}' );
   } else if( is_wp_error( $result ) ) {
     $data = array(
       'passwordReset' => array(
