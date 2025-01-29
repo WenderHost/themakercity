@@ -16,7 +16,7 @@ function maker_collaborator_note(){
       return '<div class="collaborator-note"><div class="collaborator-icon">c</div> <div>Open to Collaborating with Other Makers</div></div>';
     }
   } else {
-    return get_alert(['description' => 'The <code>[makercollaborator]</code> shortcode only works on Maker CPT pages.']);
+    return '<div class="collaborator-note"><div class="collaborator-icon">c</div> <div>Open to Collaborating with Other Makers</div></div>';
   }
 }
 add_shortcode( 'makercollaborator', __NAMESPACE__ . '\\maker_collaborator_note' );
