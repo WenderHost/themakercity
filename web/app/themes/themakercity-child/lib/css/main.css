@@ -324,9 +324,8 @@ hr,
   border: none;
 }
 .maker-primary-image.square {
-  border: 2px solid #000;
   width: 100%;
-  padding-top: 100%;
+  /*padding-top: 100%;*/
   position: relative;
   overflow: hidden;
 }
@@ -334,12 +333,16 @@ hr,
   padding-top: 0;
 }
 .maker-primary-image.square img {
-  border: none;
+  aspect-ratio: 1/1;
+  border: 2px solid #000;
+  /*
   position: absolute;
   top: 0;
   left: 0;
+  /**/
   width: 100%;
   height: 100%;
+  /**/
   object-fit: cover;
   object-position: center;
 }
