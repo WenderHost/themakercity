@@ -108,6 +108,20 @@ function maker_primary_image( $atts ){
   $img_srcset = esc_attr( wp_get_attachment_image_srcset( $attachment_id, $size ) );
   $img_sizes = wp_get_attachment_image_sizes( $attachment_id, $size );
 
+  // Get image metadata
+  $image_meta = wp_get_attachment_metadata( $attachment_id );
+
+  // Initialize the $is_square boolean
+  $is_square = false;
+
+  // Check if image metadata exists and contains width and height
+  if ( isset( $image_meta['width'], $image_meta['height'] ) ) {
+    $is_square = ( $image_meta['width'] === $image_meta['height'] );
+  }
+  if( ! $is_square )
+    $css_classes[] = 'notsquare';
+
+
   $collaborator_html = '';
   if( $show_collaborator ){
     $collaborator = get_field('collaborator');
