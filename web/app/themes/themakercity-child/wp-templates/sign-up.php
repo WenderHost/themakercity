@@ -76,8 +76,10 @@
               </div>
             </div><!-- .accordion-item -->
 
-
           </div><!-- .accordion -->
+            <div class="text-center mt-3">
+              <p class="lead"><a href="<?= home_url() ?>">&larr; Return to The Maker City</a>.</p>
+            </div>
         </div><!-- .col-md-6 -->
       </div>
     </div>
