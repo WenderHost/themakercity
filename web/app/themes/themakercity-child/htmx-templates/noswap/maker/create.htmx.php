@@ -109,7 +109,7 @@ if( $errors->has_errors() ){
   $json_response = [
     'createMaker' => [
       'css' => 'alert-success',
-      'message' => '<h2 class="fs-3 fw-bold">Thank You for Your Submission!</h2><p>We have received your Maker Profile submission. Please allow us time to review and approve your profile (<em>we\'re usually pretty fast, but give us a day or two just in case</em>). Once approved, we\'ll send you an email with the details.</p>',
+      'message' => '<h2 class="fs-3 fw-bold">Thank You for Your Submission!</h2><p>We have received your Maker Profile submission. Please allow us time to review and approve your profile (<em>we\'re usually pretty fast, but give us a day or two &endash; just in case</em>). Once approved, we\'ll send you an email with the details.</p>',
     ],
     'resetFilePond' => [],
   ];
