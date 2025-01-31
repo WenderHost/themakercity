@@ -112,8 +112,9 @@
             <textarea class="form-control" id="description" name="maker_description" rows="5"></textarea>
           </div>
           <div class="mb-3">
-            <label for="logo" class="form-label">Logo</label>
-            <input type="file" class="form-control filepond" name="maker_logo" accept="image/png, image/jpeg, image/gif" />
+            <label for="logo" class="form-label">Primary Image <span class="required">*</span></label>
+            <div class="form-text fs-5 mb-3 mt-1">Upload an image that best represents your craft or service.</div>
+            <input type="file" class="form-control filepond" name="maker_primary_image" accept="image/png, image/jpeg, image/gif" />
           </div>
           <div class="mb-3 mt-3">
             <p><strong>PLEASE NOTE:</strong></br>This form simply gets your Maker profile started. Once your account is created, you'll be able to add website links, social media profiles, product photos, headshots, and more.</p>

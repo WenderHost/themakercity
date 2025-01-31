@@ -48,8 +48,8 @@ function create_maker_cpt( $maker = array() ){
     }
 
     // Step 4: Set the post thumbnail
-    if( ! empty( $maker['logo'] ) ){
-      $attach_id = upload_and_set_acf_image_field( $post_id, $maker['logo'], 'logo') ;
+    if( ! empty( $maker['primary_image'] ) ){
+      $attach_id = upload_and_set_acf_image_field( $post_id, $maker['primary_image'], 'primary_image') ;
       if ( is_wp_error( $attach_id ) ) {
         return $attach_id; // Return the error
       }

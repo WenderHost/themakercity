@@ -102,6 +102,33 @@
             "bidirectional_target": []
         },
         {
+            "key": "field_657a265931aee",
+            "label": "Primary Image",
+            "name": "primary_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "<strong>Your Primary Image shows for your search result and next to your information on your Maker Profile. If you leave this option empty, we'll default to the first image in your gallery below.<\/strong>",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "return_format": "array",
+            "library": "uploadedTo",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": 2,
+            "mime_types": "jpg,png,gif",
+            "allow_in_bindings": 1,
+            "preview_size": "medium"
+        },
+        {
             "key": "field_679022da5037f",
             "label": "Logo",
             "name": "logo",
@@ -126,44 +153,11 @@
             "max_size": 2,
             "mime_types": "jpg,png,gif",
             "allow_in_bindings": 1,
-            "preview_size": "medium",
-            "uploader": "",
-            "acfe_thumbnail": 0,
-            "upload_folder": ""
-        },
-        {
-            "key": "field_657a265931aee",
-            "label": "Primary Image",
-            "name": "primary_image",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "<strong>This image lets you control what will show for your search result and next to your information on your Maker Profile. If you leave this option empty, we'll default to the first image in your gallery below.<\/strong>",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "33",
-                "class": "",
-                "id": ""
-            },
-            "relevanssi_exclude": 0,
-            "return_format": "array",
-            "library": "uploadedTo",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": 2,
-            "mime_types": "jpg,png,gif",
-            "allow_in_bindings": 1,
-            "preview_size": "medium",
-            "uploader": "",
-            "acfe_thumbnail": 0,
-            "upload_folder": ""
+            "preview_size": "medium"
         },
         {
             "key": "field_65bbe72aa5155",
-            "label": "Headshot (Optional)",
+            "label": "Headshot",
             "name": "avatar",
             "aria-label": "",
             "type": "image",
@@ -186,10 +180,7 @@
             "max_size": 2,
             "mime_types": "jpg,png,gif",
             "allow_in_bindings": 1,
-            "preview_size": "medium",
-            "uploader": "",
-            "acfe_thumbnail": 0,
-            "upload_folder": ""
+            "preview_size": "medium"
         },
         {
             "key": "field_657a37edf61a7",
@@ -266,7 +257,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "75",
+                "width": "100",
                 "class": "",
                 "id": ""
             },
@@ -278,7 +269,6 @@
             "collapsed": "",
             "button_label": "Add Row",
             "rows_per_page": 20,
-            "acfe_repeater_stylised_button": 0,
             "sub_fields": [
                 {
                     "key": "field_657a256324971",
@@ -560,12 +550,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfe_autosync": [
-        "json"
-    ],
-    "acfe_form": 0,
-    "acfe_display_title": "",
-    "acfe_meta": "",
-    "acfe_note": "",
-    "modified": 1738189803
+    "modified": 1738360382
 }

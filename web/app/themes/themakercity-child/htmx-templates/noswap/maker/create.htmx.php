@@ -21,11 +21,11 @@ use function TheMakerCity\makercpt\{create_maker_cpt,maker_email_exists};
  *
  * @var        array
  */
-$maker_vars = array( 'business_name', 'name', 'email', 'collaborator', 'categories',  'description', 'logo' );
+$maker_vars = array( 'business_name', 'name', 'email', 'collaborator', 'categories',  'description', 'primary_image' );
 foreach( $maker_vars as $key ){
   switch( $key ){
-    case 'logo':
-      $maker['logo'] = ( isset( $_FILES['maker_logo'] ) ) ? $_FILES['maker_logo'] : null ;
+    case 'primary_image':
+      $maker['primary_image'] = ( isset( $_FILES['maker_primary_image'] ) ) ? $_FILES['maker_primary_image'] : null ;
       break;
 
     default:

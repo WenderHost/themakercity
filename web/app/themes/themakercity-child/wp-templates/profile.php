@@ -31,6 +31,8 @@ if( empty( $maker_profile_id ) )
 
           </div>
           <div class="card-body">
+            <?= get_alert([ 'type' => 'info', 'description' => '<strong>REMINDER:</strong> Be sure to click <strong>Update</strong> at either the top/bottom of this page to <strong>Save</strong> your edits.' ]); ?>
+            <p><span class="acf-required">*</span> indicates a required field.</p>
         <?php
         if( $current_user ){
 
@@ -40,7 +42,7 @@ if( empty( $maker_profile_id ) )
             'html_updated_message'  => get_alert([ 'description' => '%s', 'type' => 'success' ]),
             'html_submit_button'    => '<div class="d-grid mt-3"><button type="submit" class="btn btn-primary fw-bold fs-3">%s</button></div>',
             'instruction_placement' => 'field',
-            'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'profile_faq', 'logo', 'primary_image', 'avatar', 'additional_images', 'description', 'social_profiles', 'show_location', 'business_address', ],
+            'fields'  => [ 'name', 'email', 'collaborator', 'maker_category', 'profile_faq', 'primary_image', 'logo', 'avatar', 'additional_images', 'description', 'social_profiles', 'show_location', 'business_address', ],
             'form'                  => false,
           ];
 
