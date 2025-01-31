@@ -35,15 +35,31 @@ if( 'success' == $status ){
   $err_codes = $user->get_error_codes();
   uber_log('$err_codes = ' . print_r( $err_codes,true ) );
   $errors = [];
-  if ( in_array( 'invalid_email', $err_codes ) || in_array( 'empty_username', $err_codes ) ) {
-    $errors[] = 'Check your username. Is it a valid email address?';
+
+  foreach( $err_codes as $error_code ){
+    switch( $error_code ){
+      case 'invalid_email':
+      case 'empty_username':
+        $errors[] = 'Check your username. Is it a valid email address?';
+        break;
+
+      case 'invalid_username':
+        $errors[] = 'Invalid username.';
+        break;
+
+      case 'incorrect_password':
+        $errors[] = 'Please check your password.';
+        break;
+
+      case 'too_many_retries':
+        $errors[] = 'You have made too many attempts. Please try again in 5 or so minutes.';
+        break;
+
+      default:
+        $errors[] = 'Unknown error (code: <code>' . $error_code . '</code>).';
+    }
   }
-  if ( in_array( 'invalid_username', $err_codes ) ) {
-    $errors[] = 'Invalid username.';
-  }
-  if ( in_array( 'incorrect_password', $err_codes ) ) {
-    $errors[] = 'Please check your password.';
-  }
+
   $data['message'] = '<p>Please correct the following errors:</p> <ul><li>' . implode('</li><li>', $errors ) . '</li></ul>';
   ?>
 <div class="alert alert-warning" id="login-message" role="alert">
