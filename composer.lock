@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "deeeed3bc98b9f5b13b52c5bfaa8fc33",
+    "content-hash": "3c13b0e338ca439e428f62f8a29221f0",
     "packages": [
         {
             "name": "composer/installers",
@@ -1479,6 +1479,24 @@
             "homepage": "https://wordpress.org/plugins/simple-page-ordering/"
         },
         {
+            "name": "wpackagist-plugin/smtp2go",
+            "version": "1.11.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/smtp2go/",
+                "reference": "tags/1.11.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/smtp2go.1.11.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/smtp2go/"
+        },
+        {
             "name": "wpackagist-plugin/spinupwp",
             "version": "1.7.1",
             "source": {
@@ -1531,24 +1549,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-importer/"
-        },
-        {
-            "name": "wpackagist-plugin/wp-change-default-from-email",
-            "version": "1.1.6",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-change-default-from-email/",
-                "reference": "tags/1.1.6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-change-default-from-email.1.1.6.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-change-default-from-email/"
         },
         {
             "name": "wpackagist-theme/hello-elementor",
