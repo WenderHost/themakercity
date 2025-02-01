@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c13b0e338ca439e428f62f8a29221f0",
+    "content-hash": "c38ee970fa38283e320c4976dc33370d",
     "packages": [
         {
             "name": "composer/installers",
@@ -1191,6 +1191,27 @@
             ],
             "description": "Customize WordPress with powerful, professional and intuitive fields.",
             "homepage": "https://www.advancedcustomfields.com"
+        },
+        {
+            "name": "wenmark/analyticswp",
+            "version": "2.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/analyticswp/2.0.0",
+                "shasum": "2319deffdb6ad8f87c44086a6d6f2b78593837ad"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": [
+                {
+                    "name": "Solid Plugins",
+                    "homepage": "https://www.analyticswp.com/"
+                }
+            ],
+            "description": "AnalyticsWP. Analytics for WordPress.",
+            "homepage": "https://www.analyticswp.com/"
         },
         {
             "name": "wenmark/elementor-pro",
