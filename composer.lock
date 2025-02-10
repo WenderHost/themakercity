@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c38ee970fa38283e320c4976dc33370d",
+    "content-hash": "e91871c20bac31ab890bb08f362bb5fc",
     "packages": [
         {
             "name": "composer/installers",
@@ -1428,6 +1428,24 @@
             "homepage": "https://wordpress.org/plugins/gf-salesforce-crmperks/"
         },
         {
+            "name": "wpackagist-plugin/host-analyticsjs-local",
+            "version": "4.8.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/host-analyticsjs-local/",
+                "reference": "tags/4.8.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/host-analyticsjs-local.4.8.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/host-analyticsjs-local/"
+        },
+        {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
             "version": "2.26.16",
             "source": {
@@ -2631,6 +2649,6 @@
     "platform": {
         "php": ">=8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

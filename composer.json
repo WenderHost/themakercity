@@ -88,7 +88,8 @@
     "wpackagist-plugin/user-switching": "^1.8",
     "wpackagist-plugin/api-for-htmx": "^1.0",
     "wpackagist-plugin/smtp2go": "^1.11",
-    "wenmark/analyticswp": "^2.0"
+    "wenmark/analyticswp": "^2.0",
+    "wpackagist-plugin/host-analyticsjs-local": "^4.8"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
