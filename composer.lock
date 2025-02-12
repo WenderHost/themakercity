@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e91871c20bac31ab890bb08f362bb5fc",
+    "content-hash": "46517fdbab729c46f4bbe55a928174ac",
     "packages": [
         {
             "name": "composer/installers",
@@ -1588,6 +1588,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-importer/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-security-audit-log",
+            "version": "5.3.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-security-audit-log/",
+                "reference": "tags/5.3.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-security-audit-log.5.3.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-security-audit-log/"
         },
         {
             "name": "wpackagist-theme/hello-elementor",
