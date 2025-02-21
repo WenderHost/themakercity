@@ -198,8 +198,8 @@ function custom_login_redirect( $redirect_to, $request, $user ) {
   if ( isset( $user->roles ) && is_array( $user->roles ) ) {
     // Check if the user has the 'maker' role
     if ( in_array( 'maker', $user->roles ) ) {
-      // Redirect them to the '/profile/' page
-      return home_url( '/profile/' );
+      // Redirect them to the '/profile-editor/' page
+      return home_url( '/profile-editor/' );
     } else {
       // Otherwise, return the default redirect_to location
       return $redirect_to;

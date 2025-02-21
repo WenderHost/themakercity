@@ -18,7 +18,7 @@ add_shortcode( 'profile_button_text', __NAMESPACE__ . '\\get_profile_button_text
  */
 function get_profile_links(){
   if( is_user_logged_in() ){
-    $links = '<a href="' . home_url( '/profile/' ) . '">Edit Your Profile</a> &bull; <a href="' . wp_logout_url( home_url() ) . '">Log Out</a>';
+    $links = '<a href="' . home_url( '/profile-editor/' ) . '">Edit Your Profile</a> &bull; <a href="' . wp_logout_url( home_url() ) . '">Log Out</a>';
   } else {
     $links = '<a href="' . home_url( '/sign-in/' ) . '">Maker Log In</a>';
   }

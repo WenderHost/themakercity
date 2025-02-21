@@ -29,8 +29,8 @@ $action = ( 'success' == $status )? 'loginSuccess' : 'loginFail' ;
 
 if( 'success' == $status ){
   //$data['message'] =  'Success! You\'re logged in. Redirecting...' ;
-  //$data['redirect_url'] = home_url( '/profile/' );
-  header('HX-Redirect: ' . home_url( '/profile/' ) );
+  //$data['redirect_url'] = home_url( '/profile-editor/' );
+  header('HX-Redirect: ' . home_url( '/profile-editor/' ) );
 } elseif( is_wp_error( $user ) ) {
   $err_codes = $user->get_error_codes();
   uber_log('$err_codes = ' . print_r( $err_codes,true ) );

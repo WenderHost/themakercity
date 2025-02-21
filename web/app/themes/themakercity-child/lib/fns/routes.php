@@ -16,7 +16,7 @@ namespace TheMakerCity\routes;
  */
 $custom_routes = [
   0 => [
-    'slug'          => 'profile',
+    'slug'          => 'profile-editor',
     'template'      => 'dashboard',
     'auth_required' => true,
     'title'         => 'My Profile',

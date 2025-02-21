@@ -32,7 +32,7 @@ $business_name = get_the_title( $maker_profile_id );
         $profile_permalink = get_permalink( $maker_profile_id );
       ?>
       <li class="sidebar-item<?php if( strpos( $_SERVER['REQUEST_URI'], 'profile' ) ){ echo ' active'; } ?>">
-        <a class="sidebar-link" href="<?= home_url( 'profile' ) ?>">
+        <a class="sidebar-link" href="<?= home_url( 'profile-editor' ) ?>">
           <i class="align-middle fas fa-user"></i> <span class="align-middle">Your Profile</span>
         </a>
       </li>

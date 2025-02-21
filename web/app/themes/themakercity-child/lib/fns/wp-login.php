@@ -20,7 +20,7 @@ add_action( 'login_enqueue_scripts', __NAMESPACE__ . '\\custom_login_logo' );
 function custom_login_redirect( $redirect_to, $request, $user ) {
   // Specify the default URL to redirect to after login.
   // Replace 'http://www.yourwebsite.com/custom-dashboard' with your desired URL.
-  $custom_redirect_url = home_url( '/profile/'); //'http://www.yourwebsite.com/custom-dashboard';
+  $custom_redirect_url = home_url( '/profile-editor/'); //'http://www.yourwebsite.com/custom-dashboard';
 
   // Security check to verify if $user is a WP_User object.
   // If there's no user, or if logging in failed, don't change the redirect.
