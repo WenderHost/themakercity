@@ -52,7 +52,7 @@ function profile_faq( $field ){
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingOne">
         <button class="accordion-button fs-6 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-         What type of image files can I upload?
+         <i class="fas fa-image" style="margin-right: 8px;"></i> What type of image files can I upload?
         </button>
       </h2>
 
@@ -62,6 +62,22 @@ function profile_faq( $field ){
         </div><!-- .accordion-body -->
       </div>
     </div><!-- .accordion-item -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button fs-6 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+         <i class="fas fa-hand" style="margin-right: 8px;"></i> Help! "Add to gallery" isn't working.
+        </button>
+      </h2>
+
+      <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#directory-steps">
+        <div class="accordion-body">
+          <p> Our webmaster is gathering details of affected user's systems so we can better diagnose and fix this issue. If the "Add to gallery" button isn't working, share your browser/OS details with our webmaster by clicking this button:</p>
+          <button class="btn btn-primary" type="button" id="send-system-info">Share Your System Info</button>
+          <p id="status"></p>
+          <p>NOTE: You only need to send your details once. Please allow our webmaster time to process your info and work on a solution.</p>
+        </div><!-- .accordion-body -->
+      </div>
+    </div><!-- .accordion-item -->    
   </div>
   <?php
 }

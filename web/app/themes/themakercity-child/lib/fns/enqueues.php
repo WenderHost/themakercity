@@ -20,10 +20,19 @@ function enqueue_scripts_styles() {
 
   wp_enqueue_script( 'global', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/global.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/global.js' ), true );
 
+  wp_register_script( 'systeminfo', MAKR_STYLESHEET_DIR_URI . 'lib/js/scripts/system-info.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/scripts/system-info.js') );
+  $wpvars = array(
+    'ajax_url'    => admin_url( 'admin-ajax.php' ),
+    'user_email'  => null,
+  );
+  $current_user = wp_get_current_user();
+  if( $current_user )
+    $wpvars['user_email'] = $current_user->user_email;
+  wp_localize_script( 'systeminfo', 'wpvars', $wpvars );
+
   wp_register_style( 'filepond', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/filepond.init.css', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/filepond.init.css' ) );
   //wp_register_script( 'filepond', 'https://unpkg.com/filepond@^4/dist/filepond.js' );
   wp_register_script( 'filepond-init', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/filepond.init.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/filepond.init.js' ), true );
-
 }
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts_styles', 20 );
 

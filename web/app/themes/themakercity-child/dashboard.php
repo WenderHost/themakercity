@@ -20,6 +20,8 @@ add_action( 'wp_enqueue_scripts', function(){
   // Load AdmiKit
   wp_enqueue_script( 'adminkit' );
   wp_enqueue_style( 'adminkit' );
+
+  wp_enqueue_script( 'systeminfo' );
 }, 99 );
 
 // Don't show admin bar

@@ -287,3 +287,43 @@ function custom_save_maker_post( $post_id ) {
   }
 }
 add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
+
+function send_system_info_handler() {
+  
+    // Get JSON payload
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    $response = array();
+    $response['message'] = '';
+    $response['status'] = '';
+
+    if( $data ) {
+      $to = 'mwender@wenmarkdigital.com'; //get_option('admin_email'); // Send to site admin email
+      $subject = "New System Info Report [{$data['user_email']}]";
+      
+      $message = "System Information Report for {$data['user_email']}:\n\n";
+      $message .= "<strong>IP Address:</strong> " . sanitize_text_field($data['ip']) . "\n";
+      $message .= "<strong>Browser:</strong> " . sanitize_text_field($data['browser']) . "\n";
+      $message .= "<strong>Operating System:</strong> " . sanitize_text_field($data['os']) . "\n";
+      $message .= "<strong>Screen Resolution:</strong> " . sanitize_text_field($data['screenResolution']) . "\n";
+      
+      $headers = ["Content-Type: text/html; charset=UTF-8"];
+      
+      if( wp_mail( $to, $subject, $message, $headers ) ) {
+        $response['status'] = "success";
+        wp_send_json( $response, 200 );
+      } else {
+        $response['status'] = 'error';
+        $response['message'] = 'Error sending email.';
+        wp_send_json( $response, 500 );
+      }
+    } else {
+      $response['status'] = 'error';
+      $response['message'] = 'No data received.';
+      wp_send_json( $response, 400 );
+    }
+    
+    wp_die();
+}
+add_action('wp_ajax_send_system_info', __NAMESPACE__ . '\\send_system_info_handler');
+add_action('wp_ajax_nopriv_send_system_info', __NAMESPACE__ . '\\send_system_info_handler');
