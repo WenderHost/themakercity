@@ -3,10 +3,7 @@
   </div><!-- .wrapper -->
 
 
-  <?php 
-  acf_enqueue_uploader();
-  wp_footer(); 
-  ?>
+  <?php wp_footer(); ?>
 </body>
 
 </html>
