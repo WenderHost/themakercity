@@ -15,6 +15,55 @@ function add_user_date_created_column( $columns ) {
 add_filter( 'manage_users_columns', __NAMESPACE__ . '\\add_user_date_created_column' );
 
 /**
+ * Grants the 'upload_files' capability to the 'subscriber' and 'maker' roles.
+ *
+ * This function checks if the 'subscriber' and 'maker' roles exist and whether 
+ * they already have the 'upload_files' capability. If not, the capability is 
+ * added, allowing users with these roles to upload media files.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function allow_upload_files_for_roles() {
+  $roles = array( 'subscriber', 'maker' );
+
+  foreach ( $roles as $role_name ) {
+    $role = get_role( $role_name );
+
+    if ( $role && ! $role->has_cap( 'upload_files' ) ) {
+      $role->add_cap( 'upload_files' );
+    }
+  }
+}
+//add_action( 'init', __NAMESPACE__ . '\\allow_subscribers_to_upload_files' );
+
+/**
+ * Redirects 'subscriber' and 'maker' users away from the WordPress admin area.
+ *
+ * If a user with the 'subscriber' or 'maker' role attempts to access the 
+ * admin dashboard, they are redirected to the '/profile-editor/' page. 
+ * This restriction does not apply to AJAX requests.
+ *
+ * @since 1.0.0
+ *
+ * @return void
+ */
+function redirect_limited_roles_from_admin() {
+  if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+    $user = wp_get_current_user();
+    
+    // Check if the user is a 'subscriber' or 'maker'
+    $restricted_roles = array( 'subscriber', 'maker' );
+    if ( array_intersect( $restricted_roles, (array) $user->roles ) ) {
+      wp_redirect( home_url( '/profile-editor/' ) );
+      exit;
+    }
+  }
+}
+add_action( 'admin_init', __NAMESPACE__ . '\\redirect_limited_roles_from_admin' );
+
+/**
  * Checks and retrieves the current user's Maker profile ID.
  *
  * This function retrieves the `maker_profile_id` user meta for the current user.
