@@ -1,5 +1,6 @@
 <?php
 namespace TheMakerCity\acf;
+use function TheMakerCity\utilities\get_alert;
 
 /**
  * Sets the Google Maps API key for ACF Google Map fields.
@@ -71,7 +72,8 @@ function profile_faq( $field ){
 
       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#directory-steps">
         <div class="accordion-body">
-          <p> Our webmaster is gathering details of affected user's systems so we can better diagnose and fix this issue. If the "Add to gallery" button isn't working, share your browser/OS details with our webmaster by clicking this button:</p>
+          <?= get_alert(['type' => 'success', 'description' => '<strong>02/22/2025 (07:55) - Update:</strong> This feature should be working now. We fixed a setting which was preventing all users from uploading images. Apologies for the inconvenience. ~The Maker City Webmaster']) ?>
+          <p>Our webmaster is gathering details of affected user's systems so we can better diagnose and fix this issue. If the "Add to gallery" button isn't working, share your browser/OS details with our webmaster by clicking this button:</p>
           <button class="btn btn-primary" type="button" id="send-system-info">Share Your System Info</button>
           <p id="status"></p>
           <p>NOTE: You only need to send your details once. Please allow our webmaster time to process your info and work on a solution.</p>
