@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e6275dc1520f021f425802926a0b695",
+    "content-hash": "aac3deefa4bbe898ff56dd2e549c2e66",
     "packages": [
         {
             "name": "composer/installers",
@@ -1426,6 +1426,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/enhanced-user-search/"
+        },
+        {
+            "name": "wpackagist-plugin/export-wp-users-xml-csv",
+            "version": "1.0.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/export-wp-users-xml-csv/",
+                "reference": "tags/1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/export-wp-users-xml-csv.1.0.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/export-wp-users-xml-csv/"
         },
         {
             "name": "wpackagist-plugin/gf-salesforce-crmperks",

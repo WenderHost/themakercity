@@ -92,7 +92,8 @@
     "wpackagist-plugin/host-analyticsjs-local": "^4.8",
     "wpackagist-plugin/wp-security-audit-log": "^5.3",
     "wpackagist-plugin/enhanced-user-search": "^1.0",
-    "wpackagist-plugin/wp-all-export": "^1.4"
+    "wpackagist-plugin/wp-all-export": "^1.4",
+    "wpackagist-plugin/export-wp-users-xml-csv": "^1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
