@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aeaa14ce616673f9cc58951e8cd4550b",
+    "content-hash": "3e6275dc1520f021f425802926a0b695",
     "packages": [
         {
             "name": "composer/installers",
@@ -1410,6 +1410,24 @@
             "homepage": "https://wordpress.org/plugins/elementor/"
         },
         {
+            "name": "wpackagist-plugin/enhanced-user-search",
+            "version": "1.0.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/enhanced-user-search/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/enhanced-user-search.zip?timestamp=1714409445"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/enhanced-user-search/"
+        },
+        {
             "name": "wpackagist-plugin/gf-salesforce-crmperks",
             "version": "1.4.7",
             "source": {
@@ -1588,6 +1606,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-importer/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-all-export",
+            "version": "1.4.10",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-all-export/",
+                "reference": "tags/1.4.10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-all-export.1.4.10.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-all-export/"
         },
         {
             "name": "wpackagist-plugin/wp-security-audit-log",
