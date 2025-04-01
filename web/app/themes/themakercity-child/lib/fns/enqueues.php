@@ -33,6 +33,8 @@ function enqueue_scripts_styles() {
   wp_register_style( 'filepond', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/filepond.init.css', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/filepond.init.css' ) );
   //wp_register_script( 'filepond', 'https://unpkg.com/filepond@^4/dist/filepond.js' );
   wp_register_script( 'filepond-init', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/filepond.init.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/filepond.init.js' ), true );
+
+  wp_register_script( 'htmx-local', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/htmx.min.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/htmx.min.js' ) );
 }
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\\enqueue_scripts_styles', 20 );
 
