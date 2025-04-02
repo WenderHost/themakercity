@@ -108,7 +108,7 @@
             "aria-label": "",
             "type": "image",
             "instructions": "<strong>Your Primary Image shows for your search result and next to your information on your Maker Profile. If you leave this option empty, we'll default to the first image in your gallery below.<\/strong>",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "33",
@@ -121,7 +121,6 @@
             "library": "uploadedTo",
             "upload_folder": "",
             "acfe_thumbnail": 0,
-            "required_message": "",
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -568,5 +567,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1743624101
+    "modified": 1743625009
 }
