@@ -278,6 +278,7 @@
             "collapsed": "",
             "button_label": "Add Row",
             "rows_per_page": 20,
+            "acfe_repeater_stylised_button": 0,
             "sub_fields": [
                 {
                     "key": "field_657a256324971",
@@ -300,22 +301,25 @@
                         "etsy": "Etsy",
                         "twitter": "Twitter\/X",
                         "website": "Website",
-                        "email": "Email",
                         "youtube": "YouTube"
                     },
                     "default_value": false,
                     "return_format": "value",
                     "multiple": 0,
+                    "max": "",
+                    "prepend": "",
+                    "append": "",
+                    "required_message": "",
                     "allow_null": 0,
+                    "allow_in_bindings": 1,
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
                     "allow_custom": 0,
                     "search_placeholder": "",
-                    "prepend": "",
-                    "append": "",
                     "min": "",
-                    "max": "",
                     "parent_repeater": "field_657a25432ce62"
                 },
                 {
@@ -336,8 +340,7 @@
                     "placeholder": "",
                     "parent_repeater": "field_657a25432ce62"
                 }
-            ],
-            "acfe_repeater_stylised_button": 0
+            ]
         },
         {
             "key": "field_657b6e74e3c0a",
@@ -418,7 +421,9 @@
                     "append": "",
                     "min": "",
                     "max": "",
-                    "parent_repeater": "field_657b6e9d6a34e"
+                    "parent_repeater": "field_657b6e9d6a34e",
+                    "create_options": 0,
+                    "save_options": 0
                 },
                 {
                     "key": "field_657b6eea6a350",
@@ -520,7 +525,7 @@
             "acfe_google_map_style": "",
             "acfe_google_map_key": "AIzaSyByvEXXQZiFVi0yUAExuARB2JVA678nO-A",
             "allow_in_bindings": 1,
-            "zoom": 10,
+            "zoom": "10",
             "acfe_google_map_marker_height": 50
         },
         {
@@ -567,5 +572,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1743625009
+    "modified": 1750173498
 }
