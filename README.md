@@ -8,7 +8,7 @@ This is the repository for [The Maker City](https://themakercity.org) website. B
 
 ## Changelog
 
-### [1.0.1]
+### [1.0.1] - 2025-06-20
 - Updated `README.md` with a changelog reflecting this repository.
 - Added "TikTok" as an option for "Maker Profile > Social Profiles".
 - Removed "Email" option from "Maker Profile > Social Profiles".
