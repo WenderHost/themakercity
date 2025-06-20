@@ -300,6 +300,7 @@
                         "instagram": "Instagram",
                         "etsy": "Etsy",
                         "twitter": "Twitter\/X",
+                        "tiktok": "TikTok",
                         "website": "Website",
                         "youtube": "YouTube"
                     },
@@ -572,5 +573,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1750173498
+    "modified": 1750425942
 }

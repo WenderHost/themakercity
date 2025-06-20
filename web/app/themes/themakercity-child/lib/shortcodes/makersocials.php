@@ -18,7 +18,11 @@ function maker_social_icons( $atts ){
       if( 'website' == $platform )
         $platform = 'earth-americas';
       $link = get_sub_field('link');
-      $links[] = '<a href="' . $link . '" target="_blank" title="' . esc_attr( get_the_title( $post ) . ' on ' . ucfirst( $platform ) ) . '"><icon class="fa fa-xl fa-' . $platform . '"></icon></a>';
+      
+      $fa_css_classes = 'fa fa-xl fa-' . $platform;
+      if( in_array( $platform, [ 'tiktok'] ) )
+        $fa_css_classes.= ' fa-brands';
+      $links[] = '<a href="' . $link . '" target="_blank" title="' . esc_attr( get_the_title( $post ) . ' on ' . ucfirst( $platform ) ) . '"><icon class="' . $fa_css_classes . '"></icon></a>';
     endwhile;
   endif;
   $email = get_field( 'email' );
