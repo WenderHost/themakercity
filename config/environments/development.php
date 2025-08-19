@@ -23,4 +23,5 @@ Config::define('DISABLED_PLUGINS', [
     'spinupwp/spinupwp.php',
     'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php',
     'smtp2go/smtp2go-wordpress-plugin.php',
+    'analyticswp/analyticswp.php',
 ]);
