@@ -24,4 +24,6 @@ Config::define('DISABLED_PLUGINS', [
     'limit-login-attempts-reloaded/limit-login-attempts-reloaded.php',
     'smtp2go/smtp2go-wordpress-plugin.php',
     'analyticswp/analyticswp.php',
+    'export-wp-users-xml-csv/plugin.php',
+    'wp-all-export/wp-all-export.php',
 ]);
