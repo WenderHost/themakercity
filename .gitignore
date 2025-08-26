@@ -38,5 +38,6 @@ web/.htaccess
 # WP-CLI
 wp-cli.local.yml
 
-# Sublime Text
+# Misc
 *.sublime-*
+web/.valetrc
