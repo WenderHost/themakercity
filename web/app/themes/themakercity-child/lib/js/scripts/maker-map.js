@@ -3,7 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const mapElement = document.getElementById(mapId);
   if (!mapElement) return;
 
-  // Map options
+  // Map config
+  const MAX_SINGLE_MARKER_ZOOM = 14;
+
   const mapOptions = {
     zoom: 12,
     center: { lat: 35.9606, lng: -83.9207 },
@@ -54,6 +56,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (makers.length > 0) {
       map.fitBounds(bounds);
+
+      // ✅ Cap zoom if only one marker is visible
+      if (makers.length === 1) {
+        google.maps.event.addListenerOnce(map, "bounds_changed", function () {
+          if (map.getZoom() > MAX_SINGLE_MARKER_ZOOM) {
+            map.setZoom(MAX_SINGLE_MARKER_ZOOM);
+          }
+        });
+      }
+
       clusterer = new markerClusterer.MarkerClusterer({ map, markers });
     }
   }
