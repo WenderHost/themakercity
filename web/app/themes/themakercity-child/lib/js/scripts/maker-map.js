@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Builds the filter UI dynamically from maker-filters.
+   * Builds the filter UI dynamically from maker-filters as checkboxes.
    * @param {Array} filters
    */
   function buildFilterUI(filters) {
@@ -72,30 +72,64 @@ document.addEventListener("DOMContentLoaded", function () {
       wrapper.appendChild(mapElement);
     }
 
-    // Create dropdown
-    const select = document.createElement("select");
-    select.classList.add("maker-map-filter");
-    select.innerHTML = `<option value="all">All Maker Spaces</option>`;
+    // Create filters container
+    const filterContainer = document.createElement("div");
+    filterContainer.classList.add("maker-map-filters");
+    filterContainer.innerHTML = `<strong>Filter by:</strong>`;
 
+    // "Show All" checkbox
+    const allLabel = document.createElement("label");
+    allLabel.classList.add("maker-filter-item");
+    const allCheckbox = document.createElement("input");
+    allCheckbox.type = "checkbox";
+    allCheckbox.value = "all";
+    allCheckbox.checked = true;
+    allLabel.appendChild(allCheckbox);
+    allLabel.append(" All Maker Spaces");
+    filterContainer.appendChild(allLabel);
+
+    // Individual filter checkboxes
     filters.forEach((filter) => {
-      const option = document.createElement("option");
-      option.value = filter.slug;
-      option.textContent = filter.name;
-      select.appendChild(option);
+      const label = document.createElement("label");
+      label.classList.add("maker-filter-item");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = filter.slug;
+      checkbox.checked = false;
+      label.appendChild(checkbox);
+      label.append(` ${filter.name}`);
+      filterContainer.appendChild(label);
     });
 
-    wrapper.insertBefore(select, mapElement);
+    wrapper.insertBefore(filterContainer, mapElement);
 
-    // Handle change event
-    select.addEventListener("change", (e) => {
-      const selected = e.target.value;
-      if (selected === "all") {
+    // Checkbox change handling
+    filterContainer.addEventListener("change", (e) => {
+      const checkboxes = filterContainer.querySelectorAll('input[type="checkbox"]');
+      const selected = Array.from(checkboxes)
+        .filter((cb) => cb.checked && cb.value !== "all")
+        .map((cb) => cb.value);
+
+      // If "All" is selected or no filters are checked, show all makers
+      if (e.target.value === "all" && e.target.checked) {
+        checkboxes.forEach((cb) => {
+          if (cb.value !== "all") cb.checked = false;
+        });
         renderMarkers(allMakers);
-      } else {
+        return;
+      }
+
+      // If any individual filters are selected, uncheck "All"
+      if (selected.length > 0) {
+        allCheckbox.checked = false;
         const filtered = allMakers.filter((maker) =>
-          maker.categories.includes(selected)
+          selected.some((slug) => maker.categories.includes(slug))
         );
         renderMarkers(filtered);
+      } else {
+        // No filters selected, show all again
+        allCheckbox.checked = true;
+        renderMarkers(allMakers);
       }
     });
   }
