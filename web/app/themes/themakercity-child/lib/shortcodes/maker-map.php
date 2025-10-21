@@ -65,20 +65,7 @@ function maker_map_shortcode( $atts ) {
 
   // Output container
   return sprintf(
-    '<style>.maker-map-filters {
-  margin-bottom: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  align-items: center;
-}
-
-.maker-filter-item {
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-</style>
-    <div class="maker-map-wrapper">
+    '<div class="maker-map-wrapper">
        <div id="%1$s" class="maker-map" style="width:100%%;height:500px;"></div>
      </div>',
     esc_attr( $map_id ),

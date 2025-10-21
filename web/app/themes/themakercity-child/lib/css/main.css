@@ -284,6 +284,40 @@ hr,
   color: inherit;
 }
 
+/* Reduce InfoWindow close button size */
+.gm-style-iw-chr button.gm-ui-hover-effect {
+  height: 32px !important;
+  width: 32px !important;
+  top: -8px !important;
+  right: 16px !important;
+}
+
+.gm-style-iw-chr {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+.gm-style-iw-d {
+  margin-top: -24px;
+}
+
+.maker-map-filters {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.maker-filter-item {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.maker-infowindow h3 {
+  margin-top: 0;
+}
+
 /* Makers Styles */
 .collaborator-note {
   display: flex;
