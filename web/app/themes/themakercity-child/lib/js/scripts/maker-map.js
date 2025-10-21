@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Map config
   const MAX_SINGLE_MARKER_ZOOM = 14;
-  const FILTER_MODE = "AND"; // or "AND"
+  const FILTER_MODE = "AND"; // use "AND" or "OR"
 
   const mapOptions = {
     zoom: 12,
