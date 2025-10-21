@@ -28,15 +28,18 @@ add_action( 'rest_api_init', function () {
  * Callback for makers/v1/locations endpoint.
  *
  * Returns all Maker CPTs within a parent term and any child terms.
- * Adds a `categories` array to each result containing all assigned term slugs.
+ * Adds:
+ *  - `categories`: array of all maker-category slugs assigned to each Maker
+ *  - top-level `maker-filters`: list of children of the queried parent term
  *
  * @param \WP_REST_Request $request The REST API request.
- * @return array List of maker posts with location data.
+ * @return array List of makers and filter metadata.
  */
 function get_maker_locations( \WP_REST_Request $request ) {
   $category_slug = sanitize_text_field( $request->get_param( 'maker-category' ) );
   $taxonomy      = 'maker-category';
   $term_ids      = [];
+  $maker_filters = [];
 
   // Try to find the term
   $term = get_term_by( 'slug', $category_slug, $taxonomy );
@@ -47,6 +50,25 @@ function get_maker_locations( \WP_REST_Request $request ) {
 
     if ( ! is_wp_error( $children ) && ! empty( $children ) ) {
       $term_ids = array_merge( [ $term->term_id ], $children );
+
+      // Build maker-filters array (children only)
+      $filter_terms = get_terms( [
+        'taxonomy'   => $taxonomy,
+        'include'    => $children,
+        'hide_empty' => false,
+      ] );
+
+      if ( ! is_wp_error( $filter_terms ) && ! empty( $filter_terms ) ) {
+        $maker_filters = array_map(
+          function ( $t ) {
+            return [
+              'slug' => $t->slug,
+              'name' => $t->name,
+            ];
+          },
+          $filter_terms
+        );
+      }
     } else {
       $term_ids = [ $term->term_id ];
     }
@@ -54,7 +76,10 @@ function get_maker_locations( \WP_REST_Request $request ) {
 
   // If no valid term found, bail early
   if ( empty( $term_ids ) ) {
-    return [];
+    return [
+      'maker-filters' => [],
+      'makers'        => [],
+    ];
   }
 
   // Query Makers in parent + child terms
@@ -71,24 +96,24 @@ function get_maker_locations( \WP_REST_Request $request ) {
     ],
   ] );
 
-  $results = [];
+  $makers = [];
 
   if ( $query->have_posts() ) {
     while ( $query->have_posts() ) {
       $query->the_post();
 
-      $map_field = get_field( 'business_address' ); // Adjust if your ACF field has a different name
+      $map_field = get_field( 'business_address' );
       if ( ! $map_field || ! isset( $map_field['lat'], $map_field['lng'] ) ) {
         continue;
       }
 
       // Collect all maker-category term slugs
-      $terms       = get_the_terms( get_the_ID(), $taxonomy );
-      $categories  = $terms && ! is_wp_error( $terms )
+      $terms      = get_the_terms( get_the_ID(), $taxonomy );
+      $categories = $terms && ! is_wp_error( $terms )
         ? wp_list_pluck( $terms, 'slug' )
         : [];
 
-      $results[] = [
+      $makers[] = [
         'id'         => get_the_ID(),
         'title'      => get_the_title(),
         'link'       => get_permalink(),
@@ -101,5 +126,9 @@ function get_maker_locations( \WP_REST_Request $request ) {
     wp_reset_postdata();
   }
 
-  return $results;
+  // Final structured response
+  return [
+    'maker-filters' => $maker_filters,
+    'makers'        => $makers,
+  ];
 }
