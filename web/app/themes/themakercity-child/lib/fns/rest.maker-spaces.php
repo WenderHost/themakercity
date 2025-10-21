@@ -1,4 +1,6 @@
 <?php
+namespace TheMakerCity\rest;
+
 /**
  * Register REST API route for Maker CPT locations.
  */
@@ -8,11 +10,11 @@ add_action( 'rest_api_init', function () {
     '/locations',
     [
       'methods'             => 'GET',
-      'callback'            => 'get_maker_locations',
-      'permission_callback' => '__return_true', // public access
+      'callback'            => __NAMESPACE__ . '\\get_maker_locations',
+      'permission_callback' => '__return_true',
       'args'                => [
         'maker-category' => [
-          'description' => __( 'Slug of maker-category taxonomy term', 'textdomain' ),
+          'description' => __( 'Slug of maker-category taxonomy term', 'themakercity' ),
           'type'        => 'string',
           'required'    => false,
           'default'     => 'maker-spaces',
@@ -25,20 +27,46 @@ add_action( 'rest_api_init', function () {
 /**
  * Callback for makers/v1/locations endpoint.
  *
- * @param WP_REST_Request $request The REST API request.
+ * Returns all Maker CPTs within a parent term and any child terms.
+ * Adds a `categories` array to each result containing all assigned term slugs.
+ *
+ * @param \WP_REST_Request $request The REST API request.
  * @return array List of maker posts with location data.
  */
-function get_maker_locations( WP_REST_Request $request ) {
+function get_maker_locations( \WP_REST_Request $request ) {
   $category_slug = sanitize_text_field( $request->get_param( 'maker-category' ) );
+  $taxonomy      = 'maker-category';
+  $term_ids      = [];
 
-  $query = new WP_Query( [
+  // Try to find the term
+  $term = get_term_by( 'slug', $category_slug, $taxonomy );
+
+  if ( $term ) {
+    // Get all children recursively
+    $children = get_term_children( $term->term_id, $taxonomy );
+
+    if ( ! is_wp_error( $children ) && ! empty( $children ) ) {
+      $term_ids = array_merge( [ $term->term_id ], $children );
+    } else {
+      $term_ids = [ $term->term_id ];
+    }
+  }
+
+  // If no valid term found, bail early
+  if ( empty( $term_ids ) ) {
+    return [];
+  }
+
+  // Query Makers in parent + child terms
+  $query = new \WP_Query( [
     'post_type'      => 'maker',
     'posts_per_page' => -1,
     'tax_query'      => [
       [
-        'taxonomy' => 'maker-category',
-        'field'    => 'slug',
-        'terms'    => $category_slug,
+        'taxonomy'         => $taxonomy,
+        'field'            => 'term_id',
+        'terms'            => $term_ids,
+        'include_children' => false,
       ],
     ],
   ] );
@@ -48,18 +76,27 @@ function get_maker_locations( WP_REST_Request $request ) {
   if ( $query->have_posts() ) {
     while ( $query->have_posts() ) {
       $query->the_post();
-      $map_field = get_field( 'business_address' ); // adjust this to your ACF field name
 
-      if ( $map_field && isset( $map_field['lat'], $map_field['lng'] ) ) {
-        $results[] = [
-          'id'      => get_the_ID(),
-          'title'   => get_the_title(),
-          'link'    => get_permalink(),
-          'lat'     => (float) $map_field['lat'],
-          'lng'     => (float) $map_field['lng'],
-          'address' => $map_field['address'] ?? '',
-        ];
+      $map_field = get_field( 'business_address' ); // Adjust if your ACF field has a different name
+      if ( ! $map_field || ! isset( $map_field['lat'], $map_field['lng'] ) ) {
+        continue;
       }
+
+      // Collect all maker-category term slugs
+      $terms       = get_the_terms( get_the_ID(), $taxonomy );
+      $categories  = $terms && ! is_wp_error( $terms )
+        ? wp_list_pluck( $terms, 'slug' )
+        : [];
+
+      $results[] = [
+        'id'         => get_the_ID(),
+        'title'      => get_the_title(),
+        'link'       => get_permalink(),
+        'lat'        => (float) $map_field['lat'],
+        'lng'        => (float) $map_field['lng'],
+        'address'    => $map_field['address'] ?? '',
+        'categories' => $categories,
+      ];
     }
     wp_reset_postdata();
   }
