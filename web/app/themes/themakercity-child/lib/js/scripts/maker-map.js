@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Map config
   const MAX_SINGLE_MARKER_ZOOM = 14;
+  const FILTER_MODE = "AND"; // or "AND"
 
   const mapOptions = {
     zoom: 12,
@@ -134,9 +135,14 @@ document.addEventListener("DOMContentLoaded", function () {
       // If any individual filters are selected, uncheck "All"
       if (selected.length > 0) {
         allCheckbox.checked = false;
+        const has = (maker, slug) => Array.isArray(maker.categories) && maker.categories.includes(slug);
+
         const filtered = allMakers.filter((maker) =>
-          selected.some((slug) => maker.categories.includes(slug))
+          FILTER_MODE === "AND"
+            ? selected.every((slug) => has(maker, slug))
+            : selected.some((slug) => has(maker, slug))
         );
+   
         renderMarkers(filtered);
       } else {
         // No filters selected, show all again
