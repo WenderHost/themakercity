@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d3df00ef0714cb675f20df4bc1b2139",
+    "content-hash": "7c777a0ca0a236c3f8e54d73e8f6f03a",
     "packages": [
         {
             "name": "composer/installers",
@@ -1184,11 +1184,11 @@
         },
         {
             "name": "wenmark/advanced-custom-fields-pro",
-            "version": "6.6.1",
+            "version": "6.4.3",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/advanced-custom-fields-pro/6.6.1",
-                "shasum": "156ab2aeecb8590f6f0ca3a7b18ab197c5107f5b"
+                "url": "https://packages.wenmarkdigital.com/satispress/advanced-custom-fields-pro/6.4.3",
+                "shasum": "b366b82373b424c111f49e095c6150936ad63486"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
