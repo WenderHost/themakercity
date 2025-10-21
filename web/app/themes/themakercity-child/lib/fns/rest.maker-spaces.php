@@ -30,7 +30,7 @@ add_action( 'rest_api_init', function () {
  * Returns all Maker CPTs within a parent term and any child terms.
  * Adds:
  *  - `categories`: array of all maker-category slugs assigned to each Maker
- *  - top-level `maker-filters`: list of children of the queried parent term
+ *  - top-level `maker-filters`: list of populated child terms with counts
  *
  * @param \WP_REST_Request $request The REST API request.
  * @return array List of makers and filter metadata.
@@ -41,7 +41,7 @@ function get_maker_locations( \WP_REST_Request $request ) {
   $term_ids      = [];
   $maker_filters = [];
 
-  // Try to find the term
+  // Try to find the parent term
   $term = get_term_by( 'slug', $category_slug, $taxonomy );
 
   if ( $term ) {
@@ -51,23 +51,27 @@ function get_maker_locations( \WP_REST_Request $request ) {
     if ( ! is_wp_error( $children ) && ! empty( $children ) ) {
       $term_ids = array_merge( [ $term->term_id ], $children );
 
-      // Build maker-filters array (children only)
+      // Build maker-filters array (children only, hide empty)
       $filter_terms = get_terms( [
         'taxonomy'   => $taxonomy,
         'include'    => $children,
-        'hide_empty' => false,
+        'hide_empty' => true, // ✅ show only terms with Makers
       ] );
 
       if ( ! is_wp_error( $filter_terms ) && ! empty( $filter_terms ) ) {
         $maker_filters = array_map(
           function ( $t ) {
             return [
-              'slug' => $t->slug,
-              'name' => $t->name,
+              'slug'  => $t->slug,
+              'name'  => sprintf( '%s (%d)', $t->name, $t->count ), // ✅ append count
+              'count' => (int) $t->count,
             ];
           },
           $filter_terms
         );
+        
+        // ✅ Ensure JSON encodes as a proper array, not object
+        $maker_filters = array_values( $maker_filters );        
       }
     } else {
       $term_ids = [ $term->term_id ];
