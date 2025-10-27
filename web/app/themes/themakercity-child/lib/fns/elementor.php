@@ -47,19 +47,18 @@ add_action( 'elementor/query/related_makers', function( $query ) {
  * @return string[] Modified body classes.
  */
 add_filter( 'body_class', function( $classes ) {
-  if ( function_exists( 'elementor_theme_do_location' ) && is_singular( 'page' ) ) {
+  if ( is_singular( 'page' ) ) {
     $page_id = get_queried_object_id();
+    $settings = get_post_meta( $page_id, '_elementor_page_settings', true );
 
-    // Check Elementor's internal "Hide Title" meta
-    $hide_title = get_post_meta( $page_id, '_elementor_hide_title', true );
-
-    if ( 'yes' === $hide_title ) {
+    if ( is_array( $settings ) && ! empty( $settings['hide_title'] ) && 'yes' === $settings['hide_title'] ) {
       $classes[] = 'hide-title';
     }
   }
 
   return $classes;
 } );
+
 
 /**
  * Taken from [Feature Request: Option to temporarily hide sections](https://github.com/elementor/elementor/issues/18183)
