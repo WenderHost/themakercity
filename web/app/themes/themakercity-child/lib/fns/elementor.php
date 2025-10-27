@@ -40,24 +40,35 @@ add_action( 'elementor/query/related_makers', function( $query ) {
 } );
 
 /**
- * Adds a `.hide-title` class to the <body> tag when the current page
- * has Elementor's "Hide Title" option enabled.
+ * Adds contextual CSS classes to the <body> tag based on Elementor
+ * and ACF field settings.
  *
  * @param string[] $classes Existing body classes.
  * @return string[] Modified body classes.
  */
 add_filter( 'body_class', function( $classes ) {
-  if ( is_singular( 'page' ) ) {
-    $page_id = get_queried_object_id();
-    $settings = get_post_meta( $page_id, '_elementor_page_settings', true );
 
-    if ( is_array( $settings ) && ! empty( $settings['hide_title'] ) && 'yes' === $settings['hide_title'] ) {
+  if ( is_singular() ) {
+    $post_id = get_queried_object_id();
+
+    // 1️⃣ Elementor "Hide Title"
+    $settings = get_post_meta( $post_id, '_elementor_page_settings', true );
+    if ( is_array( $settings ) && ( $settings['hide_title'] ?? '' ) === 'yes' ) {
       $classes[] = 'hide-title';
+    }
+
+    // 2️⃣ ACF "Hero Unit Image Placement"
+    if ( function_exists( 'get_field' ) ) {
+      $placement = get_field( 'hero_unit_image_placement', $post_id );
+      if ( $placement === 'image_only' ) {
+        $classes[] = 'hero-unit-image-only';
+      }
     }
   }
 
   return $classes;
 } );
+
 
 
 /**
