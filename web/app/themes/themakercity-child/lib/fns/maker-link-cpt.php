@@ -27,24 +27,43 @@ add_action( 'admin_head', __NAMESPACE__ . '\\makerlink_admin_column_styles' );
 /**
  * Renders the Maker Link caption.
  *
- * Shortcode: [maker_link_caption]
+ * Shortcode: [maker_link_caption link="true"]
  *
  * Output:
  * <strong>{Maker Name}</strong><br>
  * {Description}<br>
  * <span class="price">{Price}</span>
  *
+ * If `link="true"`, wraps the output in an <a> tag linking to the value
+ * of the "link" ACF field on the current maker-link post.
+ *
+ * @param array $atts {
+ *   Optional. Shortcode attributes.
+ *
+ *   @type bool $link Whether to wrap the caption in a link. Default false.
+ * }
  * @return string HTML markup for the caption.
  */
-function makerlink_caption_shortcode() {
+function makerlink_caption_shortcode( $atts = [] ) {
+  $atts = shortcode_atts(
+    [
+      'link' => false,
+    ],
+    $atts,
+    'maker_link_caption'
+  );
+
+  $atts['link'] = filter_var( $atts['link'], FILTER_VALIDATE_BOOLEAN );
+
   if ( ! is_singular( 'maker-link' ) ) {
     return '';
   }
 
-  $post_id    = get_the_ID();
-  $maker_post = get_field( 'maker', $post_id );
+  $post_id     = get_the_ID();
+  $maker_post  = get_field( 'maker', $post_id );
   $description = get_field( 'description', $post_id );
   $price       = get_field( 'price', $post_id );
+  $link_url    = get_field( 'link', $post_id );
 
   $maker_name = $maker_post instanceof \WP_Post ? $maker_post->post_title : '';
 
@@ -56,9 +75,18 @@ function makerlink_caption_shortcode() {
   $output .= esc_html( $description ) . '<br>';
   $output .= '<span class="price">$' . esc_html( $price ) . '</span>';
 
+  if ( $atts['link'] && $link_url ) {
+    $output = sprintf(
+      '<a href="%s">%s</a>',
+      esc_url( $link_url ),
+      $output
+    );
+  }
+
   return $output;
 }
 add_shortcode( 'maker_link_caption', __NAMESPACE__ . '\\makerlink_caption_shortcode' );
+
 
 /**
  * Add and order admin columns for the Maker Link CPT.
