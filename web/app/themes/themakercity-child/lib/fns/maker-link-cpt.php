@@ -2,14 +2,38 @@
 namespace TheMakerCity\makerlinkcpt;
 
 /**
+ * Adjust the Thumbnail column width for Maker Link CPT list table.
+ */
+function makerlink_admin_column_styles() {
+  $screen = get_current_screen();
+  if ( isset( $screen->post_type ) && 'maker-link' === $screen->post_type ) {
+    echo '<style>
+      .column-thumbnail {
+        width: 70px !important;
+        max-width: 70px !important;
+        text-align: center;
+      }
+      .column-thumbnail img {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+    </style>';
+  }
+}
+add_action( 'admin_head', __NAMESPACE__ . '\\makerlink_admin_column_styles' );
+
+/**
  * Add and order admin columns for the Maker Link CPT.
  *
  * @param array $columns Existing admin columns.
- * @return array Modified columns with Title, Maker, Maker Link Categories, and Date.
+ * @return array Modified columns with Thumbnail, Title, Maker, Maker Link Categories, and Date.
  */
 function makerlink_set_admin_columns( $columns ) {
   return [
     'cb'                    => '<input type="checkbox" />',
+    'thumbnail'             => __( 'Thumbnail', 'textdomain' ),
     'title'                 => __( 'Title', 'textdomain' ),
     'maker'                 => __( 'Maker', 'textdomain' ),
     'maker_link_categories' => __( 'Maker Link Categories', 'textdomain' ),
@@ -26,6 +50,16 @@ add_filter( 'manage_maker-link_posts_columns', __NAMESPACE__ . '\\makerlink_set_
  */
 function makerlink_render_custom_columns( $column, $post_id ) {
   switch ( $column ) {
+    case 'thumbnail':
+      $thumbnail = get_the_post_thumbnail( $post_id, [64, 64], [ 'style' => 'width:64px;height:64px;object-fit:cover;border-radius:4px;' ] );
+
+      if ( $thumbnail ) {
+        echo $thumbnail;
+      } else {
+        echo '<div style="width:64px;height:64px;background:#f0f0f0;border:1px solid #ccc;border-radius:4px;"></div>';
+      }
+      break;
+
     case 'maker':
       $maker = get_field( 'maker', $post_id );
 
@@ -50,8 +84,8 @@ function makerlink_render_custom_columns( $column, $post_id ) {
         foreach ( $terms as $term ) {
           $url = add_query_arg(
             [
-              'post_type'            => 'maker-link',
-              'maker-link-category'  => $term->slug,
+              'post_type'           => 'maker-link',
+              'maker-link-category' => $term->slug,
             ],
             admin_url( 'edit.php' )
           );
@@ -97,7 +131,7 @@ function makerlink_sort_by_custom_columns( $query ) {
 
   $orderby = $query->get( 'orderby' );
 
-  // Sort by Maker post title.
+  // Sort by Maker post title (meta value).
   if ( 'maker' === $orderby ) {
     $query->set( 'meta_key', 'maker' );
     $query->set( 'orderby', 'meta_value' );
