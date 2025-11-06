@@ -97,7 +97,7 @@ add_shortcode( 'maker_link_caption', __NAMESPACE__ . '\\makerlink_caption_shortc
  * Add and order admin columns for the Maker Link CPT.
  *
  * @param array $columns Existing admin columns.
- * @return array Modified columns with Thumbnail, Title, Maker, Maker Link Categories, and Date.
+ * @return array Modified columns with Thumbnail, Title, Maker, Maker Link Categories, Maker Link Tags, and Date.
  */
 function makerlink_set_admin_columns( $columns ) {
   return [
@@ -106,6 +106,7 @@ function makerlink_set_admin_columns( $columns ) {
     'title'                 => __( 'Title', 'textdomain' ),
     'maker'                 => __( 'Maker', 'textdomain' ),
     'maker_link_categories' => __( 'Maker Link Categories', 'textdomain' ),
+    'maker_link_tags'       => __( 'Maker Link Tags', 'textdomain' ),
     'date'                  => __( 'Date', 'textdomain' ),
   ];
 }
@@ -120,7 +121,13 @@ add_filter( 'manage_maker-link_posts_columns', __NAMESPACE__ . '\\makerlink_set_
 function makerlink_render_custom_columns( $column, $post_id ) {
   switch ( $column ) {
     case 'thumbnail':
-      $thumbnail = get_the_post_thumbnail( $post_id, [64, 64], [ 'style' => 'width:64px;height:64px;object-fit:cover;border-radius:4px;' ] );
+      $thumbnail = get_the_post_thumbnail(
+        $post_id,
+        [ 64, 64 ],
+        [
+          'style' => 'width:64px;height:64px;object-fit:cover;border-radius:4px;',
+        ]
+      );
 
       if ( $thumbnail ) {
         echo $thumbnail;
@@ -171,6 +178,34 @@ function makerlink_render_custom_columns( $column, $post_id ) {
         echo '<em>' . esc_html__( 'No Categories', 'textdomain' ) . '</em>';
       }
       break;
+
+    case 'maker_link_tags':
+      $terms = get_the_terms( $post_id, 'maker-link-tag' );
+
+      if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+        $links = [];
+
+        foreach ( $terms as $term ) {
+          $url = add_query_arg(
+            [
+              'post_type'      => 'maker-link',
+              'maker-link-tag' => $term->slug,
+            ],
+            admin_url( 'edit.php' )
+          );
+
+          $links[] = sprintf(
+            '<a href="%s">%s</a>',
+            esc_url( $url ),
+            esc_html( $term->name )
+          );
+        }
+
+        echo implode( ', ', $links );
+      } else {
+        echo '<em>' . esc_html__( 'No Tags', 'textdomain' ) . '</em>';
+      }
+      break;
   }
 }
 add_action( 'manage_maker-link_posts_custom_column', __NAMESPACE__ . '\\makerlink_render_custom_columns', 10, 2 );
@@ -184,12 +219,13 @@ add_action( 'manage_maker-link_posts_custom_column', __NAMESPACE__ . '\\makerlin
 function makerlink_sortable_columns( $columns ) {
   $columns['maker']                 = 'maker';
   $columns['maker_link_categories'] = 'maker_link_categories';
+  $columns['maker_link_tags']       = 'maker_link_tags';
   return $columns;
 }
 add_filter( 'manage_edit-maker-link_sortable_columns', __NAMESPACE__ . '\\makerlink_sortable_columns' );
 
 /**
- * Modify query to enable sorting by Maker and Maker Link Categories.
+ * Modify query to enable sorting by Maker, Maker Link Categories, and Maker Link Tags.
  *
  * @param \WP_Query $query The current query.
  */
@@ -200,21 +236,35 @@ function makerlink_sort_by_custom_columns( $query ) {
 
   $orderby = $query->get( 'orderby' );
 
-  // Sort by Maker post title (meta value).
   if ( 'maker' === $orderby ) {
     $query->set( 'meta_key', 'maker' );
     $query->set( 'orderby', 'meta_value' );
   }
 
-  // Sort by taxonomy.
   if ( 'maker_link_categories' === $orderby ) {
     $query->set( 'orderby', 'taxonomy' );
-    $query->set( 'tax_query', [
+    $query->set(
+      'tax_query',
       [
-        'taxonomy' => 'maker-link-category',
-        'field'    => 'term_id',
-      ],
-    ] );
+        [
+          'taxonomy' => 'maker-link-category',
+          'field'    => 'term_id',
+        ],
+      ]
+    );
+  }
+
+  if ( 'maker_link_tags' === $orderby ) {
+    $query->set( 'orderby', 'taxonomy' );
+    $query->set(
+      'tax_query',
+      [
+        [
+          'taxonomy' => 'maker-link-tag',
+          'field'    => 'term_id',
+        ],
+      ]
+    );
   }
 }
 add_action( 'pre_get_posts', __NAMESPACE__ . '\\makerlink_sort_by_custom_columns' );
