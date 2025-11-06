@@ -27,7 +27,7 @@ add_action( 'admin_head', __NAMESPACE__ . '\\makerlink_admin_column_styles' );
 /**
  * Renders the Maker Link caption.
  *
- * Shortcode: [maker_link_caption link="true"]
+ * Shortcode: [maker_link_caption link="true" target="_blank"]
  *
  * Output:
  * <strong>{Maker Name}</strong><br>
@@ -36,18 +36,21 @@ add_action( 'admin_head', __NAMESPACE__ . '\\makerlink_admin_column_styles' );
  *
  * If `link="true"`, wraps the output in an <a> tag linking to the value
  * of the "link" ACF field on the current maker-link post.
+ * Optionally specify `target` to control link behavior.
  *
  * @param array $atts {
  *   Optional. Shortcode attributes.
  *
- *   @type bool $link Whether to wrap the caption in a link. Default false.
+ *   @type bool   $link   Whether to wrap the caption in a link. Default false.
+ *   @type string $target The link target attribute (e.g. "_blank"). Default "_self".
  * }
  * @return string HTML markup for the caption.
  */
 function makerlink_caption_shortcode( $atts = [] ) {
   $atts = shortcode_atts(
     [
-      'link' => false,
+      'link'   => false,
+      'target' => '_self',
     ],
     $atts,
     'maker_link_caption'
@@ -77,8 +80,9 @@ function makerlink_caption_shortcode( $atts = [] ) {
 
   if ( $atts['link'] && $link_url ) {
     $output = sprintf(
-      '<a href="%s">%s</a>',
+      '<a href="%s" target="%s">%s</a>',
       esc_url( $link_url ),
+      esc_attr( $atts['target'] ),
       $output
     );
   }
@@ -86,6 +90,7 @@ function makerlink_caption_shortcode( $atts = [] ) {
   return $output;
 }
 add_shortcode( 'maker_link_caption', __NAMESPACE__ . '\\makerlink_caption_shortcode' );
+
 
 
 /**
