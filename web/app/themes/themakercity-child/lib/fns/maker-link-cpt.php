@@ -54,7 +54,7 @@ function makerlink_caption_shortcode() {
 
   $output  = '<strong>' . esc_html( $maker_name ) . '</strong><br>';
   $output .= esc_html( $description ) . '<br>';
-  $output .= '<span class="price">' . esc_html( $price ) . '</span>';
+  $output .= '<span class="price">$' . esc_html( $price ) . '</span>';
 
   return $output;
 }
