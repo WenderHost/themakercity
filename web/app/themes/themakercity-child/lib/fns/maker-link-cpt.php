@@ -25,6 +25,42 @@ function makerlink_admin_column_styles() {
 add_action( 'admin_head', __NAMESPACE__ . '\\makerlink_admin_column_styles' );
 
 /**
+ * Renders the Maker Link caption.
+ *
+ * Shortcode: [maker_link_caption]
+ *
+ * Output:
+ * <strong>{Maker Name}</strong><br>
+ * {Description}<br>
+ * <span class="price">{Price}</span>
+ *
+ * @return string HTML markup for the caption.
+ */
+function makerlink_caption_shortcode() {
+  if ( ! is_singular( 'maker-link' ) ) {
+    return '';
+  }
+
+  $post_id    = get_the_ID();
+  $maker_post = get_field( 'maker', $post_id );
+  $description = get_field( 'description', $post_id );
+  $price       = get_field( 'price', $post_id );
+
+  $maker_name = $maker_post instanceof \WP_Post ? $maker_post->post_title : '';
+
+  if ( ! $maker_name && ! $description && ! $price ) {
+    return '';
+  }
+
+  $output  = '<strong>' . esc_html( $maker_name ) . '</strong><br>';
+  $output .= esc_html( $description ) . '<br>';
+  $output .= '<span class="price">' . esc_html( $price ) . '</span>';
+
+  return $output;
+}
+add_shortcode( 'maker_link_caption', __NAMESPACE__ . '\\makerlink_caption_shortcode' );
+
+/**
  * Add and order admin columns for the Maker Link CPT.
  *
  * @param array $columns Existing admin columns.
