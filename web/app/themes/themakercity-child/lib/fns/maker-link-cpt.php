@@ -27,7 +27,7 @@ add_action( 'admin_head', __NAMESPACE__ . '\\makerlink_admin_column_styles' );
 /**
  * Renders the Maker Link caption.
  *
- * Shortcode: [maker_link_caption link="true" target="_blank"]
+ * Shortcode: [maker_link_caption link="true" target="_blank" id="123"]
  *
  * Output:
  * <strong>{Maker Name}</strong><br>
@@ -43,14 +43,18 @@ add_action( 'admin_head', __NAMESPACE__ . '\\makerlink_admin_column_styles' );
  *
  *   @type bool   $link   Whether to wrap the caption in a link. Default false.
  *   @type string $target The link target attribute (e.g. "_blank"). Default "_self".
+ *   @type int    $id     Optional post ID. Defaults to current global post ID.
  * }
  * @return string HTML markup for the caption.
  */
 function makerlink_caption_shortcode( $atts = [] ) {
+  global $post;
+
   $atts = shortcode_atts(
     [
       'link'   => false,
       'target' => '_self',
+      'id'     => 0,
     ],
     $atts,
     'maker_link_caption'
@@ -58,11 +62,12 @@ function makerlink_caption_shortcode( $atts = [] ) {
 
   $atts['link'] = filter_var( $atts['link'], FILTER_VALIDATE_BOOLEAN );
 
-  if ( ! is_singular( 'maker-link' ) ) {
+  // Determine which post ID to use.
+  $post_id = absint( $atts['id'] ) ?: ( $post instanceof \WP_Post ? $post->ID : 0 );
+  if ( ! $post_id || get_post_type( $post_id ) !== 'maker-link' ) {
     return '';
   }
 
-  $post_id     = get_the_ID();
   $maker_post  = get_field( 'maker', $post_id );
   $description = get_field( 'description', $post_id );
   $price       = get_field( 'price', $post_id );
@@ -90,8 +95,6 @@ function makerlink_caption_shortcode( $atts = [] ) {
   return $output;
 }
 add_shortcode( 'maker_link_caption', __NAMESPACE__ . '\\makerlink_caption_shortcode' );
-
-
 
 /**
  * Add and order admin columns for the Maker Link CPT.
