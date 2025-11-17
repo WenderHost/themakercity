@@ -15,3 +15,63 @@
 .elementor-alert p:last-child{margin-bottom: 0;}
 .elementor-alert.large-title .elementor-alert-title{font-size: 1.5em;}
 .elementor-alert-hidden{display: none;}
+
+
+/* Assign bg variables based on alert type */
+.elementor-alert.elementor-alert-info {
+  --alert-bg: #d9edf7;
+}
+
+.elementor-alert.elementor-alert-success {
+  --alert-bg: #dff0d8;
+}
+
+.elementor-alert.elementor-alert-warning {
+  --alert-bg: #fcf8e3;
+}
+
+.elementor-alert.elementor-alert-danger {
+  --alert-bg: #f2dede;
+}
+
+
+/* Point-right style */
+.elementor-alert.point-right {
+  overflow: visible;
+}
+
+/* The background patch */
+.elementor-alert.point-right::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;      /* same width as triangle */
+  height: 100%;
+  background-color: var(--alert-bg);
+}
+
+/* Full-height right chevron */
+.elementor-alert.point-right::after {
+  content: "";
+  position: absolute;
+  top: 0;              /* align to top */
+  right: -30px;        /* adjust width of arrow extension */
+  width: 30px;         /* arrow width */
+  height: 100%;        /* match the alert height */
+  background: var(--alert-bg);
+  clip-path: polygon(0 0, 100% 50%, 0 100%); /* chevron shape */
+}
+
+/* Default: hide pointer */
+.acf-input .elementor-alert.point-right::after,
+.acf-input .elementor-alert.point-right::before {
+  display: none;
+}
+
+/* When repeater *is empty* → show pointer */
+.acf-input .acf-repeater.-empty + p + .elementor-alert.point-right::after,
+.acf-input .acf-repeater.-empty + p + .elementor-alert.point-right::before {
+  display: block;
+}
+

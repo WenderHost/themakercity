@@ -262,7 +262,7 @@
             "name": "social_profiles",
             "aria-label": "",
             "type": "repeater",
-            "instructions": "",
+            "instructions": "<div class=\"elementor-alert point-right elementor-widget elementor-alert-info\" style=\"width: 75%;\" role=\"alert\">   \r\n    <span class=\"elementor-alert-description\">Add links to your various social media profiles. Click \"Add Row\" to get started.<\/span>\r\n<\/div>",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -271,6 +271,7 @@
                 "id": ""
             },
             "relevanssi_exclude": 0,
+            "acfe_repeater_stylised_button": 0,
             "layout": "table",
             "pagination": 0,
             "min": 0,
@@ -278,7 +279,6 @@
             "collapsed": "",
             "button_label": "Add Row",
             "rows_per_page": 20,
-            "acfe_repeater_stylised_button": 0,
             "sub_fields": [
                 {
                     "key": "field_657a256324971",
@@ -573,5 +573,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1750425942
+    "modified": 1763399217
 }
