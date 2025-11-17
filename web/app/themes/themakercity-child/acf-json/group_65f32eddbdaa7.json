@@ -12,17 +12,46 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "30",
                 "class": "",
                 "id": ""
             },
             "relevanssi_exclude": 0,
             "message": "Display an alert bar in the site header?",
             "default_value": 0,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": "",
             "style": ""
+        },
+        {
+            "key": "field_691b5fcb31c51",
+            "label": "Header Alert Bar Text Color",
+            "name": "header_alert_bar_text_color",
+            "aria-label": "",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "35",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "#000000",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "display": "default",
+            "button_label": "Select Color",
+            "color_picker": 1,
+            "absolute": 0,
+            "input": 1,
+            "allow_null": 1,
+            "theme_colors": 0,
+            "colors": [],
+            "allow_in_bindings": 1
         },
         {
             "key": "field_65f32f5bc17f1",
@@ -34,7 +63,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "35",
                 "class": "",
                 "id": ""
             },
@@ -44,12 +73,13 @@
             "return_format": "string",
             "display": "default",
             "button_label": "Select Color",
-            "color_picker": true,
-            "absolute": false,
-            "input": true,
-            "allow_null": true,
-            "theme_colors": false,
-            "colors": []
+            "color_picker": 1,
+            "absolute": 0,
+            "input": 1,
+            "allow_null": 1,
+            "theme_colors": 0,
+            "colors": [],
+            "allow_in_bindings": 1
         },
         {
             "key": "field_65f32f8cc17f2",
@@ -221,5 +251,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1714503337
+    "modified": 1763402343
 }
