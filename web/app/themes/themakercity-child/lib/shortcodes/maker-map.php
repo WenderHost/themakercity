@@ -3,7 +3,7 @@ namespace TheMakerCity\shortcodes;
 use function TheMakerCity\utilities\get_alert;
 
 /**
- * Shortcode: [maker-map category="maker-spaces"]
+ * Shortcode: [maker-map]
  *
  * Displays a Google Map populated with Maker CPTs that have ACF map data.
  * Data is pulled from the custom REST API endpoint /makers/v1/locations.
@@ -13,13 +13,16 @@ use function TheMakerCity\utilities\get_alert;
  */
 function maker_map_shortcode( $atts ) {
 
-  if( empty( GOOGLE_MAPS_API_KEY ) )
-    return get_alert( [ 'type' => 'warning', 'description' => 'GOOGLE_MAPS_API_KEY not found. Please set <code>GOOGLE_MAPS_API_KEY</code> in your <code>.env</code>. <code>GOOGLE_MAPS_API_KEY = ' . GOOGLE_MAPS_API_KEY . '</code>' ] );
+  if ( empty( GOOGLE_MAPS_API_KEY ) ) {
+    return get_alert( [
+      'type'        => 'warning',
+      'description' => 'GOOGLE_MAPS_API_KEY not found. Please set <code>GOOGLE_MAPS_API_KEY</code> in your <code>.env</code>. <code>GOOGLE_MAPS_API_KEY = ' . GOOGLE_MAPS_API_KEY . '</code>'
+    ] );
+  }
 
+  // No more category attribute — cleaning this up
   $atts = shortcode_atts(
-    [
-      'category' => 'maker-spaces',
-    ],
+    [],
     $atts,
     'maker-map'
   );
@@ -42,7 +45,7 @@ function maker_map_shortcode( $atts ) {
     [ 'google-maps-api' ],
     null,
     true
-  );  
+  );
 
   wp_enqueue_script(
     'maker-map',
@@ -58,7 +61,6 @@ function maker_map_shortcode( $atts ) {
     'makerMapData',
     [
       'endpoint' => esc_url( rest_url( 'makers/v1/locations' ) ),
-      'category' => sanitize_text_field( $atts['category'] ),
       'mapId'    => $map_id,
     ]
   );
@@ -66,11 +68,10 @@ function maker_map_shortcode( $atts ) {
   // Output container
   return sprintf(
     '<div class="maker-map-wrapper">
-       <div id="%1$s" class="maker-map" style="width:100%%;height:500px;"></div>
+        <div id="%1$s" class="maker-map" style="width:100%%;height:500px;"></div>
      </div>',
-    esc_attr( $map_id ),
-    selected( 'maker-spaces', $atts['category'], false )
+    esc_attr( $map_id )
   );
-
 }
+
 add_shortcode( 'maker-map', __NAMESPACE__ . '\\maker_map_shortcode' );

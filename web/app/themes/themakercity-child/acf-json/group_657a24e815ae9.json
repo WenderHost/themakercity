@@ -492,6 +492,38 @@
             "style": ""
         },
         {
+            "key": "field_691e2a7be1ab6",
+            "label": "Maker Space Type",
+            "name": "maker_space_type",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "Do you provide space where other Makers can come to utilize your space(s). Mark all relevant Space Type options that are available at your location and you will show on our Maker Spaces map and page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "taxonomy": "maker-space-type",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "id",
+            "field_type": "checkbox",
+            "min": "",
+            "max": "",
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "allow_in_bindings": 0,
+            "bidirectional": 0,
+            "multiple": 0,
+            "allow_null": 0,
+            "bidirectional_target": []
+        },
+        {
             "key": "field_66719e7e986c1",
             "label": "Business Address",
             "name": "business_address",
@@ -573,5 +605,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1763399217
+    "modified": 1763584838
 }

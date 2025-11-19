@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const { endpoint, category, mapId } = makerMapData;
+  const { endpoint, mapId } = makerMapData;
   const mapElement = document.getElementById(mapId);
   if (!mapElement) return;
 
   // Map config
   const MAX_SINGLE_MARKER_ZOOM = 14;
-  const FILTER_MODE = "AND"; // use "AND" or "OR"
+  const FILTER_MODE = "AND"; // "AND" or "OR"
 
   const mapOptions = {
     zoom: 12,
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (makers.length > 0) {
       map.fitBounds(bounds);
 
-      // ✅ Cap zoom if only one marker is visible
+      // Cap zoom on single marker
       if (makers.length === 1) {
         google.maps.event.addListenerOnce(map, "bounds_changed", function () {
           if (map.getZoom() > MAX_SINGLE_MARKER_ZOOM) {
@@ -72,11 +72,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Builds the filter UI dynamically from maker-filters as checkboxes.
-   * @param {Array} filters
+   * Builds the filter UI using maker-space-types.
+   * @param {Array} types List of taxonomy term objects
    */
-  function buildFilterUI(filters) {
-    // Find or create container above map
+  function buildFilterUI(types) {
     let wrapper = mapElement.closest(".maker-map-wrapper");
     if (!wrapper) {
       wrapper = document.createElement("div");
@@ -85,45 +84,57 @@ document.addEventListener("DOMContentLoaded", function () {
       wrapper.appendChild(mapElement);
     }
 
-    // Create filters container
     const filterContainer = document.createElement("div");
     filterContainer.classList.add("maker-map-filters");
-    filterContainer.innerHTML = `<strong>Filter by:</strong>`;
+    filterContainer.innerHTML = `<strong>Filter by Type:</strong>`;
 
-    // "Show All" checkbox
+    // Show All option
     const allLabel = document.createElement("label");
     allLabel.classList.add("maker-filter-item");
+
     const allCheckbox = document.createElement("input");
     allCheckbox.type = "checkbox";
     allCheckbox.value = "all";
     allCheckbox.checked = true;
+
     allLabel.appendChild(allCheckbox);
     allLabel.append(" All Maker Spaces");
     filterContainer.appendChild(allLabel);
 
-    // Individual filter checkboxes
-    filters.forEach((filter) => {
+    // Individual type checkboxes
+    types.forEach((type) => {
       const label = document.createElement("label");
       label.classList.add("maker-filter-item");
+
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-      checkbox.value = filter.slug;
+      checkbox.value = type.slug;
       checkbox.checked = false;
+
       label.appendChild(checkbox);
-      label.append(` ${filter.name}`);
+
+      // Show "Name (count)" using the count from the REST response
+      const labelText =
+        typeof type.count === "number"
+          ? `${type.name} (${type.count})`
+          : type.name;
+
+      label.append(` ${labelText}`);
       filterContainer.appendChild(label);
     });
 
     wrapper.insertBefore(filterContainer, mapElement);
 
-    // Checkbox change handling
+    /**
+     * Filter change handler
+     */
     filterContainer.addEventListener("change", (e) => {
       const checkboxes = filterContainer.querySelectorAll('input[type="checkbox"]');
       const selected = Array.from(checkboxes)
         .filter((cb) => cb.checked && cb.value !== "all")
         .map((cb) => cb.value);
 
-      // If "All" is selected or no filters are checked, show all makers
+      // Show All checked
       if (e.target.value === "all" && e.target.checked) {
         checkboxes.forEach((cb) => {
           if (cb.value !== "all") cb.checked = false;
@@ -132,20 +143,23 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      // If any individual filters are selected, uncheck "All"
+      // If specific filters are selected
       if (selected.length > 0) {
         allCheckbox.checked = false;
-        const has = (maker, slug) => Array.isArray(maker.categories) && maker.categories.includes(slug);
+
+        const has = (maker, slug) =>
+          Array.isArray(maker.space_types) &&
+          maker.space_types.includes(slug);
 
         const filtered = allMakers.filter((maker) =>
           FILTER_MODE === "AND"
             ? selected.every((slug) => has(maker, slug))
             : selected.some((slug) => has(maker, slug))
         );
-   
+
         renderMarkers(filtered);
       } else {
-        // No filters selected, show all again
+        // No filters → revert to all
         allCheckbox.checked = true;
         renderMarkers(allMakers);
       }
@@ -153,31 +167,30 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Load makers + filters from REST API.
+   * Loads makers + maker-space-type terms.
    */
-  function loadData(categorySlug) {
-    fetch(`${endpoint}?maker-category=${encodeURIComponent(categorySlug)}`)
+  function loadData() {
+    fetch(endpoint)
       .then((res) => res.json())
       .then((data) => {
         if (!data || !data.makers) {
-          console.warn("No makers found or invalid response:", data);
+          console.warn("Invalid response:", data);
           return;
         }
 
-        // Store makers globally for filtering
         allMakers = data.makers;
 
-        // Build filter UI
-        if (data["maker-filters"] && data["maker-filters"].length > 0) {
-          buildFilterUI(data["maker-filters"]);
+        // Build filter UI using maker-space-types
+        if (data["maker-space-types"] && data["maker-space-types"].length > 0) {
+          buildFilterUI(data["maker-space-types"]);
         }
 
-        // Initial render
+        // Initial map render
         renderMarkers(allMakers);
       })
       .catch((err) => console.error("Error loading maker locations:", err));
   }
 
   // Initial load
-  loadData(category);
+  loadData();
 });
