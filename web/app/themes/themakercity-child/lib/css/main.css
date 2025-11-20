@@ -342,23 +342,6 @@ hr,
   color: inherit;
 }
 
-/* Reduce InfoWindow close button size */
-.gm-style-iw-chr button.gm-ui-hover-effect {
-  height: 32px !important;
-  width: 32px !important;
-  top: -8px !important;
-  right: 16px !important;
-}
-
-.gm-style-iw-chr {
-  padding-top: 4px !important;
-  padding-bottom: 4px !important;
-}
-
-.gm-style-iw-d {
-  margin-top: -24px;
-}
-
 .maker-map-filters {
   margin-bottom: 10px;
   display: flex;
@@ -370,11 +353,6 @@ hr,
 .maker-filter-item {
   font-size: 0.9rem;
   white-space: nowrap;
-}
-
-.maker-infowindow h3 {
-  margin-top: 0;
-  font-size: 1.5em;
 }
 
 /** 
@@ -543,6 +521,24 @@ hr,
   margin-top: 12px;
   font-weight: bold;
   color: #0073aa;
+}
+
+/* Smooth internal content transition */
+.maker-panel-inner {
+  opacity: 1;
+  transition: opacity 200ms ease;
+}
+
+.maker-panel-inner.is-fading-out {
+  opacity: 0;
+}
+
+.maker-panel-inner.is-fading-in {
+  opacity: 0;
+}
+
+.maker-panel-inner.is-loaded {
+  opacity: 1;
 }
 
 /* Makers Styles */

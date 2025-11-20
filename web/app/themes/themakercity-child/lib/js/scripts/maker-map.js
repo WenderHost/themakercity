@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!mapElement) return;
 
   /**
-   * Create sidepanel inside the wrapper (NOT inside mapElement),
-   * so it visually floats over the map but is not under Google Maps layers.
+   * Create sidepanel inside the wrapper (NOT inside mapElement)
    */
   function createSidepanel() {
     const wrapper = mapElement.closest(".maker-map-wrapper");
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Map configuration
   const MAX_SINGLE_MARKER_ZOOM = 14;
   const FILTER_MODE = "AND";
 
@@ -74,26 +72,65 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Sidepanel HTML Template – customize freely
+   * 🔥 Smooth fade-out → fade-in content swap
+   */
+  function smoothSwapPanelContent(newHTML) {
+    const oldInner = sidepanel.querySelector(".maker-panel-inner");
+
+    // If panel was empty, just inject and bail
+    if (!oldInner) {
+      sidepanel.innerHTML = newHTML;
+      enablePanelCloseButton();
+      return;
+    }
+
+    // Fade out old content
+    oldInner.classList.remove("is-loaded");
+    oldInner.classList.add("is-fading-out");
+
+    oldInner.addEventListener(
+      "transitionend",
+      () => {
+        // Replace with new content
+        sidepanel.innerHTML = newHTML;
+
+        const newInner = sidepanel.querySelector(".maker-panel-inner");
+        newInner.classList.add("is-fading-in");
+
+        requestAnimationFrame(() => {
+          newInner.classList.remove("is-fading-in");
+          newInner.classList.add("is-loaded");
+        });
+
+        enablePanelCloseButton();
+      },
+      { once: true }
+    );
+  }
+
+  /**
+   * Sidepanel HTML Template
    */
   function buildSidepanelHTML(maker) {
     return `
-      <div class="maker-panel-header">
-        <h2>${maker.title}</h2>
-        <button class="maker-panel-close">&times;</button>
-      </div>
+      <div class="maker-panel-inner is-loaded">
+        <div class="maker-panel-header">
+          <h2>${maker.title}</h2>
+          <button class="maker-panel-close">&times;</button>
+        </div>
 
-      <div class="maker-panel-body">
-        ${
-          maker.primary_image
-            ? `<img class="maker-panel-photo" src="${maker.primary_image}" alt="${maker.title}" />`
-            : ""
-        }
-        <p class="maker-panel-address">${maker.address}</p>
+        <div class="maker-panel-body">
+          ${
+            maker.primary_image
+              ? `<img class="maker-panel-photo" src="${maker.primary_image}" alt="${maker.title}" />`
+              : ""
+          }
+          <p class="maker-panel-address">${maker.address}</p>
 
-        <a class="maker-panel-link" href="${maker.link}" target="_blank" rel="noopener noreferrer">
-          View Maker Profile →
-        </a>
+          <a class="maker-panel-link" href="${maker.link}" target="_blank" rel="noopener noreferrer">
+            View Maker Profile →
+          </a>
+        </div>
       </div>
     `;
   }
@@ -118,10 +155,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return wrapper;
   }
 
-  /**
-   * Only recenter the map if the marker falls inside the right-side
-   * danger zone (covered by the sidepanel).
-   */
   function recenterMapForSidepanel(map, position) {
     const projection = map.getProjection();
     if (!projection) return;
@@ -130,35 +163,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const rect = div.getBoundingClientRect();
     const width = rect.width;
 
-    // Rightmost 30% of the map = danger zone
     const dangerZoneStartX = width * 0.60;
 
-    // Convert lat/lng → world point → pixel point
     const scale = Math.pow(2, map.getZoom());
     const worldPoint = projection.fromLatLngToPoint(position);
 
     const pixelPoint = {
       x: worldPoint.x * scale,
-      y: worldPoint.y * scale
+      y: worldPoint.y * scale,
     };
 
-    // Where is the map's *top-left* corner in world pixels?
     const topLeftWorld = projection.fromLatLngToPoint(map.getBounds().getNorthEast());
     const topLeftPixel = {
       x: topLeftWorld.x * scale - width,
-      y: topLeftWorld.y * scale
+      y: topLeftWorld.y * scale,
     };
 
-    // Convert world pixel → container coordinates
     const markerX = pixelPoint.x - topLeftPixel.x;
 
-    // If marker is NOT in the danger zone → don't shift
-    if (markerX < dangerZoneStartX) {
-      return;
-    }
+    if (markerX < dangerZoneStartX) return;
 
-    // Marker *is* behind the sidepanel ⇒ apply recentering
-    const offsetPx = +180;   // positive moves map left (desired)
+    const offsetPx = +180;
     const worldOffsetX = offsetPx / scale;
 
     const newWorldPoint = new google.maps.Point(
@@ -172,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Render markers with AdvancedMarkerElement
+   * Render markers
    */
   function renderMarkers(makers) {
     const bounds = new google.maps.LatLngBounds();
@@ -192,31 +217,36 @@ document.addEventListener("DOMContentLoaded", function () {
         map,
       });
 
-      // NEW: Click to open sidepanel (w/ debouncing)
       marker.addListener(
         "click",
         debounce(() => {
-
-          // ---- ANIMATION: pulse the marker ----
-          const el = markerContent; // <div class="maker-marker">
+          // marker pulse
+          const el = markerContent;
           el.classList.remove("clicked");
-          void el.offsetWidth; // force reflow so animation restarts every time
+          void el.offsetWidth;
           el.classList.add("clicked");
 
-          // ---- Open panel ----
-          sidepanel.innerHTML = buildSidepanelHTML(maker);
-          sidepanel.classList.add("open");
-          enablePanelCloseButton();
+          // === PANEL LOGIC ===
+          const html = buildSidepanelHTML(maker);
 
-          // ---- Recenter smartly ----
-          const position = new google.maps.LatLng(maker.lat, maker.lng);
+          if (!sidepanel.classList.contains("open")) {
+            // First open — keep your existing behavior
+            sidepanel.innerHTML = html;
+            sidepanel.classList.add("open");
+            enablePanelCloseButton();
+          } else {
+            // Already open → smooth fade swap
+            smoothSwapPanelContent(html);
+          }
+
+          // recenter
+          const pos = new google.maps.LatLng(maker.lat, maker.lng);
 
           requestAnimationFrame(() => {
-            recenterMapForSidepanel(map, position);
+            recenterMapForSidepanel(map, pos);
           });
-
         }, 120)
-      );  
+      );
 
       markers.push(marker);
       bounds.extend(position);
@@ -250,7 +280,6 @@ document.addEventListener("DOMContentLoaded", function () {
     filterContainer.classList.add("maker-map-filters");
     filterContainer.innerHTML = `<strong>Filter by Type:</strong>`;
 
-    // "All Maker Spaces"
     const allLabel = document.createElement("label");
     allLabel.classList.add("maker-filter-item");
 
@@ -263,7 +292,6 @@ document.addEventListener("DOMContentLoaded", function () {
     allLabel.append(" All Maker Spaces");
     filterContainer.appendChild(allLabel);
 
-    // Individual taxonomy filters
     types.forEach((type) => {
       const label = document.createElement("label");
       label.classList.add("maker-filter-item");
@@ -280,7 +308,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     wrapper.insertBefore(filterContainer, mapElement);
 
-    // Filtering logic
     filterContainer.addEventListener("change", (e) => {
       const checkboxes = filterContainer.querySelectorAll("input[type=checkbox]");
       const selected = Array.from(checkboxes)
@@ -316,7 +343,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
-   * Load data + initialize
+   * Load data
    */
   function loadData() {
     fetch(endpoint)
