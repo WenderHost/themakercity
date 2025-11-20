@@ -374,6 +374,18 @@ hr,
 
 .maker-infowindow h3 {
   margin-top: 0;
+  font-size: 1.5em;
+}
+
+.maker-marker {
+  width: 32px;
+  height: 36px;
+  transform-origin: center bottom;
+  transition: transform 0.15s ease-out;
+}
+
+.maker-marker:hover {
+  transform: scale(1.5);
 }
 
 /* Makers Styles */

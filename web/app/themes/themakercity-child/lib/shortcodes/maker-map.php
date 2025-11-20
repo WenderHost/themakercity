@@ -33,7 +33,7 @@ function maker_map_shortcode( $atts ) {
   // Enqueue Google Maps + custom script
   wp_enqueue_script(
     'google-maps-api',
-    'https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY,
+    'https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY . '&libraries=marker&map_ids=6bc30825e5dd2d0987897fd0',
     [],
     null,
     true
