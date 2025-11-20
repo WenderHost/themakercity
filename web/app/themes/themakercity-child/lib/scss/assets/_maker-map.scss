@@ -1,3 +1,13 @@
+/* --------------------------------------------------------------
+ * Variables
+ * -------------------------------------------------------------- */
+$marker-color: #f3f3f3;
+$maker-teal: $makerteal; // using your existing global $makerteal
+
+
+/* --------------------------------------------------------------
+ * Filters
+ * -------------------------------------------------------------- */
 .maker-map-filters {
   margin-bottom: 10px;
   display: flex;
@@ -11,30 +21,106 @@
   white-space: nowrap;
 }
 
-/** 
+
+/* --------------------------------------------------------------
+ * Optional: Infowindow (remove if unused)
+ * -------------------------------------------------------------- */
+.maker-infowindow {
+  h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+  }
+}
+
+
+/* --------------------------------------------------------------
  * Maker Marker
- */
-$markercolor: #f3f3f3;
-/* Outer marker shell: border + pointer */
+ * -------------------------------------------------------------- */
 .maker-marker {
   width: 64px;
-  height: 72px; /* extra height to include the pointer */
+  height: 72px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   animation: maker-pop-in 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
 
-  &:hover{
+  &:hover {
     transform: scale(1.05);
   }
 
-  &.clicked{
+  &.clicked {
     animation: maker-pulse 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Outer circular border */
+  &::before {
+    content: "";
+    width: 58px;
+    height: 58px;
+    background: $marker-color;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, .65);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  /* Pointer triangle */
+  &::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 18px solid $marker-color;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+
+  /* Inner masked circle */
+  .maker-marker-inner {
+    width: 54px;
+    height: 54px;
+    background: $maker-teal;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    z-index: 2;
+    mask: radial-gradient(circle, white 99%, transparent 100%);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .maker-marker-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-family: system-ui, sans-serif;
   }
 }
 
-/* Keyframes for initial load animation */
+
+/* --------------------------------------------------------------
+ * Marker Animations
+ * -------------------------------------------------------------- */
 @keyframes maker-pop-in {
   0%   { transform: scale(0.7); }
   60%  { transform: scale(1.13); }
@@ -47,80 +133,10 @@ $markercolor: #f3f3f3;
   100% { transform: scale(1.0); }
 }
 
-/* Circular border */
-.maker-marker::before {
-  content: "";
-  width: 58px;
-  height: 58px;
-  background: $markercolor; /* Outer grey ring */
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, .65);
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-}
 
-/* Pointer triangle */
-.maker-marker::after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-top: 18px solid $markercolor; /* same grey as border */
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-/* Inner circle (masked image area) */
-.maker-marker-inner {
-  width: 54px;
-  height: 54px;
-  background: $makerteal; /* fallback blue */
-  border-radius: 50%;
-  position: absolute;
-  top: 2px; /* center inside border */
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
-  z-index: 2;
-
-  /* Perfect circle mask */
-  -webkit-mask-image: radial-gradient(circle, white 99%, transparent 100%);
-  mask-image: radial-gradient(circle, white 99%, transparent 100%);
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
-.maker-marker-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.maker-marker-fallback {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 32px;
-  font-family: system-ui, sans-serif;
-}
-
-
-
-/** 
- * Side Panel
- */
+/* --------------------------------------------------------------
+ * Sidepanel Layout
+ * -------------------------------------------------------------- */
 .maker-map-wrapper {
   position: relative;
 }
@@ -132,8 +148,8 @@ $markercolor: #f3f3f3;
   width: 360px;
   height: calc(100% - 68px);
   max-height: calc(100% - 68px);
-
   background: #fff;
+
   border: 1px solid #ddd;
   padding: 24px;
   overflow-y: auto;
@@ -141,10 +157,14 @@ $markercolor: #f3f3f3;
 
   z-index: 999999;
 
+  /* hidden state */
   transform: translateX(120%);
   opacity: 0;
   visibility: hidden;
-  transition: transform .25s ease, opacity .25s ease;
+
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   &.open {
     transform: translateX(0);
@@ -183,20 +203,23 @@ $markercolor: #f3f3f3;
   }
 }
 
-/* Smooth internal content transition */
+
+/* --------------------------------------------------------------
+ * Sidepanel Inner Fade Logic (safe w/ your JS)
+ * -------------------------------------------------------------- */
 .maker-panel-inner {
   opacity: 1;
   transition: opacity 200ms ease;
-}
 
-.maker-panel-inner.is-fading-out {
-  opacity: 0;
-}
+  &.is-fading-out {
+    opacity: 0;
+  }
 
-.maker-panel-inner.is-fading-in {
-  opacity: 0;
-}
+  &.is-fading-in {
+    opacity: 0;
+  }
 
-.maker-panel-inner.is-loaded {
-  opacity: 1;
+  &.is-loaded {
+    opacity: 1;
+  }
 }
