@@ -76,15 +76,22 @@ function get_maker_locations( \WP_REST_Request $request ) {
         ? wp_list_pluck( $space_terms, 'slug' )
         : [];
 
+
+      // primary_image
+      $img = get_field( 'primary_image' );
+      $img_id = ( is_array( $img ) && array_key_exists( 'id', $img ) )? $img['id'] : false ;
+      $image_url = ( $img_id )? wp_get_attachment_image_url( $img_id, 'thumbnail' ) : false ;
+
       $makers[] = [
-        'id'          => get_the_ID(),
-        'title'       => get_the_title(),
-        'link'        => get_permalink(),
-        'lat'         => (float) $map_field['lat'],
-        'lng'         => (float) $map_field['lng'],
-        'address'     => $map_field['address'] ?? '',
-        'categories'  => $categories,   // still included
-        'space_types' => $space_types,  // used for filtering in JS
+        'id'            => get_the_ID(),
+        'title'         => get_the_title(),
+        'link'          => get_permalink(),
+        'lat'           => (float) $map_field['lat'],
+        'lng'           => (float) $map_field['lng'],
+        'address'       => $map_field['address'] ?? '',
+        'categories'    => $categories,   // still included
+        'space_types'   => $space_types,  // used for filtering in JS
+        'primary_image' => $image_url ?: '',
       ];
     }
     wp_reset_postdata();
