@@ -51,17 +51,17 @@
 
 .maker-sidepanel {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 25px;
+  right: 60px;
   width: 360px;
-  height: calc(100% - 70px);
-  max-height: calc(100% - 70px);
+  height: calc(100% - 68px);
+  max-height: calc(100% - 68px);
 
   background: #fff;
   border: 1px solid #ddd;
   padding: 24px;
   overflow-y: auto;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
 
   z-index: 999999;
 

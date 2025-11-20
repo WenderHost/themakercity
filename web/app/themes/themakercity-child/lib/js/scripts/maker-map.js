@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const width = rect.width;
 
     // Rightmost 30% of the map = danger zone
-    const dangerZoneStartX = width * 0.70;
+    const dangerZoneStartX = width * 0.60;
 
     // Convert lat/lng → world point → pixel point
     const scale = Math.pow(2, map.getZoom());
