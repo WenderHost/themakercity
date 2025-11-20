@@ -501,7 +501,7 @@ hr,
   align-items: center;
   border-bottom: 1px solid #ddd;
   padding: 0;
-  background-color: #FDB56A;
+  background-color: #85cec5;
 }
 .maker-sidepanel .maker-panel-header h2 {
   font-size: 16px;
@@ -536,7 +536,7 @@ hr,
   display: block;
   text-align: center;
   padding: 8px 12px;
-  background-color: #FDB56A;
+  background-color: #85cec5;
   border-top: 1px solid #ddd;
 }
 .maker-sidepanel .maker-panel-link:hover {
