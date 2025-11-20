@@ -167,7 +167,7 @@ $border-color: #ddd;
     align-items: center;
     border-bottom: 1px solid $border-color;
     padding: 0;
-    background-color: #eee;
+    background-color: $marker-color;
 
     h2{
       font-size: 16px;
@@ -207,7 +207,7 @@ $border-color: #ddd;
     display: block;
     text-align: center;
     padding: 8px 12px;
-    background-color: #eee;
+    background-color: $marker-color;
     border-top: 1px solid $border-color;
 
     &:hover{
