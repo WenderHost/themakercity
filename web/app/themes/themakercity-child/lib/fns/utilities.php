@@ -37,3 +37,25 @@ function get_alert( $atts ){
 
   return render_template( 'alert', $data );
 }
+
+/**
+ * Determines whether the current request is in Elementor edit mode.
+ *
+ * Checks both the `elementor-preview` query parameter and Elementor's
+ * internal editor state to determine if the user is actively editing
+ * with Elementor.
+ *
+ * @return bool True if Elementor edit mode is active, false otherwise.
+ */
+function is_elementor_edit_mode() {
+  if ( isset( $_GET['elementor-preview'] ) ) {
+    return true;
+  }
+
+  if ( did_action( 'elementor/loaded' ) ) {
+    $elementor = \Elementor\Plugin::$instance;
+    return $elementor->editor->is_edit_mode();
+  }
+
+  return false;
+}

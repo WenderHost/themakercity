@@ -1,6 +1,6 @@
 <?php
 namespace TheMakerCity\shortcodes;
-use function TheMakerCity\utilities\get_alert;
+use function TheMakerCity\utilities\{get_alert,is_elementor_edit_mode};
 
 /**
  * Shortcode: [maker-map]
@@ -22,10 +22,13 @@ function maker_map_shortcode( $atts ) {
 
   // No more category attribute — cleaning this up
   $atts = shortcode_atts(
-    [],
+    [
+      'height' => 500,
+    ],
     $atts,
     'maker-map'
   );
+  $height = ( is_numeric( $atts['height'] ) )? $atts['height'] : 500 ;
 
   // Unique ID for multiple maps on a page
   $map_id = 'maker-map-' . uniqid();
@@ -65,12 +68,35 @@ function maker_map_shortcode( $atts ) {
     ]
   );
 
+  // Elementor admin preview skeleton
+  if ( is_elementor_edit_mode() ) {
+    return '
+      <div class="maker-map-skeleton" 
+           style="
+             width:100%;
+             height:' . intval( $height ) . 'px;
+             display:flex;
+             align-items:center;
+             justify-content:center;
+             background:#f9f9f9;
+             border:1px dashed #c8c8c8;
+             color:#555;
+             font-size:16px;
+             font-style:italic;
+           ">
+         Maker Spaces Map (height: ' . intval( $height ) . 'px)
+      </div>
+    ';
+  }
+
+
   // Output container
   return sprintf(
     '<div class="maker-map-wrapper">
-        <div id="%1$s" class="maker-map" style="width:100%%;height:500px;"></div>
+        <div id="%1$s" class="maker-map" style="width:100%%;height:%2$dpx;"></div>
      </div>',
-    esc_attr( $map_id )
+    esc_attr( $map_id ),
+    $height
   );
 }
 
