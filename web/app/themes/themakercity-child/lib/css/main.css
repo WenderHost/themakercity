@@ -388,6 +388,61 @@ hr,
   transform: scale(1.5);
 }
 
+/** Side Panel */
+.maker-map-wrapper {
+  position: relative;
+}
+
+.maker-sidepanel {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 360px;
+  height: calc(100% - 70px);
+  max-height: calc(100% - 70px);
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 24px;
+  overflow-y: auto;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+  z-index: 999999;
+  transform: translateX(120%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.maker-sidepanel.open {
+  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+.maker-sidepanel .maker-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.maker-sidepanel .maker-panel-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+.maker-sidepanel .maker-panel-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+.maker-sidepanel .maker-panel-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: bold;
+  color: #0073aa;
+}
+
 /* Makers Styles */
 .collaborator-note {
   display: flex;
