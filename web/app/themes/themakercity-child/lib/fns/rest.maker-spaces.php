@@ -72,26 +72,42 @@ function get_maker_locations( \WP_REST_Request $request ) {
 
       // maker-space-type (NEW primary taxonomy)
       $space_terms = get_the_terms( get_the_ID(), 'maker-space-type' );
+
       $space_types = $space_terms && ! is_wp_error( $space_terms )
         ? wp_list_pluck( $space_terms, 'slug' )
         : [];
 
+      $space_type_names = $space_terms && ! is_wp_error( $space_terms )
+        ? wp_list_pluck( $space_terms, 'name' )
+        : [];
+
+
 
       // primary_image
-      $img = get_field( 'primary_image' );
+      $img = get_field( 'logo' );
+      if( empty( $img ) )
+        $img = get_field( 'primary_image' );
       $img_id = ( is_array( $img ) && array_key_exists( 'id', $img ) )? $img['id'] : false ;
-      $image_url = ( $img_id )? wp_get_attachment_image_url( $img_id, 'thumbnail' ) : false ;
+      $image_thumbnail_url = false;
+      $image_medium_url = false;
+      if( $img_id ){
+        $image_thumbnail_url = wp_get_attachment_image_url( $img_id, 'thumbnail' );
+        $image_medium_url = wp_get_attachment_image_url( $img_id, 'large' );
+      }
+      $primary_image = array( 'thumbnail' => $image_thumbnail_url, 'medium' => $image_medium_url );
+
 
       $makers[] = [
-        'id'            => get_the_ID(),
-        'title'         => get_the_title(),
-        'link'          => get_permalink(),
-        'lat'           => (float) $map_field['lat'],
-        'lng'           => (float) $map_field['lng'],
-        'address'       => $map_field['address'] ?? '',
-        'categories'    => $categories,   // still included
-        'space_types'   => $space_types,  // used for filtering in JS
-        'primary_image' => $image_url ?: '',
+        'id'                => get_the_ID(),
+        'title'             => get_the_title(),
+        'link'              => get_permalink(),
+        'lat'               => (float) $map_field['lat'],
+        'lng'               => (float) $map_field['lng'],
+        'address'           => $map_field['address'] ?? '',
+        'categories'        => $categories,   // still included
+        'space_types'       => $space_types,  // used for filtering in JS
+        'space_type_names'  => $space_type_names,
+        'primary_image'     => $primary_image,
       ];
     }
     wp_reset_postdata();

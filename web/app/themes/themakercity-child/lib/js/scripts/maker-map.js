@@ -112,25 +112,25 @@ document.addEventListener("DOMContentLoaded", function () {
    * Sidepanel HTML Template
    */
   function buildSidepanelHTML(maker) {
+    const spaceTypesList = maker.space_type_names?.join(', ') || '';
+
     return `
       <div class="maker-panel-inner is-loaded">
         <div class="maker-panel-header">
           <h2>${maker.title}</h2>
           <button class="maker-panel-close">&times;</button>
-        </div>
-
-        <div class="maker-panel-body">
-          ${
-            maker.primary_image
-              ? `<img class="maker-panel-photo" src="${maker.primary_image}" alt="${maker.title}" />`
-              : ""
-          }
+        </div>${
+          maker.primary_image.medium
+            ? `<img class="maker-panel-photo" src="${maker.primary_image.medium}" alt="${maker.title}" />`
+            : ""
+        }<div class="maker-panel-body">
           <p class="maker-panel-address">${maker.address}</p>
+          <p class="maker-panel-space-types"><strong>Available:</strong> ${spaceTypesList}</p>
 
-          <a class="maker-panel-link" href="${maker.link}" target="_blank" rel="noopener noreferrer">
-            View Maker Profile →
-          </a>
         </div>
+        <a class="maker-panel-link" href="${maker.link}" target="_blank" rel="noopener noreferrer">
+          View Maker Profile →
+        </a>            
       </div>
     `;
   }
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const wrapper = document.createElement("div");
     wrapper.className = "maker-marker";
 
-    const imageUrl = maker.primary_image || "";
+    const imageUrl = maker.primary_image.thumbnail || "";
     const firstLetter = (maker.title || "").trim().charAt(0).toUpperCase() || "?";
 
     wrapper.innerHTML = `
