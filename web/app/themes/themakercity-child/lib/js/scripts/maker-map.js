@@ -65,6 +65,14 @@ document.addEventListener("DOMContentLoaded", function () {
   let allMakers = [];
   let markers = [];
 
+  function debounce(fn, delay = 120) {
+    let timer = null;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
   /**
    * Sidepanel HTML Template – customize freely
    */
@@ -90,60 +98,23 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   }
 
-  /**
-   * Build SVG marker content
-   */
-  function buildMarkerSvgString(maker) {
-    const imageUrl = maker.primary_image || "";
-    const hasImage = !!imageUrl;
-    const firstLetter = (maker.title || "").trim().charAt(0).toUpperCase() || "?";
-
-    return `
-<svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 72">
-  <style>
-    .fill { fill: #f4f4f4; }
-    .outline { fill: #d1d1d1; }
-  </style>
-
-  <path class="fill" d="M27.2 63.1H27C11.6 60.6.5 47.6.5 32 .5 14.6 14.6.5 32 .5S63.5 14.6 63.5 32c0 15.6-11.1 28.6-26.5 31.1h-.2L32 71l-4.8-7.9z"/>
-  <path class="outline" d="M32 1c17.1 0 31 13.9 31 31 0 7.4-2.7 14.6-7.5 20.2s-11.4 9.2-18.6 10.4l-.5.1-.2.4-4.2 7-4.2-7-.2-.4-.5-.1c-7.2-1.1-13.8-4.8-18.6-10.4C3.7 46.6 1 39.4 1 32 1 14.9 14.9 1 32 1m0-1C14.3 0 0 14.3 0 32c0 15.9 11.7 29.2 26.9 31.6L32 72l5.1-8.4C52.3 61.2 64 47.9 64 32 64 14.3 49.7 0 32 0z"/>
-
-  <defs>
-    <clipPath id="primary-image-clip">
-      <circle cx="32" cy="32" r="29" />
-    </clipPath>
-  </defs>
-
-  ${
-    hasImage
-      ? `
-        <image
-          href="${imageUrl}"
-          x="3"
-          y="3"
-          width="58"
-          height="58"
-          clip-path="url(#primary-image-clip)"
-          preserveAspectRatio="xMidYMid slice"
-        />`
-      : `
-        <circle cx="32" cy="32" r="29" fill="#7ac5e5" />
-        <text
-          x="32"
-          y="39"
-          text-anchor="middle"
-          font-size="24"
-          font-family="system-ui"
-          fill="#ffffff"
-        >${firstLetter}</text>`
-  }
-</svg>`;
-  }
-
   function createMarkerContentElement(maker) {
     const wrapper = document.createElement("div");
     wrapper.className = "maker-marker";
-    wrapper.innerHTML = buildMarkerSvgString(maker).trim();
+
+    const imageUrl = maker.primary_image || "";
+    const firstLetter = (maker.title || "").trim().charAt(0).toUpperCase() || "?";
+
+    wrapper.innerHTML = `
+      <div class="maker-marker-inner">
+        ${
+          imageUrl
+            ? `<img src="${imageUrl}" alt="${maker.title}" />`
+            : `<div class="maker-marker-fallback"><span>${firstLetter}</span></div>`
+        }
+      </div>
+    `;
+
     return wrapper;
   }
 
@@ -221,21 +192,31 @@ document.addEventListener("DOMContentLoaded", function () {
         map,
       });
 
-      // Click → open sidepanel
-      marker.addListener("click", () => {
-        // Open panel
-        sidepanel.innerHTML = buildSidepanelHTML(maker);
-        sidepanel.classList.add("open");
-        enablePanelCloseButton();
+      // NEW: Click to open sidepanel (w/ debouncing)
+      marker.addListener(
+        "click",
+        debounce(() => {
 
-        // RECENTER MAP (smart offset)
-        const position = new google.maps.LatLng(maker.lat, maker.lng);
+          // ---- ANIMATION: pulse the marker ----
+          const el = markerContent; // <div class="maker-marker">
+          el.classList.remove("clicked");
+          void el.offsetWidth; // force reflow so animation restarts every time
+          el.classList.add("clicked");
 
-        // Wait one animation frame so panel has opened
-        requestAnimationFrame(() => {
-          recenterMapForSidepanel(map, position);
-        });
-      });
+          // ---- Open panel ----
+          sidepanel.innerHTML = buildSidepanelHTML(maker);
+          sidepanel.classList.add("open");
+          enablePanelCloseButton();
+
+          // ---- Recenter smartly ----
+          const position = new google.maps.LatLng(maker.lat, maker.lng);
+
+          requestAnimationFrame(() => {
+            recenterMapForSidepanel(map, position);
+          });
+
+        }, 120)
+      );  
 
       markers.push(marker);
       bounds.extend(position);
