@@ -148,6 +148,59 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /**
+   * Only recenter the map if the marker falls inside the right-side
+   * danger zone (covered by the sidepanel).
+   */
+  function recenterMapForSidepanel(map, position) {
+    const projection = map.getProjection();
+    if (!projection) return;
+
+    const div = map.getDiv();
+    const rect = div.getBoundingClientRect();
+    const width = rect.width;
+
+    // Rightmost 30% of the map = danger zone
+    const dangerZoneStartX = width * 0.70;
+
+    // Convert lat/lng → world point → pixel point
+    const scale = Math.pow(2, map.getZoom());
+    const worldPoint = projection.fromLatLngToPoint(position);
+
+    const pixelPoint = {
+      x: worldPoint.x * scale,
+      y: worldPoint.y * scale
+    };
+
+    // Where is the map's *top-left* corner in world pixels?
+    const topLeftWorld = projection.fromLatLngToPoint(map.getBounds().getNorthEast());
+    const topLeftPixel = {
+      x: topLeftWorld.x * scale - width,
+      y: topLeftWorld.y * scale
+    };
+
+    // Convert world pixel → container coordinates
+    const markerX = pixelPoint.x - topLeftPixel.x;
+
+    // If marker is NOT in the danger zone → don't shift
+    if (markerX < dangerZoneStartX) {
+      return;
+    }
+
+    // Marker *is* behind the sidepanel ⇒ apply recentering
+    const offsetPx = +180;   // positive moves map left (desired)
+    const worldOffsetX = offsetPx / scale;
+
+    const newWorldPoint = new google.maps.Point(
+      worldPoint.x + worldOffsetX,
+      worldPoint.y
+    );
+
+    const newLatLng = projection.fromPointToLatLng(newWorldPoint);
+
+    map.panTo(newLatLng);
+  }
+
+  /**
    * Render markers with AdvancedMarkerElement
    */
   function renderMarkers(makers) {
@@ -170,9 +223,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Click → open sidepanel
       marker.addListener("click", () => {
+        // Open panel
         sidepanel.innerHTML = buildSidepanelHTML(maker);
         sidepanel.classList.add("open");
         enablePanelCloseButton();
+
+        // RECENTER MAP (smart offset)
+        const position = new google.maps.LatLng(maker.lat, maker.lng);
+
+        // Wait one animation frame so panel has opened
+        requestAnimationFrame(() => {
+          recenterMapForSidepanel(map, position);
+        });
       });
 
       markers.push(marker);
