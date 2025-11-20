@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
       filterContainer.appendChild(label);
     });
 
-    wrapper.insertBefore(filterContainer, mapElement);
+    wrapper.appendChild(filterContainer);
 
     filterContainer.addEventListener("change", (e) => {
       const checkboxes = filterContainer.querySelectorAll("input[type=checkbox]");
