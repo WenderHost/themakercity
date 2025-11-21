@@ -140,7 +140,31 @@ function maker_list_shortcode( $atts ) {
 
 	// If admin AND in Elementor edit mode, append an instructional alert.
 	if ( current_user_can( 'manage_options' ) && is_elementor_edit_mode() ) {
-	  $output .= get_alert([
+
+	  // Build dynamic shortcode representation
+	  $shortcode_parts = [];
+
+	  if ( ! empty( $atts['category'] ) ) {
+	    $shortcode_parts[] = 'category="' . esc_attr( $atts['category'] ) . '"';
+	  }
+
+	  if ( ! empty( $atts['spacetype'] ) ) {
+	    $shortcode_parts[] = 'spacetype="' . esc_attr( $atts['spacetype'] ) . '"';
+	  }
+
+	  if ( ! empty( $atts['tags'] ) ) {
+	    $shortcode_parts[] = 'tags="' . esc_attr( $atts['tags'] ) . '"';
+	  }
+
+	  // Only show link attr if explicitly set by user or not default
+	  if ( isset( $atts['link'] ) && $atts['link'] !== 'true' ) {
+	    $shortcode_parts[] = 'link="' . esc_attr( $atts['link'] ) . '"';
+	  }
+
+	  $dynamic_shortcode = '[maker_list' . ( ! empty( $shortcode_parts ) ? ' ' . implode( ' ', $shortcode_parts ) : '' ) . ']';
+
+	  // Build alert
+	  $alert = get_alert([
 	    'type'        => 'info',
 	    'title'       => 'Maker List Shortcode Instructions',
 	    'description' => '
@@ -155,12 +179,18 @@ function maker_list_shortcode( $atts ) {
 	      <strong>Examples:</strong><br>
 	      <code>[maker_list]</code><br>
 	      <code>[maker_list spacetype="all"]</code><br>
-	      <code>[maker_list category="art,wood" spacetype="studio" tags="painting"]</code>
+	      <code>[maker_list category="art,wood" spacetype="studio" tags="painting"]</code><br><br>
+
+	      <strong>Your Shortcode:</strong><br>
+	      <code>' . esc_html( $dynamic_shortcode ) . '</code>
 	    ',
 	    'dismissable' => false,
 	  ]);
+
+	  $output .= '<div style="margin-top: 20px;">' . $alert . '</div>';
 	}
-  
+
+
   return $output;
 }
 add_shortcode( 'maker_list', __NAMESPACE__ . '\\maker_list_shortcode' );
