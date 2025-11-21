@@ -103,6 +103,8 @@ function maker_list_shortcode( $atts ) {
     'post_type'      => 'maker',
     'post_status'    => 'publish',
     'posts_per_page' => -1,
+    'order'					 => 'ASC',
+    'orderby'				 => 'title',
   ];
 
   if ( ! empty( $tax_query ) ) {
