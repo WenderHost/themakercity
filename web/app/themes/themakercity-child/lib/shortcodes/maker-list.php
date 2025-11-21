@@ -1,5 +1,6 @@
 <?php
 namespace TheMakerCity\shortcodes;
+use function TheMakerCity\utilities\{get_alert,is_elementor_edit_mode};
 
 /**
  * Generates a list of Maker posts filtered by taxonomy attributes.
@@ -137,6 +138,29 @@ function maker_list_shortcode( $atts ) {
 
   $output .= '</ul>';
 
+	// If admin AND in Elementor edit mode, append an instructional alert.
+	if ( current_user_can( 'manage_options' ) && is_elementor_edit_mode() ) {
+	  $output .= get_alert([
+	    'type'        => 'info',
+	    'title'       => 'Maker List Shortcode Instructions',
+	    'description' => '
+	      Use the <code>[maker_list]</code> shortcode to display Makers.<br><br>
+
+	      <strong>Attributes:</strong><br>
+	      <code>category</code> – Comma-separated maker-category slugs<br>
+	      <code>spacetype</code> – Comma-separated maker-space-type slugs, or <code>all</code><br>
+	      <code>tags</code> – Comma-separated maker-tag slugs<br>
+	      <code>link</code> – true/false (default: true)<br><br>
+
+	      <strong>Examples:</strong><br>
+	      <code>[maker_list]</code><br>
+	      <code>[maker_list spacetype="all"]</code><br>
+	      <code>[maker_list category="art,wood" spacetype="studio" tags="painting"]</code>
+	    ',
+	    'dismissable' => false,
+	  ]);
+	}
+  
   return $output;
 }
 add_shortcode( 'maker_list', __NAMESPACE__ . '\\maker_list_shortcode' );
