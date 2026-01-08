@@ -196,6 +196,32 @@ document.addEventListener("DOMContentLoaded", function () {
     map.panTo(newLatLng);
   }
 
+  const HOME_CENTER = { lat: 35.9606, lng: -83.9207 }; // Knoxville
+  const HOME_ZOOM = 11;
+
+  // Only makers within this radius can influence fitBounds.
+  const AUTOFIT_RADIUS_KM = 150;
+
+  function distanceKm(a, b) {
+    const toRad = (n) => (n * Math.PI) / 180;
+    const R = 6371;
+
+    const dLat = toRad(b.lat - a.lat);
+    const dLng = toRad(b.lng - a.lng);
+
+    const lat1 = toRad(a.lat);
+    const lat2 = toRad(b.lat);
+
+    const sin1 = Math.sin(dLat / 2);
+    const sin2 = Math.sin(dLng / 2);
+
+    const h =
+      sin1 * sin1 +
+      Math.cos(lat1) * Math.cos(lat2) * (sin2 * sin2);
+
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
   /**
    * Render markers
    */
@@ -252,6 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bounds.extend(position);
     });
 
+    /*
     if (makers.length > 0) {
       map.fitBounds(bounds);
 
@@ -268,6 +295,43 @@ document.addEventListener("DOMContentLoaded", function () {
         markers,
       });
     }
+    /**/
+    if (makers.length > 0) {
+      // Build "local" bounds that ignore far-away outliers (like London).
+      const localBounds = new google.maps.LatLngBounds();
+      let localCount = 0;
+
+      makers.forEach((maker) => {
+        const pos = { lat: maker.lat, lng: maker.lng };
+
+        if (distanceKm(HOME_CENTER, pos) <= AUTOFIT_RADIUS_KM) {
+          localBounds.extend(pos);
+          localCount++;
+        }
+      });
+
+      if (localCount > 0) {
+        map.fitBounds(localBounds);
+      } else {
+        // If nothing local exists (unlikely), force Knoxville anyway.
+        map.setCenter(HOME_CENTER);
+        map.setZoom(HOME_ZOOM);
+      }
+
+      if (makers.length === 1) {
+        google.maps.event.addListenerOnce(map, "bounds_changed", function () {
+          if (map.getZoom() > MAX_SINGLE_MARKER_ZOOM) {
+            map.setZoom(MAX_SINGLE_MARKER_ZOOM);
+          }
+        });
+      }
+
+      clusterer = new markerClusterer.MarkerClusterer({
+        map,
+        markers,
+      });
+    }
+    
   }
 
   /**
