@@ -27,6 +27,9 @@ WEB_DIR="$PROJECT_ROOT/web"
 SQL_DIR="$PROJECT_ROOT/sql"
 mkdir -p "$SQL_DIR"
 
+export PROJECT_ROOT WEB_DIR SQL_DIR
+export SYNC_REMOTE_HOST SYNC_LOCAL_HOST
+
 REMOTE_SQL="production.sql"
 REMOTE_TGZ="production.sql.tar.gz"
 
@@ -118,16 +121,15 @@ run rm -f "$LOCAL_SQL"
 echo "👉 [WP DB] Replacing https://$SYNC_REMOTE_HOST with https://$SYNC_LOCAL_HOST..."
 run bash -lc "cd \"$WEB_DIR\" && wp search-replace \"https://$SYNC_REMOTE_HOST\" \"https://$SYNC_LOCAL_HOST\" --skip-columns=guid --format=count"
 
-echo "---"
-echo "👉 [Elementor] Replacing https://$SYNC_REMOTE_HOST with https://$SYNC_LOCAL_HOST..."
-run bash -lc "cd \"$WEB_DIR\" && wp elementor replace_urls \"https://$SYNC_REMOTE_HOST\" \"https://$SYNC_LOCAL_HOST\""
+# Optional per-project steps:
+# Create bin/sync.d/post-import.sh to run Elementor fixes, plugin toggles, etc.
+POST_IMPORT_HOOK="$PROJECT_ROOT/bin/sync.d/post-import.sh"
 
-echo "---"
-run bash -lc "cd \"$WEB_DIR\" && wp elementor flush_css"
-
-# Keep project-specific plugin toggles non-fatal.
-run bash -lc "cd \"$WEB_DIR\" && wp plugin deactivate spinupwp limit-login-attempts-reloaded" || true
-run bash -lc "cd \"$WEB_DIR\" && wp plugin activate localdev-switcher" || true
+if [[ -f "$POST_IMPORT_HOOK" ]]; then
+  echo "---"
+  echo "🪝 Running post-import hook: $POST_IMPORT_HOOK"
+  run bash "$POST_IMPORT_HOOK"
+fi
 
 echo "✅ Done."
 echo "Local DB backup saved at: $LOCAL_BACKUP"
