@@ -2,6 +2,7 @@
 web/app/plugins/*
 !web/app/plugins/.gitkeep
 web/app/mu-plugins/*/
+web/app/mu-plugins/spinup-media-fallback.php
 web/app/themes/twentytwentythree/
 web/app/themes/hello-elementor/
 web/app/upgrade
