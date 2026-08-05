@@ -19,32 +19,50 @@ function my_acf_google_map_api( $api ){
 add_filter('acf/fields/google_map/api', __NAMESPACE__ . '\\my_acf_google_map_api');
 
 /**
- * Disables the ACF Extended Pro plugin on the 'profile' page.
+ * Prevents ACF Extended Pro's frontend/input JS (`acf-extended-input`,
+ * i.e. `acfe-input.js`) from loading on the profile editor page.
  *
- * This function checks the custom routing variables `maker_template` and `maker_slug` to determine if
- * the current page is the 'profile' page. If so, it deactivates the ACF Extended Pro plugin to prevent it from loading.
+ * ACF Extended Pro monkey-patches ACF Pro's native Gallery field JS
+ * (`acf.models.GalleryField.prototype.onClickAdd` / `.editAttachment`)
+ * without keeping a reference to the original methods, which breaks the
+ * "Add to gallery" button on this page's frontend `acf_form()`. There's
+ * no clean way to un-patch it once that script has run, so instead we
+ * stop `acf-extended-input` from being enqueued in the first place, for
+ * this one route only.
  *
- * @global array $custom_routes The array containing custom route configurations.
+ * This used to be handled by deactivating the whole plugin via
+ * `deactivate_plugins()`, which is NOT request-scoped — it flips the
+ * plugin off site-wide via the `active_plugins` option, breaking it for
+ * every visitor and also breaking the `profile_faq` field on this same
+ * page (an `acfe_dynamic_render` field type supplied by this plugin).
+ * See git commit a3e18ca, "BUGFIX: Accessing /profile/ deactivates ACF
+ * Extended Pro". Dequeuing just the one script/style for this one
+ * request is safe and fully request-scoped — nothing persists to the
+ * database, and the PHP-registered `acfe_dynamic_render` field type
+ * (which `profile_faq` relies on for rendering, via our own
+ * `render_field` callback below) is untouched since that's a separate,
+ * always-registered PHP field type, not part of this JS bundle.
+ *
+ * Also note: this route (`/profile-editor/`) is a virtual rewrite route
+ * (see lib/fns/routes.php), not a real WP_Post page, so `is_page()`
+ * won't detect it — the `maker_template`/`maker_slug` query vars set by
+ * `custom_query_vars()` are the only reliable way to identify it.
  *
  * @return void
  */
-function disable_acf_extended_on_profile() {
-  // Get the value of the maker_template query variable
+function dequeue_acf_extended_on_profile_editor() {
   $maker_template = get_query_var( 'maker_template' );
-  $maker_slug = get_query_var( 'maker_slug' );
+  $maker_slug     = get_query_var( 'maker_slug' );
 
-  // Check if the maker_template is 'dashboard' and the maker_slug is 'profile'
-  global $custom_routes;
-  if( ! empty( $maker_template ) ){
-    foreach ( $custom_routes as $route ) {
-      if ( $maker_template === 'dashboard' && $maker_slug === 'profile' ) {
-        // Deactivate the ACF Extended Pro plugin
-        deactivate_plugins( 'acf-extended-pro/acf-extended.php' );
-      }
-    }
-  }
+  if ( 'dashboard' !== $maker_template || 'profile-editor' !== $maker_slug )
+    return;
+
+  add_action( 'acf/input/admin_enqueue_scripts', function(){
+    wp_dequeue_script( 'acf-extended-input' );
+    wp_dequeue_style( 'acf-extended-input' );
+  }, 20 ); // After ACFE's own priority-10 callback enqueues them.
 }
-add_action( 'template_redirect', __NAMESPACE__ . '\\disable_acf_extended_on_profile' );
+add_action( 'template_redirect', __NAMESPACE__ . '\\dequeue_acf_extended_on_profile_editor' );
 
 
 function profile_faq( $field ){
