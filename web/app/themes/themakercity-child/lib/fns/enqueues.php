@@ -21,14 +21,19 @@ function enqueue_scripts_styles() {
   wp_enqueue_script( 'global', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/global.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/global.js' ), true );
 
   wp_register_script( 'systeminfo', MAKR_STYLESHEET_DIR_URI . 'lib/js/scripts/system-info.js', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/scripts/system-info.js') );
+
+  wp_register_script( 'gallery-watchdog', MAKR_STYLESHEET_DIR_URI . 'lib/js/scripts/gallery-watchdog.js', ['jquery'], filemtime( MAKR_STYLESHEET_DIR . 'lib/js/scripts/gallery-watchdog.js' ), true );
+
   $wpvars = array(
     'ajax_url'    => admin_url( 'admin-ajax.php' ),
+    'nonce'       => wp_create_nonce( 'mkc_client_report' ),
     'user_email'  => null,
   );
   $current_user = wp_get_current_user();
   if( $current_user )
     $wpvars['user_email'] = $current_user->user_email;
   wp_localize_script( 'systeminfo', 'wpvars', $wpvars );
+  wp_localize_script( 'gallery-watchdog', 'wpvars', $wpvars );
 
   wp_register_style( 'filepond', MAKR_STYLESHEET_DIR_URI . 'lib/js/dist/filepond.init.css', null, filemtime( MAKR_STYLESHEET_DIR . 'lib/js/dist/filepond.init.css' ) );
   //wp_register_script( 'filepond', 'https://unpkg.com/filepond@^4/dist/filepond.js' );

@@ -8,11 +8,13 @@ function sendSystemInfo(event) {
     .then(response => response.json())
     .then(data => {
       const systemInfo = {
+        event: 'manual_report',
         browser: navigator.userAgent,
         os: navigator.platform,
         screenResolution: `${screen.width}x${screen.height}`,
         ip: data.ip,
-        user_email: wpvars.user_email
+        user_email: wpvars.user_email,
+        nonce: wpvars.nonce
       };
 
       const endpoint = wpvars.ajax_url + '?action=send_system_info';

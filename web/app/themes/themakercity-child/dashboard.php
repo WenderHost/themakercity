@@ -86,6 +86,10 @@ if( 'apply' == $current_slug ){
   wp_enqueue_script( 'filepond-init' );
 }
 
+if( 'profile-editor' == $current_slug ){
+  wp_enqueue_script( 'gallery-watchdog' );
+}
+
 get_template_part( 'wp-templates/layout/head', null, [ 'title' => $current_title ] );
 if( is_user_logged_in() ){
     get_template_part( 'wp-templates/layout/header' );
