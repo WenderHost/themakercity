@@ -337,41 +337,115 @@ function custom_save_maker_post( $post_id ) {
 }
 add_action( 'acf/save_post', __NAMESPACE__ . '\\custom_save_maker_post', 20 );
 
+/**
+ * Logs the outcome of a Maker CPT save, focused on the `additional_images`
+ * gallery field, so gallery-upload reports can be cross-referenced against
+ * actual server-side save results instead of relying solely on user reports.
+ *
+ * Runs after ACF's own field-saving (default priority 10 on `acf/save_post`),
+ * so `get_field()` reflects the just-saved value.
+ *
+ * @param int $post_id The Post ID.
+ */
+function log_maker_gallery_save( $post_id ) {
+  if ( is_admin() || 'maker' !== get_post_type( $post_id ) )
+    return;
+
+  $current_user  = wp_get_current_user();
+  $gallery       = get_field( 'additional_images', $post_id );
+  $gallery_count = is_array( $gallery ) ? count( $gallery ) : 0;
+  $acfe_active   = defined( 'ACFE_VERSION' );
+
+  uber_log( '[gallery-save] Maker CPT saved via frontend form.', [
+    'post_id'       => $post_id,
+    'user_id'       => $current_user->ID,
+    'user_email'    => $current_user->user_email,
+    'gallery_count' => $gallery_count,
+    'acfe_active'   => $acfe_active ? 'yes' : 'no',
+    'has_upload_cap'=> user_can( $current_user, 'upload_files' ) ? 'yes' : 'no',
+  ] );
+}
+add_action( 'acf/save_post', __NAMESPACE__ . '\\log_maker_gallery_save', 20 );
+
+/**
+ * Handles the "Share Your System Info" report, and the richer client-side
+ * diagnostic events logged by the gallery watchdog (see `lib/js/scripts/
+ * gallery-watchdog.js`). Both post JSON to this same nonce-protected
+ * endpoint; the `event` field distinguishes a manual system-info report
+ * from an automatically-captured gallery failure.
+ */
 function send_system_info_handler() {
-  
-    // Get JSON payload
-    $data = json_decode(file_get_contents("php://input"), true);
+
+    // Get JSON payload. This endpoint receives `Content-Type: application/json`
+    // bodies, so the nonce is NOT in $_POST/$_REQUEST — check_ajax_referer()
+    // can't see it there, hence the manual wp_verify_nonce() below instead.
+    $data = json_decode( file_get_contents( 'php://input' ), true );
 
     $response = array();
     $response['message'] = '';
     $response['status'] = '';
 
+    if( $data && ( empty( $data['nonce'] ) || ! wp_verify_nonce( $data['nonce'], 'mkc_client_report' ) ) ) {
+      uber_log( '[client-report] Rejected: invalid or missing nonce.' );
+      $response['status'] = 'error';
+      $response['message'] = 'Invalid request.';
+      wp_send_json( $response, 403 );
+    }
+
     if( $data ) {
-      $to = 'mwender@wenmarkdigital.com'; //get_option('admin_email'); // Send to site admin email
-      $subject = "New System Info Report [{$data['user_email']}]";
-      
-      $message = "System Information Report for {$data['user_email']}:\n\n";
-      $message .= "<strong>IP Address:</strong> " . sanitize_text_field($data['ip']) . "\n";
-      $message .= "<strong>Browser:</strong> " . sanitize_text_field($data['browser']) . "\n";
-      $message .= "<strong>Operating System:</strong> " . sanitize_text_field($data['os']) . "\n";
-      $message .= "<strong>Screen Resolution:</strong> " . sanitize_text_field($data['screenResolution']) . "\n";
-      
+      $current_user = wp_get_current_user();
+      $event        = isset( $data['event'] ) ? sanitize_text_field( $data['event'] ) : 'manual_report';
+      $user_email   = isset( $data['user_email'] ) ? sanitize_text_field( $data['user_email'] ) : $current_user->user_email;
+
+      // Always log server-side first, so we have a record even if the
+      // outbound email fails or is never triggered.
+      uber_log( '[client-report] ' . $event, [
+        'user_id'        => $current_user->ID,
+        'user_email'     => $user_email,
+        'ip'             => isset( $data['ip'] ) ? sanitize_text_field( $data['ip'] ) : null,
+        'browser'        => isset( $data['browser'] ) ? sanitize_text_field( $data['browser'] ) : null,
+        'os'             => isset( $data['os'] ) ? sanitize_text_field( $data['os'] ) : null,
+        'screen'         => isset( $data['screenResolution'] ) ? sanitize_text_field( $data['screenResolution'] ) : null,
+        'has_upload_cap' => user_can( $current_user, 'upload_files' ) ? 'yes' : 'no',
+        'acfe_active'    => defined( 'ACFE_VERSION' ) ? 'yes' : 'no',
+        'detail'         => isset( $data['detail'] ) ? sanitize_text_field( $data['detail'] ) : null,
+        'js_error'       => isset( $data['jsError'] ) ? sanitize_textarea_field( $data['jsError'] ) : null,
+      ] );
+
+      $to      = get_option( 'admin_email' );
+      $subject = "New {$event} Report [{$user_email}]";
+
+      $message  = "Report type: {$event}\n";
+      $message .= "User: {$user_email} (ID {$current_user->ID})\n\n";
+      $message .= "<strong>IP Address:</strong> " . ( isset( $data['ip'] ) ? sanitize_text_field( $data['ip'] ) : 'n/a' ) . "\n";
+      $message .= "<strong>Browser:</strong> " . ( isset( $data['browser'] ) ? sanitize_text_field( $data['browser'] ) : 'n/a' ) . "\n";
+      $message .= "<strong>Operating System:</strong> " . ( isset( $data['os'] ) ? sanitize_text_field( $data['os'] ) : 'n/a' ) . "\n";
+      $message .= "<strong>Screen Resolution:</strong> " . ( isset( $data['screenResolution'] ) ? sanitize_text_field( $data['screenResolution'] ) : 'n/a' ) . "\n";
+      $message .= "<strong>Has upload_files capability:</strong> " . ( user_can( $current_user, 'upload_files' ) ? 'yes' : 'no' ) . "\n";
+      $message .= "<strong>ACF Extended Pro active:</strong> " . ( defined( 'ACFE_VERSION' ) ? 'yes' : 'no' ) . "\n";
+      if ( ! empty( $data['detail'] ) )
+        $message .= "<strong>Detail:</strong> " . sanitize_text_field( $data['detail'] ) . "\n";
+      if ( ! empty( $data['jsError'] ) )
+        $message .= "<strong>JS Error:</strong> " . sanitize_textarea_field( $data['jsError'] ) . "\n";
+
       $headers = ["Content-Type: text/html; charset=UTF-8"];
-      
+
       if( wp_mail( $to, $subject, $message, $headers ) ) {
         $response['status'] = "success";
         wp_send_json( $response, 200 );
       } else {
+        uber_log( '[client-report] wp_mail() failed to send report to admin_email.', [ 'to' => $to, 'subject' => $subject ] );
         $response['status'] = 'error';
         $response['message'] = 'Error sending email.';
         wp_send_json( $response, 500 );
       }
     } else {
+      uber_log( '[client-report] Received request with no/invalid JSON payload.' );
       $response['status'] = 'error';
       $response['message'] = 'No data received.';
       wp_send_json( $response, 400 );
     }
-    
+
     wp_die();
 }
 add_action('wp_ajax_send_system_info', __NAMESPACE__ . '\\send_system_info_handler');
