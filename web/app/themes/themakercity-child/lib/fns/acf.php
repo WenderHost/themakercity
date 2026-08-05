@@ -90,8 +90,7 @@ function profile_faq( $field ){
 
       <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#directory-steps">
         <div class="accordion-body">
-          <?= get_alert(['type' => 'success', 'description' => '<strong>04/01/2025 (14:13) - NOTE:</strong> Earlier today there was an issue loading some of the backend scripts that power the profile editor. We have just pushed an update that should fix that issue.']) ?>
-          <?= get_alert(['type' => 'success', 'description' => '<strong>02/22/2025 (07:55) - Update:</strong> This feature should be working now. We fixed a setting which was preventing all users from uploading images. Apologies for the inconvenience. ~The Maker City Webmaster']) ?>
+          <?= get_alert(['type' => 'success', 'description' => '<strong>08/05/2026 (15:08):</strong> <em><strong>Been having issues uploading images to your Maker Profile?</strong></em> As of today, I\'m hopeful I\'ve gotten those fixed. If not, click the button below to share your system info with me so I can further diagnose. ~The Maker City Webmaster']) ?>
           <p>Our webmaster is gathering details of affected user's systems so we can better diagnose and fix this issue. If the "Add to gallery" button isn't working, share your browser/OS details with our webmaster by clicking this button:</p>
           <button class="btn btn-primary" type="button" id="send-system-info">Share Your System Info</button>
           <p id="status"></p>
