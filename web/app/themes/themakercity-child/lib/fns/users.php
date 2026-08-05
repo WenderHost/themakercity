@@ -36,7 +36,7 @@ function allow_upload_files_for_roles() {
     }
   }
 }
-//add_action( 'init', __NAMESPACE__ . '\\allow_subscribers_to_upload_files' );
+add_action( 'init', __NAMESPACE__ . '\\allow_upload_files_for_roles' );
 
 /**
  * Redirects 'subscriber' and 'maker' users away from the WordPress admin area.
