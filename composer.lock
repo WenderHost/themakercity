@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfb914ebd1ec3a6f6c53a357a6a91b6d",
+    "content-hash": "6634ea145b9a1f2704f953b5be43c785",
     "packages": [
         {
             "name": "composer/installers",
@@ -1183,11 +1183,11 @@
         },
         {
             "name": "wenmark/advanced-custom-fields-pro",
-            "version": "6.4.3",
+            "version": "6.8.7",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/advanced-custom-fields-pro/6.4.3",
-                "shasum": "b366b82373b424c111f49e095c6150936ad63486"
+                "url": "https://packages.wenmarkdigital.com/satispress/advanced-custom-fields-pro/6.8.7",
+                "shasum": "44ea041dc86ec3fd5aa0ec2f3cae30c85ab4be36"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1493,15 +1493,15 @@
         },
         {
             "name": "wpackagist-plugin/limit-login-attempts-reloaded",
-            "version": "2.26.28",
+            "version": "3.3.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/limit-login-attempts-reloaded/",
-                "reference": "tags/2.26.28"
+                "reference": "tags/3.3.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.2.26.28.zip"
+                "url": "https://downloads.wordpress.org/plugin/limit-login-attempts-reloaded.3.3.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1619,15 +1619,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-importer",
-            "version": "0.8.4",
+            "version": "0.9.5",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
-                "reference": "tags/0.8.4"
+                "reference": "tags/0.9.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.8.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.9.5.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
