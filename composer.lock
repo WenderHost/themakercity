@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07a433447e4f10437c1edf6dcba39e0e",
+    "content-hash": "bfb914ebd1ec3a6f6c53a357a6a91b6d",
     "packages": [
         {
             "name": "composer/installers",
@@ -1225,11 +1225,11 @@
         },
         {
             "name": "wenmark/elementor-pro",
-            "version": "3.35.1",
+            "version": "4.2.1",
             "dist": {
                 "type": "zip",
-                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/3.35.1",
-                "shasum": "132ef3887025815dfda0ed795d313c218fe460f7"
+                "url": "https://packages.wenmarkdigital.com/satispress/elementor-pro/4.2.1",
+                "shasum": "b9af79f053108bf419de7c1cfff25feb87eab904"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -1403,15 +1403,15 @@
         },
         {
             "name": "wpackagist-plugin/elementor",
-            "version": "3.35.9",
+            "version": "4.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/elementor/",
-                "reference": "tags/3.35.9"
+                "reference": "tags/4.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/elementor.3.35.9.zip"
+                "url": "https://downloads.wordpress.org/plugin/elementor.4.2.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
