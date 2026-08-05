@@ -368,6 +368,31 @@ function log_maker_gallery_save( $post_id ) {
 add_action( 'acf/save_post', __NAMESPACE__ . '\\log_maker_gallery_save', 20 );
 
 /**
+ * Records the timestamp of a Maker's most recent edit made through the
+ * frontend Profile Editor, in a dedicated postmeta value distinct from
+ * WordPress' own `post_modified`.
+ *
+ * `post_modified` isn't a reliable signal for "the Maker edited their
+ * profile" - it also gets bumped by admin/webmaster edits in wp-admin,
+ * bulk imports (see scripts/import-makers.php), and any other process
+ * that calls wp_update_post() on a Maker CPT. This meta value only ever
+ * gets set here, gated the same way as custom_save_maker_post() above
+ * (`! is_admin()`), so it only reflects genuine frontend submissions.
+ *
+ * Read by the "Last Edit" admin column in
+ * lib/fns/maker-cpt.admin-columns.php.
+ *
+ * @param int $post_id The Post ID.
+ */
+function track_maker_profile_edit_timestamp( $post_id ) {
+  if ( is_admin() || 'maker' !== get_post_type( $post_id ) )
+    return;
+
+  update_post_meta( $post_id, '_maker_profile_last_edited', current_time( 'mysql' ) );
+}
+add_action( 'acf/save_post', __NAMESPACE__ . '\\track_maker_profile_edit_timestamp', 20 );
+
+/**
  * Handles the "Share Your System Info" report, and the richer client-side
  * diagnostic events logged by the gallery watchdog (see `lib/js/scripts/
  * gallery-watchdog.js`). Both post JSON to this same nonce-protected
