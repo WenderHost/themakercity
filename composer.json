@@ -73,7 +73,7 @@
     "wpackagist-plugin/limit-login-attempts-reloaded": "^3",
     "wpackagist-plugin/spinupwp": "^1.5",
     "lukasbesch/bedrock-plugin-disabler": "^1.4",
-    "wenmark/gravityforms": "^2",
+    "wenmark/gravityforms": "^3",
     "wenmark/advanced-custom-fields-pro": "^6",
     "wpackagist-plugin/relevanssi": "^4.22",
     "wenmark/facetwp": "^4.2",
