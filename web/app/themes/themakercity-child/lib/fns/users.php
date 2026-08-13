@@ -373,12 +373,13 @@ function log_maker_gallery_save( $post_id ) {
   $acfe_active   = defined( 'ACFE_VERSION' );
 
   uber_log( '[gallery-save] Maker CPT saved via frontend form.', [
-    'post_id'       => $post_id,
-    'user_id'       => $current_user->ID,
-    'user_email'    => $current_user->user_email,
-    'gallery_count' => $gallery_count,
-    'acfe_active'   => $acfe_active ? 'yes' : 'no',
-    'has_upload_cap'=> user_can( $current_user, 'upload_files' ) ? 'yes' : 'no',
+    'post_id'        => $post_id,
+    'user_id'        => $current_user->ID,
+    'user_email'     => $current_user->user_email,
+    'gallery_count'  => $gallery_count,
+    'acfe_active'    => $acfe_active ? 'yes' : 'no',
+    'has_upload_cap' => user_can( $current_user, 'upload_files' ) ? 'yes' : 'no',
+    'has_edit_cap'   => user_can( $current_user, 'edit_post', $post_id ) ? 'yes' : 'no',
   ] );
 }
 add_action( 'acf/save_post', __NAMESPACE__ . '\\log_maker_gallery_save', 20 );
@@ -438,6 +439,12 @@ function send_system_info_handler() {
       $event        = isset( $data['event'] ) ? sanitize_text_field( $data['event'] ) : 'manual_report';
       $user_email   = isset( $data['user_email'] ) ? sanitize_text_field( $data['user_email'] ) : $current_user->user_email;
 
+      // Read-only lookup (unlike check_maker_profile_id(), doesn't write
+      // meta as a side effect) so this diagnostic can check edit_post
+      // against the reporting user's own Maker profile, if they have one.
+      $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
+      $has_edit_cap     = $maker_profile_id ? user_can( $current_user, 'edit_post', $maker_profile_id ) : null;
+
       // Always log server-side first, so we have a record even if the
       // outbound email fails or is never triggered.
       uber_log( '[client-report] ' . $event, [
@@ -448,6 +455,7 @@ function send_system_info_handler() {
         'os'             => isset( $data['os'] ) ? sanitize_text_field( $data['os'] ) : null,
         'screen'         => isset( $data['screenResolution'] ) ? sanitize_text_field( $data['screenResolution'] ) : null,
         'has_upload_cap' => user_can( $current_user, 'upload_files' ) ? 'yes' : 'no',
+        'has_edit_cap'   => is_null( $has_edit_cap ) ? 'n/a (no maker_profile_id)' : ( $has_edit_cap ? 'yes' : 'no' ),
         'acfe_active'    => defined( 'ACFE_VERSION' ) ? 'yes' : 'no',
         'detail'         => isset( $data['detail'] ) ? sanitize_text_field( $data['detail'] ) : null,
         'js_error'       => isset( $data['jsError'] ) ? sanitize_textarea_field( $data['jsError'] ) : null,
@@ -463,6 +471,7 @@ function send_system_info_handler() {
       $message .= "<strong>Operating System:</strong> " . ( isset( $data['os'] ) ? sanitize_text_field( $data['os'] ) : 'n/a' ) . "\n";
       $message .= "<strong>Screen Resolution:</strong> " . ( isset( $data['screenResolution'] ) ? sanitize_text_field( $data['screenResolution'] ) : 'n/a' ) . "\n";
       $message .= "<strong>Has upload_files capability:</strong> " . ( user_can( $current_user, 'upload_files' ) ? 'yes' : 'no' ) . "\n";
+      $message .= "<strong>Has edit_post capability on own profile:</strong> " . ( is_null( $has_edit_cap ) ? 'n/a (no maker_profile_id)' : ( $has_edit_cap ? 'yes' : 'no' ) ) . "\n";
       $message .= "<strong>ACF Extended Pro active:</strong> " . ( defined( 'ACFE_VERSION' ) ? 'yes' : 'no' ) . "\n";
       if ( ! empty( $data['detail'] ) )
         $message .= "<strong>Detail:</strong> " . sanitize_text_field( $data['detail'] ) . "\n";
