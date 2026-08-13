@@ -15,11 +15,22 @@ function add_user_date_created_column( $columns ) {
 add_filter( 'manage_users_columns', __NAMESPACE__ . '\\add_user_date_created_column' );
 
 /**
- * Grants the 'upload_files' capability to the 'subscriber' and 'maker' roles.
+ * Grants the 'subscriber' and 'maker' roles the capabilities needed to use
+ * the frontend Profile Editor's media/gallery uploader.
  *
- * This function checks if the 'subscriber' and 'maker' roles exist and whether 
- * they already have the 'upload_files' capability. If not, the capability is 
- * added, allowing users with these roles to upload media files.
+ * 'upload_files' alone isn't enough: WordPress' native media-library upload
+ * handler (wp_ajax_upload_attachment()) also requires `edit_post` on the
+ * Maker CPT post being attached to. Since the Maker CPT uses the standard
+ * `post` capability type with map_meta_cap on, editing your own post - even
+ * as its author - additionally requires the base `edit_posts` capability,
+ * and WordPress won't surface a saved change to a published post without
+ * `edit_published_posts` either. Neither role has ever been granted those,
+ * so every Maker/Subscriber failed that check with "Sorry, you are not
+ * allowed to attach files to this post.", regardless of owning the post.
+ *
+ * Deliberately NOT granting `edit_others_posts` or `publish_posts`: these
+ * roles should only ever be able to edit their own already-published
+ * profile, not other Makers' profiles or publish new posts outright.
  *
  * @since 1.0.0
  *
@@ -27,12 +38,17 @@ add_filter( 'manage_users_columns', __NAMESPACE__ . '\\add_user_date_created_col
  */
 function allow_upload_files_for_roles() {
   $roles = array( 'subscriber', 'maker' );
+  $caps  = array( 'upload_files', 'edit_posts', 'edit_published_posts' );
 
   foreach ( $roles as $role_name ) {
     $role = get_role( $role_name );
 
-    if ( $role && ! $role->has_cap( 'upload_files' ) ) {
-      $role->add_cap( 'upload_files' );
+    if ( ! $role )
+      continue;
+
+    foreach ( $caps as $cap ) {
+      if ( ! $role->has_cap( $cap ) )
+        $role->add_cap( $cap );
     }
   }
 }
