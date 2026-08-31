@@ -20,6 +20,7 @@
   if (typeof wpvars === 'undefined' || !wpvars.ajax_url) return;
 
   var WATCH_TIMEOUT_MS = 5000;
+  var MODAL_POLL_INTERVAL_MS = 250;
   var MAX_REPORTS = 5;
   var reportCount = 0;
   var reportedKeys = {};
@@ -53,17 +54,29 @@
    * actually appears. If ACF's gallery field JS failed to initialize or
    * its click handler never bound, nothing happens and the user just sees
    * an unresponsive link - this catches that silently.
+   *
+   * We poll for the modal rather than checking once at the end of the
+   * window: a user who opens the modal, picks an image and closes it
+   * inside WATCH_TIMEOUT_MS would otherwise look identical to a modal
+   * that never opened at all, and get reported as a false positive.
    */
   $(document).on('click', '.acf-gallery-add, .acf-gallery-edit', function () {
     var label = this.className || 'unknown';
-    setTimeout(function () {
-      if (!document.querySelector('.media-modal')) {
+    var deadline = Date.now() + WATCH_TIMEOUT_MS;
+
+    (function poll() {
+      if (document.querySelector('.media-modal')) return; // Modal appeared - all good.
+
+      if (Date.now() >= deadline) {
         reportEvent(
           'gallery_add_no_modal',
           'Clicked "' + label + '" but no media modal appeared within ' + WATCH_TIMEOUT_MS + 'ms.'
         );
+        return;
       }
-    }, WATCH_TIMEOUT_MS);
+
+      setTimeout(poll, MODAL_POLL_INTERVAL_MS);
+    }());
   });
 
   /**
