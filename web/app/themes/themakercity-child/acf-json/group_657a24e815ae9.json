@@ -127,7 +127,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": 2,
-            "mime_types": "jpg,jpeg,png,gif",
+            "mime_types": "jpg,jpeg,png,gif,webp",
             "allow_in_bindings": 1,
             "preview_size": "medium"
         },
@@ -137,7 +137,7 @@
             "name": "logo",
             "aria-label": "",
             "type": "image",
-            "instructions": "<strong>This logo will be shown on your profile page.<\/strong> Accepted formats: JPG, PNG, or GIF.",
+            "instructions": "<strong>This logo will be shown on your profile page.<\/strong> Accepted formats: JPG, PNG, GIF, or WEBP.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -157,7 +157,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": 2,
-            "mime_types": "jpg,jpeg,png,gif",
+            "mime_types": "jpg,jpeg,png,gif,webp",
             "allow_in_bindings": 1,
             "preview_size": "medium"
         },
@@ -184,7 +184,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": 2,
-            "mime_types": "jpg,png,gif",
+            "mime_types": "jpg,jpeg,png,gif,webp",
             "allow_in_bindings": 1,
             "preview_size": "medium",
             "uploader": "",
@@ -216,7 +216,7 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "jpg,jpeg,png,gif",
+            "mime_types": "jpg,jpeg,png,gif,webp",
             "insert": "append",
             "preview_size": "large"
         },
@@ -605,5 +605,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1763584838
+    "modified": 1788371727
 }
