@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91a06dcc436dd6ea123681e73e9f7c4c",
+    "content-hash": "c75b18604970b61ebdf5523931843f4e",
     "packages": [
         {
             "name": "composer/installers",
@@ -1421,15 +1421,15 @@
         },
         {
             "name": "wpackagist-plugin/enhanced-user-search",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/enhanced-user-search/",
-                "reference": "trunk"
+                "reference": "tags/2.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/enhanced-user-search.zip?timestamp=1714409445"
+                "url": "https://downloads.wordpress.org/plugin/enhanced-user-search.2.0.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

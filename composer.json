@@ -91,7 +91,7 @@
     "wenmark/analyticswp": "^2.0",
     "wpackagist-plugin/host-analyticsjs-local": "^5",
     "wpackagist-plugin/wp-security-audit-log": "^5.3",
-    "wpackagist-plugin/enhanced-user-search": "^1.0",
+    "wpackagist-plugin/enhanced-user-search": "^2.0",
     "wpackagist-plugin/wp-all-export": "^1.4",
     "wpackagist-plugin/export-wp-users-xml-csv": "^1.0"
   },
