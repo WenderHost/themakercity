@@ -176,18 +176,27 @@ add_action( 'init', __NAMESPACE__ . '\\add_user_roles' );
 /**
  * Creates a maker user.
  *
- * @param      object  $post   The Maker CPT post object.
+ * @param      object  $post           The Maker CPT post object.
+ * @param      bool    $send_welcome   Whether to email the new user their
+ *                                     welcome message and password reset link.
+ *                                     True for the /apply approval flow, where
+ *                                     the Maker submitted their own details and
+ *                                     is expecting to hear back. False when an
+ *                                     admin publishes a Maker they created in
+ *                                     wp-admin, since the person on the other
+ *                                     end didn't ask for anything and staff
+ *                                     want to time that outreach themselves.
  *
  * @return     int       The User ID.
  */
-function create_maker_user( $post ){
+function create_maker_user( $post, $send_welcome = true ){
   if( is_null( $post ) )
     return new \WP_Error( 'not_a_post_obj', 'Received a `null` $post object.' );
 
   if( 'maker' !== $post->post_type )
     return new \WP_Error( 'not_a_maker_cpt', 'The provided $post is not a Maker CPT object.' );
 
-  $maker_post_handled = get_post_meta( $post->ID, '_maker_publish_handled', true );
+  $maker_publish_handled = get_post_meta( $post->ID, '_maker_publish_handled', true );
   // Convert the meta value to boolean explicitly
   $is_handled = ! empty( $maker_publish_handled ) && 'false' !== $maker_publish_handled;
   if( ! $is_handled && 'publish' == $post->post_status ){
@@ -242,7 +251,8 @@ function create_maker_user( $post ){
       $message = str_replace( 'http://http', 'http', $message );
 
     // Send the email
-    wp_mail( $user_email, $subject, $message );
+    if ( $send_welcome )
+      wp_mail( $user_email, $subject, $message );
     // END Email User
 
     return $user_id;
