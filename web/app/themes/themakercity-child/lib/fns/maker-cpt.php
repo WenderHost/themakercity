@@ -97,7 +97,22 @@ function maker_email_exists( $email ) {
 }
 
 /**
- * Handles the transition of a Maker CPT from `pending` to `publish`.
+ * Creates the Maker's user account when their CPT becomes published.
+ *
+ * This used to fire only on a `pending` -> `publish` transition, i.e. only the
+ * /apply flow, where a public submission lands as `pending` and staff approve
+ * it by publishing. But staff also create Makers directly in wp-admin, which
+ * transitions `auto-draft`/`draft` -> `publish` and so never ran this at all:
+ * those Makers ended up published with no user account behind them, which left
+ * the person unable to claim their listing (the /sign-up password reset says
+ * "No user found", and /apply would let them file a duplicate). Any transition
+ * into `publish` now creates the account.
+ *
+ * The welcome email is only sent for the `pending` -> `publish` approval, where
+ * the Maker submitted their own details and is waiting to hear back. An admin
+ * publishing a Maker they typed in themselves gets the account and the link but
+ * no email, so staff can time that outreach — the account still works through
+ * the normal password reset whenever they do reach out.
  *
  * @param      string  $new_status  The new status
  * @param      string  $old_status  The old status
@@ -109,14 +124,15 @@ function handle_maker_publish( $new_status, $old_status, $post ) {
     return;
   }
 
-  // Check if the transition is from 'pending' to 'publish'
-  if ( $old_status === 'pending' && $new_status === 'publish' ) {
+  // Any transition into `publish`, from anything that wasn't already published.
+  if ( 'publish' !== $old_status && 'publish' === $new_status ) {
     // Check if the action has already been done
     $has_run = get_post_meta($post->ID, '_maker_publish_handled', true);
     if ($has_run)
       return;
 
-    $user_id = create_maker_user( $post );
+    $send_welcome = ( 'pending' === $old_status );
+    $user_id      = create_maker_user( $post, $send_welcome );
 
     // Mark this action as done for this post
     update_post_meta($post->ID, '_maker_publish_handled', true);
