@@ -224,6 +224,28 @@
             "acfe_wysiwyg_auto_init": 0,
             "acfe_wysiwyg_min_height": 300,
             "acfe_wysiwyg_toolbar_buttons": []
+        },
+        {
+            "key": "field_68b7a1c93f4e2",
+            "label": "Diagnostic Report Recipients",
+            "name": "diagnostic_report_recipients",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Email addresses that receive automated diagnostic \/ error reports from the Profile Editor (e.g. \"gallery_upload_rejected\"). One address per line, or separated by commas. Leave empty to fall back to the site admin email under Settings \u2192 General.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "relevanssi_exclude": 0,
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "maxlength": "",
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": ""
         }
     ],
     "location": [
@@ -251,5 +273,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1763402343
+    "modified": 1788372900
 }

@@ -410,6 +410,42 @@ function track_maker_profile_edit_timestamp( $post_id ) {
 add_action( 'acf/save_post', __NAMESPACE__ . '\\track_maker_profile_edit_timestamp', 20 );
 
 /**
+ * Returns the list of email addresses that should receive the automated
+ * diagnostic/error reports sent by send_system_info_handler().
+ *
+ * Sourced from the "Diagnostic Report Recipients" field on the Maker Site
+ * Options page (ACF options page `maker-site-options`), which accepts one
+ * address per line and/or comma-separated addresses. Anything that isn't a
+ * valid email is dropped. If the field is empty — or no address in it
+ * validates — this falls back to WordPress' own `admin_email` so reports are
+ * never silently sent nowhere.
+ *
+ * @return array List of valid recipient email addresses.
+ */
+function get_client_report_recipients() {
+  $recipients = [];
+  $configured = function_exists( 'get_field' ) ? get_field( 'diagnostic_report_recipients', 'option' ) : '';
+
+  if ( is_string( $configured ) && '' !== trim( $configured ) ) {
+    foreach ( preg_split( '/[\r\n,]+/', $configured ) as $email ) {
+      $email = sanitize_email( trim( $email ) );
+      if ( $email && is_email( $email ) )
+        $recipients[] = $email;
+    }
+  }
+
+  if ( empty( $recipients ) )
+    $recipients[] = get_option( 'admin_email' );
+
+  /**
+   * Filters the recipients of the frontend diagnostic/error reports.
+   *
+   * @param array $recipients List of email addresses.
+   */
+  return array_values( array_unique( apply_filters( 'themakercity/client_report_recipients', $recipients ) ) );
+}
+
+/**
  * Handles the "Share Your System Info" report, and the richer client-side
  * diagnostic events logged by the gallery watchdog (see `lib/js/scripts/
  * gallery-watchdog.js`). Both post JSON to this same nonce-protected
@@ -471,7 +507,7 @@ function send_system_info_handler() {
         'js_error'       => isset( $data['jsError'] ) ? sanitize_textarea_field( $data['jsError'] ) : null,
       ] );
 
-      $to      = get_option( 'admin_email' );
+      $to      = get_client_report_recipients();
       $subject = "New {$event} Report [{$user_email}]";
 
       $message  = "Report type: {$event}\n";
@@ -504,7 +540,7 @@ function send_system_info_handler() {
         $response['status'] = "success";
         wp_send_json( $response, 200 );
       } else {
-        uber_log( '[client-report] wp_mail() failed to send report to admin_email.', [ 'to' => $to, 'subject' => $subject ] );
+        uber_log( '[client-report] wp_mail() failed to send report.', [ 'to' => implode( ', ', (array) $to ), 'subject' => $subject ] );
         $response['status'] = 'error';
         $response['message'] = 'Error sending email.';
         wp_send_json( $response, 500 );
