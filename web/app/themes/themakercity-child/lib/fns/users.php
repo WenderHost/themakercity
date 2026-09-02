@@ -445,11 +445,21 @@ function send_system_info_handler() {
       $maker_profile_id = get_user_meta( $current_user->ID, 'maker_profile_id', true );
       $has_edit_cap     = $maker_profile_id ? user_can( $current_user, 'edit_post', $maker_profile_id ) : null;
 
+      // Links to the reporting user's Maker CPT, so a report can be acted on
+      // without first having to look the Maker up by email. get_edit_post_link()
+      // is deliberately NOT used here — it returns null unless the *current*
+      // user can edit the post, and the current user here is the Maker, not the
+      // admin who receives this email.
+      $maker_view_url = $maker_profile_id ? get_permalink( $maker_profile_id ) : '';
+      $maker_edit_url = $maker_profile_id ? admin_url( 'post.php?post=' . intval( $maker_profile_id ) . '&action=edit' ) : '';
+      $maker_title    = $maker_profile_id ? get_the_title( $maker_profile_id ) : '';
+
       // Always log server-side first, so we have a record even if the
       // outbound email fails or is never triggered.
       uber_log( '[client-report] ' . $event, [
         'user_id'        => $current_user->ID,
         'user_email'     => $user_email,
+        'maker_id'       => $maker_profile_id ? intval( $maker_profile_id ) : null,
         'ip'             => isset( $data['ip'] ) ? sanitize_text_field( $data['ip'] ) : null,
         'browser'        => isset( $data['browser'] ) ? sanitize_text_field( $data['browser'] ) : null,
         'os'             => isset( $data['os'] ) ? sanitize_text_field( $data['os'] ) : null,
@@ -466,6 +476,16 @@ function send_system_info_handler() {
 
       $message  = "Report type: {$event}\n";
       $message .= "User: {$user_email} (ID {$current_user->ID})\n\n";
+
+      if ( $maker_profile_id ) {
+        $message .= "<strong>Maker Profile:</strong> " . esc_html( $maker_title ) . " (ID {$maker_profile_id}) &mdash; ";
+        $message .= '<a href="' . esc_url( $maker_edit_url ) . '">Edit in wp-admin</a>';
+        if ( $maker_view_url )
+          $message .= ' | <a href="' . esc_url( $maker_view_url ) . '">View profile</a>';
+        $message .= "\n";
+      } else {
+        $message .= "<strong>Maker Profile:</strong> none linked to this user (no maker_profile_id)\n";
+      }
       $message .= "<strong>IP Address:</strong> " . ( isset( $data['ip'] ) ? sanitize_text_field( $data['ip'] ) : 'n/a' ) . "\n";
       $message .= "<strong>Browser:</strong> " . ( isset( $data['browser'] ) ? sanitize_text_field( $data['browser'] ) : 'n/a' ) . "\n";
       $message .= "<strong>Operating System:</strong> " . ( isset( $data['os'] ) ? sanitize_text_field( $data['os'] ) : 'n/a' ) . "\n";
