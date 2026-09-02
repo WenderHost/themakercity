@@ -31,7 +31,7 @@ class Makers_Command {
     'maker_page_title',
     'maker_page_url',
     'maker_id',
-    'has_login',
+    'login_status',
     'last_modified',
     'last_self_edit',
   ];
@@ -58,7 +58,7 @@ class Makers_Command {
     'maker_page_title',
     'maker_page_url',
     'last_self_edit',
-    'has_login',
+    'login_status',
   ];
 
   /**
@@ -90,7 +90,7 @@ class Makers_Command {
    * : Comma-separated columns to include, in the order given. See AVAILABLE
    * COLUMNS below.
    * ---
-   * default: name,email,maker_page_title,maker_page_url,last_self_edit,has_login
+   * default: name,email,maker_page_title,maker_page_url,last_self_edit,login_status
    * ---
    *
    * [--status=<statuses>]
@@ -100,8 +100,9 @@ class Makers_Command {
    * ---
    *
    * [--linked-users-only]
-   * : Only include Makers with a linked WordPress user account, i.e. the people
-   * who can log in and edit their own page today.
+   * : Only include Makers whose profile is linked to a WordPress account, i.e.
+   * login_status=linked. Note this is narrower than "can log in": Makers with
+   * login_status=account_only can log in too, they just never have.
    *
    * [--not-updated-since=<date>]
    * : Only include Makers with no last_self_edit on or after this date
@@ -120,7 +121,15 @@ class Makers_Command {
    * * maker_page_title - the Maker post title, HTML entities decoded.
    * * maker_page_url   - public permalink of the Maker page.
    * * maker_id         - the Maker post ID.
-   * * has_login        - yes/no: is a WordPress user account linked?
+   * * login_status     - can this Maker log in and edit their page?
+   *                      `linked`       - account linked to the profile; they
+   *                                       have opened their profile editor.
+   *                      `account_only` - an account exists on their email
+   *                                       address but has never been linked, so
+   *                                       they can log in (via a password
+   *                                       reset) but never have.
+   *                      `none`         - no account on their email address;
+   *                                       they'd need one created first.
    * * last_self_edit   - date the Maker last saved their page in the frontend
    *                      Profile Editor. The only trustworthy activity signal.
    *                      Empty means none on record, not never: the tracking
@@ -170,16 +179,17 @@ class Makers_Command {
       \WP_CLI::error( 'No Maker profiles found for status: ' . implode( ', ', $statuses ) );
 
     $user_ids_by_maker = self::get_user_ids_by_maker();
+    $user_ids_by_email = self::get_user_ids_by_email();
 
     $rows           = [];
-    $with_login     = 0;
+    $by_status      = [ 'linked' => 0, 'account_only' => 0, 'none' => 0 ];
     $with_self_edit = 0;
     $no_email  = [];
     $skipped   = 0;
 
     foreach ( $makers as $maker_id ) {
       $user   = isset( $user_ids_by_maker[ $maker_id ] ) ? get_user_by( 'id', $user_ids_by_maker[ $maker_id ] ) : false;
-      $record = self::build_record( $maker_id, $user );
+      $record = self::build_record( $maker_id, $user, $user_ids_by_email );
 
       if ( $linked_only && ! $user ) {
         $skipped++;
@@ -201,8 +211,7 @@ class Makers_Command {
         continue;
       }
 
-      if ( $user )
-        $with_login++;
+      $by_status[ $record['login_status'] ]++;
 
       if ( '' !== $record['last_self_edit'] )
         $with_self_edit++;
@@ -234,8 +243,9 @@ class Makers_Command {
     }
 
     // Noun phrases rather than sentences, so a count of 1 doesn't read wrong.
-    $notes[] = sprintf( '📧 %d with a WordPress login — they can update their own page today.', $with_login );
-    $notes[] = sprintf( '✉️  %d with no login — contact details only.', count( $rows ) - $with_login );
+    $notes[] = sprintf( '📧 %d have logged in and opened their profile editor.', $by_status['linked'] );
+    $notes[] = sprintf( '🔑 %d have an account but have never used it — a password reset gets them in.', $by_status['account_only'] );
+    $notes[] = sprintf( '🚫 %d have no account at all — one has to be created before they can edit.', $by_status['none'] );
     $notes[] = sprintf( '✏️  %d with a self-edit on record since that tracking began.', $with_self_edit );
 
     if ( $skipped )
@@ -270,7 +280,7 @@ class Makers_Command {
    * @param \WP_User|false $user   The linked user account, or false.
    * @return array Column name => value.
    */
-  private static function build_record( $maker_id, $user ) {
+  private static function build_record( $maker_id, $user, $user_ids_by_email = [] ) {
     // Two sources, because neither covers the directory on its own: the ACF
     // fields on the profile are set on nearly every Maker, while only about
     // half have a linked WordPress account — and that account is the one that
@@ -285,8 +295,20 @@ class Makers_Command {
     if ( '' === $name && $user )
       $name = trim( $user->first_name . ' ' . $user->last_name );
 
-    $parts      = '' === $name ? [] : preg_split( '/\s+/', $name, 2 );
-    $self_edit  = get_post_meta( $maker_id, '_maker_profile_last_edited', true );
+    $parts     = '' === $name ? [] : preg_split( '/\s+/', $name, 2 );
+    $self_edit = get_post_meta( $maker_id, '_maker_profile_last_edited', true );
+
+    // A missing link doesn't mean a missing account. The `maker_profile_id`
+    // meta is written lazily by check_maker_profile_id() the first time a Maker
+    // opens their profile editor, so most Makers created by the CSV imports
+    // have an account sitting on their profile email that has never been
+    // linked — they can log in via a password reset, they just never have.
+    if ( $user )
+      $login_status = 'linked';
+    elseif ( '' !== $profile_email && isset( $user_ids_by_email[ strtolower( $profile_email ) ] ) )
+      $login_status = 'account_only';
+    else
+      $login_status = 'none';
 
     return [
       'name'             => $name,
@@ -298,7 +320,7 @@ class Makers_Command {
       'maker_page_title' => html_entity_decode( get_the_title( $maker_id ), ENT_QUOTES, 'UTF-8' ),
       'maker_page_url'   => get_permalink( $maker_id ),
       'maker_id'         => $maker_id,
-      'has_login'        => $user ? 'yes' : 'no',
+      'login_status'     => $login_status,
       'last_modified'    => substr( (string) get_post_field( 'post_modified', $maker_id ), 0, 10 ),
       'last_self_edit'   => $self_edit ? substr( (string) $self_edit, 0, 10 ) : '',
     ];
@@ -343,6 +365,24 @@ class Makers_Command {
       if ( $maker_id && ! isset( $map[ $maker_id ] ) )
         $map[ $maker_id ] = intval( $row->user_id );
     }
+
+    return $map;
+  }
+
+  /**
+   * Maps lowercased user email addresses to user IDs, so login_status can tell
+   * "no account" from "an account nobody has linked yet" without a
+   * get_user_by() call per Maker.
+   *
+   * @return array email => user ID.
+   */
+  private static function get_user_ids_by_email() {
+    global $wpdb;
+
+    $map = [];
+
+    foreach ( $wpdb->get_results( "SELECT ID, user_email FROM {$wpdb->users} WHERE user_email != ''" ) as $row )
+      $map[ strtolower( $row->user_email ) ] = intval( $row->ID );
 
     return $map;
   }
