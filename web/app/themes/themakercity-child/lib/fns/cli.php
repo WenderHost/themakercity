@@ -37,6 +37,19 @@ class Makers_Command {
   ];
 
   /**
+   * The date the `_maker_profile_last_edited` tracking went live, so the run
+   * summary can say what a blank last_self_edit actually means.
+   *
+   * Set by commit 586ae61, "Add \"Last Edit\" admin column tracking genuine
+   * Profile Editor saves" (2026-08-05), which deployed on push. Nothing before
+   * that date was ever recorded, and there's no backfilling it — post_modified
+   * is exactly the unreliable signal that commit replaced.
+   *
+   * @var string
+   */
+  const SELF_EDIT_TRACKING_SINCE = '2026-08-05';
+
+  /**
    * The columns produced when --fields isn't given.
    *
    * `name` is a single column rather than first/last: the Maker profile's ACF
@@ -132,8 +145,8 @@ class Makers_Command {
    *                                       they'd need one created first.
    * * last_self_edit   - date the Maker last saved their page in the frontend
    *                      Profile Editor. The only trustworthy activity signal.
-   *                      Empty means none on record, not never: the tracking
-   *                      only started recently.
+   *                      Tracking began 2026-08-05, so empty means nothing on
+   *                      record since then, not never.
    * * last_modified    - post_modified, as Y-m-d. Off by default, and not a
    *                      proxy for Maker activity: admin edits and imports bump
    *                      it too, so it means "last touched by anyone".
@@ -246,7 +259,7 @@ class Makers_Command {
     $notes[] = sprintf( '📧 %d have logged in and opened their profile editor.', $by_status['linked'] );
     $notes[] = sprintf( '🔑 %d have an account but have never used it — a password reset gets them in.', $by_status['account_only'] );
     $notes[] = sprintf( '🚫 %d have no account at all — one has to be created before they can edit.', $by_status['none'] );
-    $notes[] = sprintf( '✏️  %d with a self-edit on record since that tracking began.', $with_self_edit );
+    $notes[] = sprintf( '✏️  %d with a self-edit on record (tracking began %s; blanks predate it).', $with_self_edit, self::SELF_EDIT_TRACKING_SINCE );
 
     if ( $skipped )
       $notes[] = sprintf( '🔍 %d left out by the filters you gave.', $skipped );
