@@ -28,6 +28,9 @@ Context file for AI coding agents (Claude Code, etc.) working in this repository
 - **Frontend build:** Sass → CSS and a Parcel-bundled JS entrypoint, both scoped to the child theme. See `package.json`:
   - `npm run watch` — watches SCSS (`lib/scss`) and JS (`lib/js/scripts`) during development
   - `npm run build` — production build (compressed CSS to `lib/css-dist`, bundled JS via Parcel)
+  - **The built files are committed, and production's deploy only runs `composer install`.** npm is needed only when editing SCSS or JS, and the rebuilt output must be committed with the change.
+  - **`filepond.init.js` has no npm script.** `build:parcel` only bundles `global.js`. The maker dashboard's upload widget is built by hand: `npx parcel build web/app/themes/themakercity-child/lib/js/scripts/filepond.init.js --out-dir web/app/themes/themakercity-child/lib/js/dist/`.
+  - **Parcel is the abandoned 1.x (`parcel-bundler`).** On the Mac Mini (2026-11-17, Node 26, npm 11) `npm install` and every build ran cleanly and reproduced the committed CSS and JS byte for byte. npm 11 skips install scripts it hasn't been told to allow (`deasync`, `fsevents`, `core-js`); the build doesn't need them, so leave them unapproved. `npm audit` reports many vulnerabilities, all in local build tooling that never ships. If Parcel 1 stops working, try `PATH="/opt/homebrew/opt/node@22/bin:$PATH"` first; the real fix is esbuild or Parcel 2, checked by diffing against the committed output.
 - **Custom fields:** Advanced Custom Fields PRO (+ ACF Extended PRO). Field group definitions are version-controlled as JSON in `web/app/themes/themakercity-child/acf-json/`.
 - **Search/filtering:** FacetWP + Relevanssi (with FacetWP↔Relevanssi and FacetWP↔Elementor integration plugins), used for directory/maker search and filtering.
 - **Forms:** Gravity Forms (+ Salesforce CRM Perks integration).
