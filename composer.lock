@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c75b18604970b61ebdf5523931843f4e",
+    "content-hash": "b8a0eb01728396bb536d93bf9cc9f58f",
     "packages": [
         {
             "name": "composer/installers",
@@ -1363,6 +1363,27 @@
                 }
             ],
             "description": "Easily create web forms and manage form entries within the WordPress admin.",
+            "homepage": "https://gravityforms.com"
+        },
+        {
+            "name": "wenmark/gravityformsstripe",
+            "version": "7.0.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://packages.wenmarkdigital.com/satispress/gravityformsstripe/7.0.1",
+                "shasum": "eb00aae0dadf6946afa47bb00a161d5567582f96"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "authors": [
+                {
+                    "name": "Gravity Forms",
+                    "homepage": "https://gravityforms.com"
+                }
+            ],
+            "description": "Integrates Gravity Forms with Stripe, enabling end users to purchase goods and services through Gravity Forms.",
             "homepage": "https://gravityforms.com"
         },
         {
@@ -3003,5 +3024,5 @@
         "php": ">=8.0"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }
