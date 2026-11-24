@@ -65,7 +65,7 @@ add_action( 'gform_enqueue_scripts', __NAMESPACE__ . '\\enqueue_assets', 10, 2 )
  */
 function form_definition( $title ) {
   $amount_choices = [];
-  foreach ( [ 2000, 1500, 1000, 500, 100, 50, 25 ] as $amount ) {
+  foreach ( [ 25, 50, 100, 500, 1000, 1500, 2000 ] as $amount ) {
     $amount_choices[] = [ 'text' => '$' . number_format( $amount ), 'value' => (string) $amount, 'isSelected' => false ];
   }
   $amount_choices[] = [ 'text' => 'Other', 'value' => 'other', 'isSelected' => false ];
