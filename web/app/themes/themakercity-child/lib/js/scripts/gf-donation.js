@@ -57,6 +57,14 @@
       var monthly = $frequency.filter( ':checked' ).val() === 'Monthly Gift';
       $form.find( '.tmc-donation-summary-amount' ).text( formatAmount( $amount.val() ) );
       $form.find( '.tmc-donation-summary-frequency' ).text( monthly ? ' each month' : '' );
+
+      // Page 3: say above the total whether it's charged once or monthly.
+      var $total = $form.find( '.tmc-donation-total' );
+      var $note = $total.find( '.tmc-donation-frequency-note' );
+      if ( ! $note.length )
+        $note = $( '<p class="tmc-donation-frequency-note"></p>' ).prependTo( $total );
+      $note.text( monthly ? 'Monthly gift, charged every month' : 'One-time gift' );
+      $total.toggleClass( 'is-monthly', monthly );
     }
 
     $presets.off( '.tmcDonation' ).on( 'change.tmcDonation', function () {

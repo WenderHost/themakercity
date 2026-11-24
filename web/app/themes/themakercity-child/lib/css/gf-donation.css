@@ -199,9 +199,20 @@
   font-size: 1.1rem;
 }
 .tmc-donation-form_wrapper.gform-theme--framework .tmc-donation-total .ginput_total {
+  flex: 1;
+  min-width: 0;
   font-size: 3rem;
   line-height: 1.1;
   color: inherit;
+}
+.tmc-donation-form_wrapper.gform-theme--framework .tmc-donation-total .tmc-donation-frequency-note {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #0A79B8;
+}
+.tmc-donation-form_wrapper.gform-theme--framework .tmc-donation-total.is-monthly .ginput_container_total::after {
+  content: "USD / month";
 }
 .tmc-donation-form_wrapper.gform-theme--framework .gform_page_footer,
 .tmc-donation-form_wrapper.gform-theme--framework .gform_footer {

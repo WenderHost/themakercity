@@ -244,10 +244,25 @@ $radius: 10px;
       }
     }
 
+    // A read-only input; let it shrink so the "USD" suffix stays in view.
     .ginput_total {
+      flex: 1;
+      min-width: 0;
       font-size: 3rem;
       line-height: 1.1;
       color: inherit;
+    }
+
+    // Added by gf-donation.js: "One-time gift" or "Monthly gift, …".
+    .tmc-donation-frequency-note {
+      margin: 0 0 4px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: $makerblue;
+    }
+
+    &.is-monthly .ginput_container_total::after {
+      content: 'USD / month';
     }
   }
 
