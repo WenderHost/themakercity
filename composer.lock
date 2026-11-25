@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8a0eb01728396bb536d93bf9cc9f58f",
+    "content-hash": "3868dba6dfe3a74a34694be050ac3f4e",
     "packages": [
         {
             "name": "composer/installers",
@@ -256,6 +256,43 @@
                 "source": "https://github.com/lukasbesch/bedrock-plugin-disabler/tree/v1.5.0"
             },
             "time": "2026-02-06T01:10:33+00:00"
+        },
+        {
+            "name": "mwender/giftkit",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mwender/giftkit.git",
+                "reference": "07e48430facbf1b7e4ee8f1feb4babe0b9f90ffa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mwender/giftkit/zipball/07e48430facbf1b7e4ee8f1feb4babe0b9f90ffa",
+                "reference": "07e48430facbf1b7e4ee8f1feb4babe0b9f90ffa",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0",
+                "php": ">=8.1"
+            },
+            "default-branch": true,
+            "type": "wordpress-plugin",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Wender",
+                    "homepage": "https://mwender.com/"
+                }
+            ],
+            "description": "A ready-made donation form for Gravity Forms, with one-time and monthly gifts, preset amounts, an optional processing fee and Stripe payments.",
+            "homepage": "https://github.com/mwender/giftkit",
+            "support": {
+                "source": "https://github.com/mwender/giftkit/tree/main",
+                "issues": "https://github.com/mwender/giftkit/issues"
+            },
+            "time": "2026-11-25T01:45:28+00:00"
         },
         {
             "name": "oscarotero/env",
@@ -3016,6 +3053,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "mwender/giftkit": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
