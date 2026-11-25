@@ -263,12 +263,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mwender/giftkit.git",
-                "reference": "1925ff1b0d13c9309ab0e50f38c01c93aa845a86"
+                "reference": "c3a68484823f8fdb60e05599fc6d962b1209c8bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mwender/giftkit/zipball/1925ff1b0d13c9309ab0e50f38c01c93aa845a86",
-                "reference": "1925ff1b0d13c9309ab0e50f38c01c93aa845a86",
+                "url": "https://api.github.com/repos/mwender/giftkit/zipball/c3a68484823f8fdb60e05599fc6d962b1209c8bc",
+                "reference": "c3a68484823f8fdb60e05599fc6d962b1209c8bc",
                 "shasum": ""
             },
             "require": {
@@ -292,7 +292,7 @@
                 "source": "https://github.com/mwender/giftkit/tree/main",
                 "issues": "https://github.com/mwender/giftkit/issues"
             },
-            "time": "2026-11-25T20:44:33+00:00"
+            "time": "2026-11-25T20:52:52+00:00"
         },
         {
             "name": "oscarotero/env",
